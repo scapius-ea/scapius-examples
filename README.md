@@ -94,12 +94,12 @@ scapius-examples/
    ```
 
 2. **Open in Scapius EA:**
-   * Launch **Scapius EA**.
-   * Open the `Neobank/` folder or select `Neobank/main.ea` as the workspace entrypoint.
+   * Launch **Scapius Community Edition**.
+   * Map the `Neobank/` folder as the workspace root directory.
    * Explore the interactive diagrams, capability heatmaps, and lineage views via the view selector.
 
 3. **Syntax Sample:**
-   Scapius EA models are written in human-readable, declarative `.ea` code:
+   Scapius models are written in human-readable, declarative `.ea` code:
 
    ```ea
    workspace neo_bank "Neo Bank Enterprise Architecture" {
