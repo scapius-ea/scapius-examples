@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "view_id": "payment_system",
+  "revision": "sha256:f94a2bd1a174360615edd06720d5967acccc38653eb058ee6142daaac093858f",
+  "updated_at_utc": "2026-09-06T09:44:16.5983655Z",
+  "nodes": {
+    "customer": {
+      "x": 40,
+      "y": 268,
+      "width": 280,
+      "height": 96
+    },
+    "checkout_flow": {
+      "x": 40,
+      "y": 532,
+      "width": 280,
+      "height": 96
+    },
+    "token_handler": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "payment_api": {
+      "x": 20,
+      "y": 64,
+      "width": 320,
+      "height": 180
+    },
+    "payment_gateway": {
+      "x": 587,
+      "y": 364,
+      "width": 360,
+      "height": 264
+    }
+  },
+  "edges": {
+    "customer-triggers-checkout_flow": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 92,
+        "y": 16,
+        "width": null,
+        "height": null
+      }
+    },
+    "payment_gateway-serves-checkout_flow": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 0,
+        "y": 48,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+layer "Business Architecture" {
+
+    value_stream vs_customer_onboarding "Customer Onboarding Stream" {
+        description "End-to-end journey from initial digital application to account opening and wallet activation"
+        owner "VP Customer Operations"
+
+        stage stage_capture_app "Capture Digital Application" {
+            order 1
+            description "Applicant submits personal details and ID documents via mobile app"
+
+            relationships {
+                cap_digital_onboarding realizes this "Provides self-service capture"
+            }
+        }
+
+        stage stage_verify_kyc "Verify Identity & KYC" {
+            order 2
+            description "Biometric liveness check and document verification against government databases"
+
+            relationships {
+                cap_identity_verification realizes this "Automates document verification"
+            }
+        }
+
+        stage stage_provision_account "Provision Account & Wallet" {
+            order 3
+            description "Automated ledger account creation and initial digital wallet funding"
+
+            relationships {
+                cap_retail_banking realizes this "Creates core deposit accounts"
+            }
+        }
+    }
+
+    value_stream vs_fraud_resolution "Fraud Detection & Resolution Stream" {
+        description "Real-time anomaly scoring, account restriction, and investigator remediation"
+        owner "Head of Financial Crime"
+
+        stage stage_detect_anomaly "Detect Transaction Anomaly" {
+            order 1
+            description "Streaming ML models score every payment in real time"
+
+            relationships {
+                cap_transaction_scoring realizes this "Real-time transaction fraud scoring"
+            }
+        }
+
+        stage stage_freeze_account "Risk Containment & Freeze" {
+            order 2
+            description "Automated account freeze when risk score exceeds 85/100"
+        }
+
+        stage stage_investigate_case "Investigator Case Review" {
+            order 3
+            description "Fraud specialist conducts secondary triage and files suspicious activity report"
+        }
+    }
+}

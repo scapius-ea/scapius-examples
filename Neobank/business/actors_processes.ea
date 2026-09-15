@@ -1,0 +1,12 @@
+layer "Business Architecture" {
+
+    process proc_onboarding "Digital Onboarding Process" {
+        description "End-to-end user journey for verifying identity and provisioning accounts"
+        automation_level "Automated"
+
+        relationships {
+            this realizes cap_digital_onboarding "Executes the customer onboarding capability"
+            this triggers app_mobile_banking "Customer initiates registration on mobile"
+        }
+    }
+}

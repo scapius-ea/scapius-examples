@@ -1,0 +1,72 @@
+layer "Application Architecture" {
+
+    group "AI Agent Fleet" {
+
+        agent agent_support_bot "NeoHelp Onboarding Chatbot" {
+            description "Conversational LLM assistant helping customers troubleshoot onboarding and verification questions"
+            model "claude-3-5-sonnet"
+            time "Invest"
+            cost {
+                amount 60000
+                unit year
+            }
+            security {
+                confidentiality "Medium"
+                integrity "Medium"
+                availability "High"
+            }
+            ai_governance {
+                autonomy_level "SemiAutonomous"
+                human_in_loop false
+            }
+
+            relationships {
+                this serves customer "Assists applicant with signup questions"
+                this realizes cap_customer_support "Provides 24/7 self-service triage"
+                this triggers proc_onboarding "Initiates onboarding registration on user command"
+            }
+        }
+
+        agent agent_fraud_detective "AI Fraud Investigation Detective" {
+            description "Autonomous agent that ingests suspicious payment alerts, cross-references geolocation patterns, and drafts SAR filings"
+            model "gpt-4o"
+            time "Invest"
+            cost {
+                amount 90000
+                unit year
+            }
+            security {
+                confidentiality "High"
+                integrity "High"
+                availability "High"
+            }
+            ai_governance {
+                autonomy_level "Autonomous"
+                human_in_loop true
+            }
+            
+            relationships {
+                this reads data_ledger_tx "Consumes transaction event stream"
+                this serves compliance_officer "Drafts suspicious activity dossiers for human signoff"
+                this realizes cap_fraud_prevention "Autonomous investigative dossier preparation"
+            }
+        }
+    }
+
+    actor compliance_officer "AML Compliance Officer" {
+        description "Internal investigator reviewing high-risk payment escalations"
+        role "Compliance Officer"
+        is_external false
+    }
+
+    // Channel-to-Agent Integrations
+    app_mobile_banking serves agent_support_bot "Support chat integration" {
+        tags ["gRPC"]
+        description "Routes in-app customer support queries to the AI chatbot over bidirectional gRPC"
+    }
+
+    app_aml_monitor serves agent_fraud_detective "Fraud alert stream" {
+        tags ["Kafka", "Event-Driven"]
+        description "Streams real-time suspicious transaction triggers via Kafka topic 'fraud.alerts.v1'"
+    }
+}

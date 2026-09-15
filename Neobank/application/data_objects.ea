@@ -1,0 +1,18 @@
+layer "Application Architecture" {
+
+    data_object data_ledger_tx "Core Ledger Transaction Record" {
+        description "Double-entry accounting transaction record persisting debits, credits, and timestamps"
+        classification "Confidential"
+        pii true
+        phi false
+        security {
+            confidentiality "Critical"
+            integrity "Critical"
+            availability "Critical"
+        }
+
+        relationships {
+            app_mobile_banking reads this "Reads ledger transactions for mobile banking operations"
+        }
+    }
+}

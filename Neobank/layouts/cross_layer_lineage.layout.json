@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "view_id": "cross_layer_lineage",
+  "revision": "sha256:882b44fa60ab3cd8ac4b0d19b9d5b511ee797f92a5a46a367ea9250762091022",
+  "updated_at_utc": "2026-09-14T05:31:02.790073Z",
+  "nodes": {
+    "inf_aws_eks": {
+      "x": 17.665202571096188,
+      "y": 56.995607713288564,
+      "width": 280,
+      "height": 96
+    },
+    "env_aws_prod": {
+      "x": 915.0584241574437,
+      "y": 424.8462447373767,
+      "width": 348,
+      "height": 180
+    },
+    "cap_identity_verification": {
+      "x": 24,
+      "y": 96,
+      "width": 308,
+      "height": 96
+    },
+    "cap_digital_onboarding": {
+      "x": 21.88643391055325,
+      "y": 104.94321695527663,
+      "width": 352,
+      "height": 240
+    },
+    "cap_customer_service": {
+      "x": 303.9182561773177,
+      "y": 766.2602179778353,
+      "width": 400,
+      "height": 384
+    },
+    "proc_onboarding": {
+      "x": -205.18310152035087,
+      "y": 479.6434870314339,
+      "width": 280,
+      "height": 96
+    },
+    "app_mobile_banking": {
+      "x": 20,
+      "y": 104,
+      "width": 280,
+      "height": 96
+    },
+    "system_core_banking": {
+      "x": 342,
+      "y": 376,
+      "width": 320,
+      "height": 240
+    },
+    "goal_double_customers": {
+      "x": -241.35260546515144,
+      "y": 940.0578163954543,
+      "width": 280,
+      "height": 96
+    }
+  },
+  "edges": {
+    "cap_digital_onboarding-influences-goal_double_customers": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": -17,
+        "y": -21,
+        "width": null,
+        "height": null
+      }
+    },
+    "proc_onboarding-realizes-cap_digital_onboarding": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 8,
+        "y": -24,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_mobile_banking-realizes-cap_digital_onboarding": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 134,
+        "y": -14,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

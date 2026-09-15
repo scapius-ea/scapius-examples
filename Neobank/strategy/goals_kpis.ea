@@ -1,0 +1,18 @@
+layer "Strategy Layer" {
+
+    goal goal_double_customers "Double Active Customer Base" {
+        description "Expand active customer accounts to 4M by end-of-year 2028 through frictionless mobile onboarding and digital lending"
+        priority "Critical"
+        attr target_date "2028-12-31"
+    }
+
+    kpi kpi_onboarding_time "Customer Onboarding Time" {
+        description "Average elapsed minutes from app download to approved account opening"
+        target_value 5.0
+        current_value 3.8
+        unit "minutes"
+        trend "Down"        
+    }
+
+    kpi_onboarding_time influences goal_double_customers "Faster registration drives higher conversion rates"
+}

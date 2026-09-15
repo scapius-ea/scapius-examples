@@ -1,0 +1,90 @@
+layer "Application Architecture" {
+
+    system system_payments "Payment Hub Platform" {
+        description "Instant payment gateway and transaction router"
+        owner "Payments Engineering"
+        criticality "Mission-Critical"
+        status "Active"
+        tier "Tier-1"
+        time "Invest"
+        cost {
+            amount 800000
+            unit year
+        }
+        score {
+            business_value 9.8
+            tech_fit 9.2
+        }
+        security {
+            confidentiality "Critical"
+            integrity "Critical"
+            availability "Critical"
+        }
+        lifecycle {
+            phase Run start "2023-01-01"
+        }
+
+        app app_instant_pay "Instant Payments API" {
+            description "Real-time payment gateway and instant settlement router"
+            owner "Payments Engineering"
+            status "Active"
+            tier "Tier-1"
+            internet_facing true
+            time "Invest"
+            cost {
+                amount 280000
+                unit year
+            }
+            score {
+                business_value 9.7
+                tech_fit 9.4
+            }
+            security {
+                confidentiality "Critical"
+                integrity "Critical"
+                availability "Critical"
+            }
+            lifecycle {
+                phase Run start "2023-03-01"
+            }
+
+            relationships {
+                this flows_to system_core_banking "Posts cleared payments"
+                this writes data_ledger_tx "Persists debit/credit ledger transactions"
+                this realizes cap_payments_transfers "Processes money movement and clearing"
+                this realizes cap_real_time_payments "Executes FedNow and RTP instant settlements"
+            }
+        }
+
+        app app_aml_monitor "Streaming AML Fraud Monitor" {
+            description "Kafka streaming analytics engine evaluating real-time transaction anomalies"
+            owner "Financial Crime Unit"
+            tier "Tier-1"
+            status "Active"
+            internet_facing false
+            time "Invest"
+            cost {
+                amount 220000
+                unit year
+            }
+            score {
+                business_value 9.2
+                tech_fit 8.9
+            }
+            security {
+                confidentiality "Critical"
+                integrity "Critical"
+                availability "Critical"
+            }
+            lifecycle {
+                phase Run start "2023-06-01"
+            }
+
+            relationships {
+                this reads data_ledger_tx "Inspects live payment stream"
+                this realizes cap_fraud_prevention "Automated fraud pattern detection"
+                this realizes cap_transaction_scoring "Real-time payment fraud anomaly scoring"
+            }
+        }
+    }
+}

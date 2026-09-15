@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "view_id": "customer_onboarding_context",
+  "revision": "sha256:bf9cc326ce5da328b27bf21f407e3d48f9563275d86120ee83143ce54b318160",
+  "updated_at_utc": "2026-09-11T08:51:41.449718Z",
+  "nodes": {
+    "customer": {
+      "x": 225,
+      "y": 376,
+      "width": 280,
+      "height": 96
+    },
+    "app_mobile_banking": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "system_core_banking": {
+      "x": 40,
+      "y": 40,
+      "width": 320,
+      "height": 200
+    },
+    "onboardingNote": {
+      "x": 535,
+      "y": 376,
+      "width": 340,
+      "height": 136
+    }
+  },
+  "edges": {
+    "app_mobile_banking-serves-customer": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 123,
+        "y": 41,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

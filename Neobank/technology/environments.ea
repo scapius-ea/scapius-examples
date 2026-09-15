@@ -1,0 +1,58 @@
+layer "Technology Architecture" {
+
+    environment env_aws_prod "AWS Production Environment" {
+        description "Primary cloud environment running containerized microservices in us-east-1"
+        provider "AWS"
+        region "us-east-1"
+        env_type "Production"
+        is_production true
+
+        infrastructure inf_aws_eks "EKS Kubernetes Cluster" {
+            description "Multi-AZ managed Kubernetes compute cluster running banking APIs"
+            provider "AWS"
+            time "Invest"
+            cost {
+                amount 180000
+                unit year
+            }
+            security {
+                confidentiality "High"
+                integrity "High"
+                availability "Critical"
+            }
+
+            relationships {
+                this hosts app_mobile_banking "Hosts mobile backend gateway and APIs"
+                this hosts app_auth_api "Hosts authentication microservice pods"
+            }
+        }
+    }
+
+    environment env_on_prem_mainframe "On-Premises Mainframe Datacenter" {
+        description "Legacy IBM z16 mainframe datacenter hosting core banking ledger"
+        provider "IBM"
+        region "us-east-1"
+        env_type "Production"
+        is_production true
+        
+        infrastructure inf_ibm_z16 "IBM z16 Mainframe" {
+            description "IBM z16 mainframe hosting core banking ledger and batch processing"
+            provider "IBM"
+            time "Eliminate"
+            cost {
+                amount 650000
+                unit year
+            }
+            security {
+                confidentiality "High"
+                integrity "Critical"
+                availability "Critical"
+            }
+            
+            relationships {
+                this hosts system_core_banking "Hosts legacy transactional ledger system"
+                this migrates_to env_aws_prod "Planned migration to AWS cloud core by 2027"
+            }
+        }
+    }
+}

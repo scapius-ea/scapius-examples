@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "view_id": "technology_footprint",
+  "revision": "sha256:82f243b0bc7776dff82c73e3d6024033301642f8c7bb5c38dca2640b234b2d35",
+  "updated_at_utc": "2026-09-14T05:31:22.923334Z",
+  "nodes": {
+    "inf_aws_eks": {
+      "x": 76.32853401881158,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "env_aws_prod": {
+      "x": 280,
+      "y": 48,
+      "width": 432,
+      "height": 180
+    },
+    "inf_ibm_z16": {
+      "x": 995.0032764180885,
+      "y": 90.85795596272385,
+      "width": 280,
+      "height": 96
+    },
+    "app_mobile_banking": {
+      "x": 20,
+      "y": 104,
+      "width": 280,
+      "height": 96
+    },
+    "system_core_banking": {
+      "x": 336,
+      "y": 376,
+      "width": 320,
+      "height": 240
+    }
+  },
+  "edges": {
+    "inf_aws_eks-hosts-app_mobile_banking": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": -133,
+        "y": -22,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

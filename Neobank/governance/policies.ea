@@ -1,0 +1,60 @@
+layer "Governance & Policy" {
+
+    standard standard_pci_dss "PCI DSS v4.0" {
+        description "Payment Card Industry Data Security Standard requirements for protecting cardholder data"
+        standard_type "Regulatory"
+        tags ["PCI-DSS", "Regulatory"]
+        attr authority "PCI Security Standards Council"
+
+        relationships {
+            control_card_tokenization governed_by this  "Requirement 3.4: Render PAN unreadable" {
+                status Compliant
+            }
+            system_core_banking governed_by this "Enforces audit logs and access controls on core banking" {
+                status Exempt
+            }
+        }
+    }
+
+    standard standard_sox "Sarbanes-Oxley Act (SOX 404)" {
+        description "Internal controls and auditability over financial ledger reporting systems"
+        standard_type "Regulatory"
+        tags ["SOX", "Regulatory"]
+        attr authority "SEC"
+
+        relationships {
+            system_core_banking governed_by this "Requires immutable transactional ledger audit trails" {
+                status Non-Compliant
+            }
+        }
+    }
+
+    policy policy_data_privacy "Enterprise Data Privacy Charter" {
+        description "Mandatory customer data protection policy complying with GDPR, CCPA, and GLBA"
+        policy_type "Security"
+        enforcement "Mandatory"
+        priority "Critical"
+        tags ["GDPR", "Privacy"]
+        attr framework "GDPR"
+
+        relationships {
+            system_core_banking governed_by this "Mandates least-privilege access and purpose limitation" {
+                status Compliant
+            }
+        }
+    }
+
+    policy policy_ai_governance "Responsible AI & Automated Decisioning Policy" {
+        description "Mandates human-in-the-loop oversight for high-impact credit, fraud, and account termination decisions"
+        policy_type "AI Governance"
+        enforcement "Mandatory"
+        priority "Critical"
+        tags ["AI-Governance", "Ethical-AI"]
+        attr framework "AI-Governance"
+
+        relationships {
+            agent_support_bot governed_by this "Restricts financial advice without human licensing"
+            agent_fraud_detective governed_by this "Requires human sign-off before closing accounts"
+        }
+    }
+}

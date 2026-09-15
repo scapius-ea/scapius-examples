@@ -1,0 +1,91 @@
+layer "Security Architecture" {
+
+    trust_boundary tb_public_internet "Public Internet Zone" {
+        description "Untrusted public perimeter accessible by internet-facing mobile apps and attackers"
+        boundary_type "Zone"
+        trust_level "Untrusted"
+        attr zone_type "Public"
+
+        relationships {
+            this encloses app_mobile_banking "Public internet can access the mobile banking app"
+        }
+    }
+
+    trust_boundary tb_pci_secure_enclave "PCI Secure Enclave" {
+        description "Isolated VPC enclave holding payment gateways and cardholder data environments (CDE)"
+        boundary_type "Zone"
+        trust_level "High"
+        attr zone_type "Restricted"
+
+        relationships {
+            this encloses system_core_banking "Core banking system resides in the PCI secure enclave"
+        }
+    }
+
+    control control_waf "Web Application Firewall" {
+        description "Cloudflare edge WAF with rate limiting and automated DDoS mitigation"
+        control_type "Preventive"
+        control_category "Network Security"
+        framework "PCI-DSS"
+        tags ["PCI-DSS", "Network Security"]
+        effectiveness "High"
+        implementation_status "Implemented"
+
+        relationships {
+            this protects app_mobile_banking "Filters incoming malicious HTTP requests" {
+                mechanism "Monitoring"
+            }
+            this mitigates threat_ddos "Absorbs distributed volumetric traffic spikes"
+        }
+    }
+
+    control control_card_tokenization "PAN Card Tokenization Vault" {
+        description "Replaces sensitive Primary Account Numbers with irreversible tokens"
+        control_type "Preventive"
+        control_category "Cryptography"
+        framework "PCI-DSS"
+        tags ["PCI-DSS", "Data Protection"]
+        effectiveness "High"
+        implementation_status "Implemented"
+
+        relationships {
+            this protects system_core_banking "Ensures card numbers are never stored in plaintext"
+        }
+    }
+
+    threat threat_credential_stuffing "Automated Credential Stuffing Attack" {
+        description "Automated botnets attempting leaked username/password combinations"
+        category "Spoofing"
+        likelihood "High"
+        impact "High"
+        risk_rating "High"
+        mitigation_status "Mitigated"
+
+        relationships {
+            this targets app_mobile_banking "Targets customer authentication endpoint"
+        }
+    }
+
+    threat threat_ddos "Distributed Denial of Service (DDoS)" {
+        description "L7 application-layer flood designed to overwhelm payment services"
+        category "DoS"
+        likelihood "Critical"
+        impact "Critical"
+        risk_rating "Critical"
+        mitigation_status "Accepted"
+
+        relationships {
+            this targets app_mobile_banking "Floods API ingress gateways"
+        }
+    }
+
+    vulnerability vuln_missing_rate_limiting "Missing Rate Limiting on Login Endpoint" {
+        description "Authentication API does not throttle rapid repeated login attempts"
+        cve_id "CVE-2025-41928"
+        cvss_score 7.5
+
+        relationships {
+            this targets app_mobile_banking "Allows fast-paced automated credential attacks"
+        }
+    }
+}

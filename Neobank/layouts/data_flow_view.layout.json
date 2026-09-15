@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "view_id": "data_flow_view",
+  "revision": "sha256:b296ef0a6ee4c0f98961e7383529f272707ac1e4f4d5d2983c60deac0dc3e661",
+  "updated_at_utc": "2026-09-14T05:31:43.813757Z",
+  "nodes": {
+    "app_mobile_banking": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "system_core_banking": {
+      "x": 528,
+      "y": 408,
+      "width": 320,
+      "height": 180
+    },
+    "app_instant_pay": {
+      "x": 20,
+      "y": 180,
+      "width": 280,
+      "height": 96
+    },
+    "app_aml_monitor": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "system_payments": {
+      "x": 40,
+      "y": 84,
+      "width": 320,
+      "height": 296
+    },
+    "data_ledger_tx": {
+      "x": 624,
+      "y": 133.04550657592597,
+      "width": 300,
+      "height": 96
+    }
+  },
+  "edges": {
+    "app_instant_pay-writes-data_ledger_tx": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 129,
+        "y": 39,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_mobile_banking-reads-data_ledger_tx": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": -181,
+        "y": 21,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

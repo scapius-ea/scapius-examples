@@ -1,0 +1,127 @@
+workspace neo_bank "Neo Bank Enterprise Architecture" {
+
+    styles {
+        style "system" {
+            shape "rounded_rectangle"
+            css_class "card shadow-sm border-primary"
+        }
+
+        style "app" {
+            shape "pill"
+            css_class "card border-secondary text-primary"
+        }
+
+        style "actor" {
+            shape "actor"
+            css_class "actor-node text-center"
+        }
+    }
+
+    views {
+        landscape customer_onboarding_context "Customer Onboarding Context" {
+            description "End-to-end customer onboarding journey across digital channels, core deposit services, and KYC records."
+            tags ["Customer Experience", "KYC", "Onboarding", "Journey"]
+
+            include customer
+            include app_mobile_banking
+            include system_core_banking
+
+            auto_layout TopToBottom
+
+            text onboardingNote """
+                Frictionless mobile onboarding backed by instant identity checks reduces customer registration to under 5 minutes.
+            """ {
+                anchor customer
+            }
+        }
+
+        landscape cross_layer_lineage "Strategic Cross-Layer Lineage" {
+            description "End-to-end traceability from executive growth goals down to operational processes, apps, and Kubernetes infrastructure."
+            tags ["Strategy", "Traceability", "Multi-Layer", "Lineage"]
+
+            include goal_double_customers
+            include cap_digital_onboarding
+            include proc_onboarding
+            include app_mobile_banking
+            include inf_aws_eks
+
+            auto_layout TopToBottom
+        }
+
+        landscape technology_footprint "Hosting Matrix" {
+            description "Live hosting footprint showing AWS cloud and mainframe environments with deployed applications."
+            tags ["Technology Architecture", "Infrastructure", "Cloud", "Traceability"]
+
+            include where layer == "Technology Architecture"
+            include_verb hosts
+            exclude env_on_prem_mainframe
+            exclude app_auth_api
+
+            auto_layout LeftToRight
+        }
+
+        capability_map capability_map_view "Neo Bank Capability Map" {
+            description "Comprehensive business capability map showing L1 domains through L3 capabilities with maturity ratings."
+            tags ["Business Architecture", "Capabilities", "Maturity", "Portfolio"]
+
+            include where layer == "Business Architecture"
+            auto_layout LeftToRight
+        }
+
+        threat_model threat_model_view "NeoBank Threat Model" {
+            description "STRIDE threat model mapping threats, vulnerabilities, and mitigating security controls across trust boundaries."
+            tags ["Security", "Threat Model", "STRIDE", "Controls"]
+
+            include where layer == "Security Architecture"
+            include app_mobile_banking
+            include system_core_banking
+
+            auto_layout LeftToRight
+        }
+
+        compliance_matrix compliance_matrix_view "Regulatory Compliance Matrix" {
+            description "Regulatory and policy compliance coverage across core banking systems and data assets."
+            tags ["Governance", "Compliance", "PCI-DSS", "SOX", "Audit"]
+
+            include where layer == "Governance & Policy"
+            include_verb governed_by 
+        }
+        
+        data_flow data_flow_view "Customer & Ledger Data Flow" {
+            description "Data lifecycle showing customer KYC profiles, payment transactions, and protective encryption controls across stages."
+            tags ["Data Architecture", "PII", "Data Flow", "Value Streams"]
+
+            include app_instant_pay
+            include system_core_banking
+            include app_aml_monitor
+            include app_mobile_banking
+            include data_ledger_tx
+            
+            auto_layout LeftToRight
+        }
+
+        value_stream customer_onboarding_value_stream "Customer Onboarding Stream" {
+            description "End-to-end customer onboarding pipeline mapping stages to enabling capabilities and applications."
+            tags ["Business Architecture", "Value Stream", "Onboarding", "Customer Experience"]
+
+            include vs_customer_onboarding
+
+            auto_layout LeftToRight
+        }
+
+        landscape integration_view "System & Agent Integration Landscape" {
+            description "API, gRPC, and Kafka event stream integration topology connecting digital channels, instant payment rails, and autonomous AI agents."
+            tags ["Integration", "APIs", "Event Streams", "AI Agents"]
+
+            include app
+            include agent
+            include actor
+
+            exclude component
+            exclude app_auth_api
+            exclude app_instant_pay
+
+            auto_layout LeftToRight
+        }
+    }
+}

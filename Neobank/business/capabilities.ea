@@ -1,0 +1,153 @@
+layer "Business Architecture" {
+
+    // Domain 1: Retail Banking Operations
+    capability cap_retail_banking "Retail Banking Operations" {
+        description "Core consumer banking products, deposits, lending, and transaction services"
+        number "1.0"
+        maturity "Defined"
+
+        score {
+            business_value 9.5
+            tech_fit 8.8
+        }
+
+        capability cap_consumer_lending "Consumer Lending" {
+            description "End-to-end unsecured personal loans and credit decisioning"
+            number "1.1"
+            maturity "Managed"
+
+            score {
+                business_value 8.5
+                tech_fit 8.0
+            }
+
+            capability cap_credit_scoring "Automated Credit Scoring" {
+                description "Real-time algorithmic risk and credit scoring"
+                number auto
+                maturity "Managed"
+
+                score {
+                    business_value 8.9
+                    tech_fit 8.7
+                }
+            }
+        }
+
+        capability cap_payments_transfers "Payments & Transfers" {
+            description "Domestic and international money movement and clearing"
+            number "1.2"
+            maturity "Optimizing"
+
+            score {
+                business_value 9.5
+                tech_fit 9.0
+            }
+
+            capability cap_real_time_payments "Real-Time Instant Payments" {
+                description "FedNow and RTP instant settlement processing"
+                number auto
+                maturity "Optimizing"
+
+                score {
+                    business_value 9.6
+                    tech_fit 9.3
+                }
+            }
+        }
+    }
+
+    // Domain 2: Customer Service & Operations
+    capability cap_customer_service "Customer Service & Ops" {
+        description "Customer engagement, account servicing, and contact center operations"
+        number "2.0"
+        maturity "Defined"
+
+        score {
+            business_value 8.8
+            tech_fit 8.5
+        }
+
+        capability cap_digital_onboarding "Digital Onboarding & KYC" {
+            description "Self-service customer registration, ID verification, and KYC"
+            number "2.1"
+            maturity "Managed"
+
+            score {
+                business_value 9.6
+                tech_fit 9.2
+            }
+
+            relationships {
+                this influences goal_double_customers "Enables rapid customer acquisition at scale"
+            }
+
+            capability cap_identity_verification "Biometric Identity Verification" {
+                description "Document validation and liveness detection"
+                number auto
+                maturity "Managed"
+
+                score {
+                    business_value 9.2
+                    tech_fit 9.1
+                }
+            }
+        }
+
+        capability cap_customer_support "Customer Support Operations" {
+            description "Omnichannel inquiries, ticketing, and dispute triage"
+            number "2.2"
+            maturity "Managed"
+
+            score {
+                business_value 8.2
+                tech_fit 7.8
+            }
+
+            capability cap_voice_telephony "Legacy PBX Voice IVR" {
+                description "Traditional phone tree routing slated for retirement"
+                maturity "Managed" 
+
+                score {
+                    business_value 4.0
+                    tech_fit 3.0
+                }
+
+                lifecycle {
+                    phase Run start "2018-01-01" end "2026-12-31"
+                    phase Retire start "2027-01-01"
+                }
+            }
+        }
+    }
+
+    // Domain 3: Risk & Compliance Management
+    capability cap_risk_compliance "Risk and Compliance Management" {
+        description "Enterprise risk management, AML fraud detection, and regulatory filings"
+        number "3.0"
+        maturity "Defined"
+
+        score {
+            business_value 9.2
+            tech_fit 8.6
+        }
+
+        capability cap_fraud_prevention "Fraud Prevention" {
+            number "3.1"
+            maturity "Initial"
+
+            score {
+                business_value 9.0
+                tech_fit 8.4
+            }
+
+            capability cap_transaction_scoring "Real-time Transaction Fraud Scoring" {
+                maturity "Initial"
+
+                score {
+                    business_value 9.3
+                    tech_fit 8.9
+                }
+            }
+        }
+    }
+}

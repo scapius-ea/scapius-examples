@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "view_id": "integration_view",
+  "revision": "sha256:82106f3d6b553a41b5e48ada9277d1cb389ec5739a6ee29878990a1fbbfd8c7b",
+  "updated_at_utc": "2026-09-13T10:48:54.458125Z",
+  "nodes": {
+    "customer": {
+      "x": 598.3987321406184,
+      "y": 104.37971424989504,
+      "width": 280,
+      "height": 96
+    },
+    "app_mobile_banking": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "system_core_banking": {
+      "x": 40,
+      "y": 40,
+      "width": 320,
+      "height": 180
+    },
+    "agent_support_bot": {
+      "x": 598.3987321406184,
+      "y": -96,
+      "width": 280,
+      "height": 96
+    },
+    "agent_fraud_detective": {
+      "x": 598.3987321406184,
+      "y": 480,
+      "width": 316,
+      "height": 96
+    },
+    "compliance_officer": {
+      "x": 598.3987321406184,
+      "y": 254,
+      "width": 280,
+      "height": 96
+    },
+    "app_aml_monitor": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "system_payments": {
+      "x": 40,
+      "y": 260,
+      "width": 320,
+      "height": 180
+    }
+  },
+  "edges": {
+    "agent_support_bot-serves-customer": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 22,
+        "y": 12,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_aml_monitor-serves-agent_fraud_detective": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": -5,
+        "y": -40,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

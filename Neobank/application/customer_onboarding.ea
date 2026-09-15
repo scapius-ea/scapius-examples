@@ -1,0 +1,95 @@
+layer "Application Architecture" {
+
+    actor customer "Retail Customer" {
+        description "Prospective and active personal banking customers accessing NeoBank digital channels"
+        role "Customer"
+        is_external true
+    }
+
+    system system_core_banking "Core Banking Platform" {
+        description "Central mainframe-based account ledger, settlement system, and records database"
+        owner "Core Banking Operations"
+        criticality "Mission-Critical"
+        status "Active"
+        tier "Tier-1"
+        time "Eliminate"
+        cost {
+            amount 1200000
+            unit year
+        }
+        score {
+            business_value 9.0
+            tech_fit 4.5
+        }
+        security {
+            confidentiality "High"
+            integrity "Critical"
+            availability "Critical"
+        }
+        lifecycle {
+            phase Run start "2010-01-01" end "2026-12-31"
+            phase Retire start "2027-01-01"
+        }
+
+        relationships {
+            this realizes cap_retail_banking "Underpins core deposit accounts and retail ledgers"
+        }
+
+        app app_mobile_banking "NeoBank Mobile App" {
+            description "Primary customer-facing digital touchpoint for onboarding, deposits, and transfers"
+            owner "Digital Channels"
+            tier "Tier-1"
+            internet_facing true
+            status "Active"
+            time "Invest"
+            cost {
+                amount 350000
+                unit year
+            }
+            score {
+                business_value 9.5
+                tech_fit 9.0
+            }
+            security {
+                confidentiality "High"
+                integrity "Critical"
+                availability "Critical"
+            }
+            lifecycle {
+                phase Run start "2022-01-01"
+            }
+
+            relationships {
+                this serves customer "Provides self-service mobile banking"
+                // Connect application to the capability it delivers
+                this realizes cap_digital_onboarding "Delivers mobile digital onboarding"
+                this realizes cap_consumer_lending "Customer self-service loan applications"
+            }
+        }
+    }
+
+    app app_auth_api "Customer Authentication API" {
+        description "Stateless token verification and OAuth2 customer authentication service"
+        owner "Identity & Access Management"
+        tier "Tier-1"
+        internet_facing true
+        status "Active"
+        time "Tolerate"
+        cost {
+            amount 150000
+            unit year
+        }
+        score {
+            business_value 8.8
+            tech_fit 7.5
+        }
+        security {
+            confidentiality "Critical"
+            integrity "Critical"
+            availability "Critical"
+        }
+        lifecycle {
+            phase Run start "2021-06-01"
+        }
+    }
+}
