@@ -100,7 +100,7 @@ workspace neo_bank "Neo Bank Enterprise Architecture" {
             auto_layout LeftToRight
         }
 
-        value_stream customer_onboarding_value_stream "Customer Onboarding Stream" {
+        value_stream_map customer_onboarding_value_stream "Customer Onboarding Stream" {
             description "End-to-end customer onboarding pipeline mapping stages to enabling capabilities and applications."
             tags ["Business Architecture", "Value Stream", "Onboarding", "Customer Experience"]
 

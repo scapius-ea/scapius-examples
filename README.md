@@ -47,7 +47,7 @@ The **NeoBank** workspace models a cloud-native digital banking platform deliver
 | **`threat_model_view`** | `threat_model` | STRIDE threat model mapping threats, vulnerabilities, and security controls across trust zones. |
 | **`compliance_matrix_view`** | `compliance_matrix` | Regulatory standard compliance coverage across platforms and data assets. |
 | **`data_flow_view`** | `data_flow` | Customer KYC and transaction ledger lifecycle across processing stages. |
-| **`customer_onboarding_value_stream`** | `value_stream` | Onboarding stage pipeline mapped to supporting capabilities and applications. |
+| **`customer_onboarding_value_stream`** | `value_stream_map` | Onboarding stage pipeline mapped to supporting capabilities and applications. |
 | **`integration_view`** | `landscape` | Topology of APIs, gRPC streams, and Kafka topics linking systems and AI agents. |
 | **`technology_footprint`** | `landscape` | Cloud hosting matrix across AWS production environments and on-premise mainframes. |
 
