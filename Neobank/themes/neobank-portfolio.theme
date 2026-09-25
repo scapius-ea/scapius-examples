@@ -1,0 +1,103 @@
+# ==============================================================================
+# NeoBank Enterprise Portfolio Theme: TIME & Technology Design System
+# ==============================================================================
+
+theme light "neobank-light" {
+    # ── Gartner TIME Classification (Light Mode) ──
+    style app where time == "Invest" {
+        fill "#dcfce7"
+        stroke "#16a34a"
+        stroke_width "2px"
+        color "#14532d"
+    }
+
+    style app where time == "Tolerate" {
+        fill "#e0f2fe"
+        stroke "#0284c7"
+        stroke_width "1.5px"
+        color "#0369a1"
+    }
+
+    style * where time == "Migrate" {
+        fill "#fef3c7"
+        stroke "#d97706"
+        stroke_width "2px"
+        stroke_style "dashed"
+        color "#78350f"
+    }
+
+    style * where time == "Eliminate" {
+        fill "#fee2e2"
+        stroke "#dc2626"
+        stroke_width "2px"
+        stroke_style "dotted"
+        color "#7f1d1d"
+    }
+
+    # ── Official Cloud & Tech Vector Icons ──
+    style app where id == "app_mobile_banking" {
+        icon "smartphone"
+    }
+
+    style app where id == "app_instant_pay" {
+        icon "aws:api-gateway"
+    }
+
+    style app where id == "app_auth_api" {
+        icon "shield-check"
+    }
+
+    style system where id == "system_core_banking" {
+        icon "assets:systems/core-banking.svg"
+    }
+}
+
+theme dark "neobank-dark" {
+    # ── Gartner TIME Classification (Dark Mode) ──
+    style app where time == "Invest" {
+        fill "#82c5a4"
+        stroke "#0e361c"
+        stroke_width "2px"
+        color "#20442e"
+    }
+
+    style app where time == "Tolerate" {
+        fill "#95b3d6"
+        stroke "#1a3642"
+        stroke_width "1.5px"
+        color "#142229"
+    }
+
+    style * where time == "Migrate" {
+        fill "#c5b095"
+        stroke "#312612"
+        stroke_width "2px"
+        stroke_style "dashed"
+        color "#504724"
+    }
+
+    style * where time == "Eliminate" {
+        fill "#cda1a6"
+        stroke "#2f1116"
+        stroke_width "2px"
+        stroke_style "dotted"
+        color "#461a1f"
+    }
+
+    # ── Icons (Inherited across both modes) ──
+    style app where id == "app_mobile_banking" {
+        icon "smartphone"
+    }
+
+    style app where id == "app_instant_pay" {
+        icon "aws:api-gateway"
+    }
+
+    style app where id == "app_auth_api" {
+        icon "shield-check"
+    }
+
+    style system where id == "system_core_banking" {
+        icon "assets:systems/core-banking.svg"
+    }
+}

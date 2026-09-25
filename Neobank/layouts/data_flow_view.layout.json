@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "view_id": "data_flow_view",
-  "revision": "sha256:b296ef0a6ee4c0f98961e7383529f272707ac1e4f4d5d2983c60deac0dc3e661",
-  "updated_at_utc": "2026-09-14T05:31:43.813757Z",
+  "revision": "sha256:dd5c41b283d8c0f444ea3748dabd76d306c8b4744144d854ccc7e81240a4affc",
+  "updated_at_utc": "2026-09-25T00:18:06.223538Z",
   "nodes": {
     "app_mobile_banking": {
       "x": 20,
@@ -11,10 +11,16 @@
       "height": 96
     },
     "system_core_banking": {
-      "x": 528,
-      "y": 408,
+      "x": 604,
+      "y": 360,
       "width": 320,
       "height": 180
+    },
+    "data_ledger_tx": {
+      "x": 624,
+      "y": 133.04550657592597,
+      "width": 300,
+      "height": 96
     },
     "app_instant_pay": {
       "x": 20,
@@ -33,33 +39,38 @@
       "y": 84,
       "width": 320,
       "height": 296
-    },
-    "data_ledger_tx": {
-      "x": 624,
-      "y": 133.04550657592597,
-      "width": 300,
-      "height": 96
     }
   },
   "edges": {
-    "app_instant_pay-writes-data_ledger_tx": {
-      "start_point": null,
-      "end_point": null,
-      "anchors": null,
-      "label_offset": {
-        "x": 129,
-        "y": 39,
-        "width": null,
-        "height": null
-      }
-    },
     "app_mobile_banking-reads-data_ledger_tx": {
       "start_point": null,
       "end_point": null,
       "anchors": null,
       "label_offset": {
-        "x": -181,
-        "y": 21,
+        "x": -174,
+        "y": 3,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_instant_pay-flows_to-system_core_banking": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 29,
+        "y": 39,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_instant_pay-writes-data_ledger_tx": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 136,
+        "y": 12,
         "width": null,
         "height": null
       }

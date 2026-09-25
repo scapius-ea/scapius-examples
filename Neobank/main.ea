@@ -1,6 +1,8 @@
 workspace neo_bank "Neo Bank Enterprise Architecture" {
 
     styles {
+        theme "themes/neobank-portfolio.theme"
+
         style "system" {
             shape "rounded_rectangle"
             css_class "card shadow-sm border-primary"
@@ -14,6 +16,27 @@ workspace neo_bank "Neo Bank Enterprise Architecture" {
         style "actor" {
             shape "actor"
             css_class "actor-node text-center"
+        }
+
+        # Universal edge styling
+        style serves {
+            stroke "#64748b"
+            stroke_width "1.5px"
+            curve_type "bezier"
+        }
+
+        style flows_to {
+            stroke "#1e7633"
+            stroke_width "1px"
+            curve_type "smooth_step"
+            arrow "diamond"
+            label {
+                color "#8a57a5"
+                fill "#8a57a500"
+                stroke "#2b0f3a"
+                stroke_style "dashed"
+                stroke_width "0px"
+            }
         }
     }
 
