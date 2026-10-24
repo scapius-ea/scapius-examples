@@ -1,71 +1,82 @@
 {
   "schema_version": 1,
   "view_id": "cross_layer_lineage",
-  "revision": "sha256:882b44fa60ab3cd8ac4b0d19b9d5b511ee797f92a5a46a367ea9250762091022",
-  "updated_at_utc": "2026-09-14T05:31:02.790073Z",
+  "revision": "sha256:4058eee102dfe88306f5ad4c422f2d4e265d7da82a69df07464ad911d8463e5a",
+  "updated_at_utc": "2026-10-24T05:44:40.71726Z",
   "nodes": {
     "inf_aws_eks": {
-      "x": 17.665202571096188,
-      "y": 56.995607713288564,
+      "x": 48,
+      "y": 64,
       "width": 280,
-      "height": 96
+      "height": 147
     },
     "env_aws_prod": {
-      "x": 915.0584241574437,
-      "y": 424.8462447373767,
-      "width": 348,
-      "height": 180
+      "x": 912,
+      "y": 388.00000000000006,
+      "width": 360,
+      "height": 260
     },
     "cap_identity_verification": {
-      "x": 24,
-      "y": 96,
-      "width": 308,
-      "height": 96
+      "x": 72,
+      "y": 72,
+      "width": 280,
+      "height": 122
     },
     "cap_digital_onboarding": {
-      "x": 21.88643391055325,
-      "y": 104.94321695527663,
-      "width": 352,
-      "height": 240
+      "x": 72,
+      "y": 72,
+      "width": 372,
+      "height": 214
     },
     "cap_customer_service": {
-      "x": 303.9182561773177,
-      "y": 766.2602179778353,
-      "width": 400,
+      "x": 242.9272426121504,
+      "y": 782.1189750399822,
+      "width": 528,
       "height": 384
     },
     "proc_onboarding": {
-      "x": -205.18310152035087,
-      "y": 479.6434870314339,
+      "x": -219.18644067796612,
+      "y": 448.6414472159727,
       "width": 280,
-      "height": 96
+      "height": 149
     },
     "app_mobile_banking": {
-      "x": 20,
-      "y": 104,
+      "x": 24,
+      "y": 72,
       "width": 280,
-      "height": 96
+      "height": 160
     },
     "system_core_banking": {
-      "x": 342,
+      "x": 338.4788204692641,
       "y": 376,
-      "width": 320,
-      "height": 240
+      "width": 324,
+      "height": 260
     },
     "goal_double_customers": {
-      "x": -241.35260546515144,
-      "y": 940.0578163954543,
+      "x": -332,
+      "y": 905.8199767751731,
       "width": 280,
-      "height": 96
+      "height": 125
     }
   },
   "edges": {
+    "inf_aws_eks-hosts-app_mobile_banking": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": -14,
+        "y": 50,
+        "width": null,
+        "height": null
+      }
+    },
     "cap_digital_onboarding-influences-goal_double_customers": {
       "start_point": null,
       "end_point": null,
       "anchors": null,
       "label_offset": {
-        "x": -17,
+        "x": -36,
         "y": -21,
         "width": null,
         "height": null

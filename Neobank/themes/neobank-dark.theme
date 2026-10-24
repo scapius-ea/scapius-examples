@@ -1,0 +1,660 @@
+theme dark "material-grayscale" {
+    // ==============================================================================
+    // 1. Universal Material Base Style (Dark Slate Foundation)
+    // ==============================================================================
+    style * {
+        fill "#1d2027"
+        stroke "#334155"
+        stroke_width "1px"
+        stroke_style "solid"
+        color "#e2e8f0"
+        font_family "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+        font_size "13px"
+        font_weight "400"
+        line_height "1.5"
+    }
+
+    // ==============================================================================
+    // 2. Strategy Layer (Subtle Elevated Dark Surfaces & Balanced Typography)
+    // ==============================================================================
+    style capability {
+        shape "rounded_rectangle"
+        fill "#272a31"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "layers"
+    }
+
+    style goal {
+        shape "rounded_rectangle"
+        fill "#22252c"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#e2e8f0"
+        font_weight "500"
+        icon "target"
+    }
+
+    style kpi {
+        shape "rectangle"
+        fill "#1d2027"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "500"
+        icon "trending-up"
+    }
+
+    // ==============================================================================
+    // 3. Business Architecture (Clean Human-Centric Forms in Dark Tones)
+    // ==============================================================================
+    style actor {
+        shape "person"
+        fill "#272a31"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "user"
+    }
+
+    style businessactor {
+        shape "person"
+        fill "#272a31"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "user"
+    }
+
+    style person {
+        shape "person"
+        fill "#272a31"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "user"
+    }
+
+    style process {
+        shape "chevron"
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#e2e8f0"
+        font_weight "500"
+        icon "workflow"
+    }
+
+    style businessprocess {
+        shape "chevron"
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#e2e8f0"
+        font_weight "500"
+        icon "workflow"
+    }
+
+    style value_stream {
+        shape "rounded_rectangle"
+        fill "#272a31"
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "arrow-right-circle"
+    }
+
+    style stage {
+        shape "chevron"
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#cbd5e1"
+        font_weight "500"
+        icon "chevron-right"
+    }
+
+    style group {
+        shape "folder"
+        fill "transparent"
+        stroke "#475569"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#94a3b8"
+        font_weight "600"
+        icon "folder"
+    }
+
+    // ==============================================================================
+    // 4. Application Architecture (Elevated Dark Cards & Fluid Silhouettes)
+    // ==============================================================================
+    style system {
+        shape "rounded_rectangle"
+        fill "#1d2027"
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "server"
+    }
+
+    style app {
+        shape "rounded_rectangle"
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#f1f5f9"
+        font_weight "500"
+        icon "layout-grid"
+    }
+
+    style application {
+        shape "rounded_rectangle"
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#f1f5f9"
+        font_weight "500"
+        icon "layout-grid"
+    }
+
+    style applicationservice {
+        shape "rounded_rectangle"
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#f1f5f9"
+        font_weight "500"
+        icon "layout-grid"
+    }
+
+    style component {
+        shape "rounded_rectangle"
+        fill "#22252c"
+        stroke "#334155"
+        stroke_width "1px"
+        color "#cbd5e1"
+        font_weight "500"
+        icon "component"
+    }
+
+    style data_object {
+        shape "cylinder"
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#f1f5f9"
+        font_weight "500"
+        icon "database"
+    }
+
+    style database {
+        shape "cylinder"
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#f1f5f9"
+        font_weight "500"
+        icon "database"
+    }
+
+    style agent {
+        shape "hexagon"
+        fill "#272a31"
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "bot"
+    }
+
+    // ==============================================================================
+    // 5. Technology Architecture
+    // ==============================================================================
+    style infrastructure {
+        shape "rounded_rectangle"
+        fill "#22252c"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#e2e8f0"
+        font_weight "500"
+        icon "hard-drive"
+    }
+
+    style node {
+        shape "rounded_rectangle"
+        fill "#22252c"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#e2e8f0"
+        font_weight "500"
+        icon "hard-drive"
+    }
+
+    style environment {
+        shape "rounded_rectangle"
+        fill "#22252c40"
+        stroke "#475569"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#f8fafc"
+        font_weight "600"
+        icon "cloud"
+    }
+
+    // ==============================================================================
+    // 6. Security Architecture
+    // ==============================================================================
+    style threat {
+        shape "octagon"
+        fill "#1d2027"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "alert-triangle"
+    }
+
+    style vulnerability {
+        shape "rectangle"
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#e2e8f0"
+        font_weight "500"
+        icon "bug"
+    }
+
+    style risk_scenario {
+        shape "octagon"
+        fill "#272a31"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "alert-circle"
+    }
+
+    style control {
+        shape "shield"
+        fill "#1d2027"
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "shield-check"
+    }
+
+    style trust_boundary {
+        shape "rectangle"
+        fill "transparent"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#94a3b8"
+        font_weight "600"
+        icon "shield"
+    }
+
+    // ==============================================================================
+    // 7. Governance & Policy
+    // ==============================================================================
+    style policy {
+        shape "document"
+        fill "#22252c"
+        stroke "#475569"
+        stroke_width "1px"
+        color "#e2e8f0"
+        font_weight "500"
+        icon "file-text"
+    }
+
+    style standard {
+        shape "document"
+        fill "#1d2027"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        color "#f8fafc"
+        font_weight "600"
+        icon "file-check"
+    }
+
+    // ==============================================================================
+    // 8. Relationships & Edge Verbs (Curved, Fluid & Soft Dark Connectors)
+    // ==============================================================================
+    style relationship {
+        stroke "#64748b"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        curve_type "smooth_step"
+        arrow "standard"
+        color "#94a3b8"
+    }
+
+    style realizes {
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        curve_type "smooth_step"
+        color "#cbd5e1"
+    }
+
+    style serves {
+        stroke "#cbd5e1"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        curve_type "bezier"
+        color "#e2e8f0"
+    }
+
+    style hosts {
+        stroke "#64748b"
+        stroke_width "1px"
+        stroke_style "dashed"
+        curve_type "smooth_step"
+        color "#94a3b8"
+    }
+
+    style reads {
+        stroke "#64748b"
+        stroke_width "1px"
+        stroke_style "dashed"
+        curve_type "smooth_step"
+        color "#cbd5e1"
+    }
+
+    style writes {
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        curve_type "smooth_step"
+        color "#e2e8f0"
+    }
+
+    style flows_to {
+        stroke "#cbd5e1"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        curve_type "smooth_step"
+        color "#e2e8f0"
+    }
+
+    style triggers {
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        curve_type "smooth_step"
+        color "#e2e8f0"
+    }
+
+    style composed_of {
+        stroke "#475569"
+        stroke_width "1px"
+        stroke_style "solid"
+        curve_type "smooth_step"
+        color "#94a3b8"
+    }
+
+    style influences {
+        stroke "#64748b"
+        stroke_width "1px"
+        stroke_style "dotted"
+        curve_type "bezier"
+        color "#94a3b8"
+    }
+
+    style migrates_to {
+        stroke "#cbd5e1"
+        stroke_width "1.5px"
+        stroke_style "dotted"
+        curve_type "smooth_step"
+        color "#e2e8f0"
+    }
+
+    style depends_on {
+        stroke "#64748b"
+        stroke_width "1px"
+        stroke_style "dashed"
+        curve_type "smooth_step"
+        color "#94a3b8"
+    }
+
+    style governed_by {
+        stroke "#64748b"
+        stroke_width "1px"
+        stroke_style "dashed"
+        curve_type "smooth_step"
+        color "#94a3b8"
+    }
+
+    style mitigates {
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        curve_type "smooth_step"
+        color "#e2e8f0"
+    }
+
+    style protects {
+        stroke "#cbd5e1"
+        stroke_width "1px"
+        stroke_style "dashed"
+        curve_type "smooth_step"
+        color "#cbd5e1"
+    }
+
+    style targets {
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        curve_type "smooth_step"
+        color "#e2e8f0"
+    }
+
+    // ==============================================================================
+    // 9. Layer Backgrounds (Frosted Translucent Dark Washes)
+    // ==============================================================================
+    style layer {
+        fill "#1d202720"
+        stroke "#334155"
+        stroke_width "1px"
+        stroke_style "solid"
+        color "#94a3b8"
+    }
+
+    style "Strategy Layer" {
+        fill "#1d202718"
+        stroke "#334155"
+        color "#f8fafc"
+    }
+
+    style "Business Architecture" {
+        fill "#1d202718"
+        stroke "#334155"
+        color "#f8fafc"
+    }
+
+    style "Application Architecture" {
+        fill "#1d202718"
+        stroke "#334155"
+        color "#f8fafc"
+    }
+
+    style "Technology Architecture" {
+        fill "#1d202718"
+        stroke "#334155"
+        color "#f8fafc"
+    }
+
+    style "Security Architecture" {
+        fill "#1d202718"
+        stroke "#334155"
+        color "#f8fafc"
+    }
+
+    style "Governance & Policy" {
+        fill "#1d202718"
+        stroke "#334155"
+        color "#f8fafc"
+    }
+
+    // ==============================================================================
+    // 10. Semantic Conditional Overrides: Gartner TIME (Luminous Outlines & Contrast)
+    // ==============================================================================
+    style * where time == "Invest" {
+        fill "#064e3b33"
+        stroke "#34d399"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        color "#6ee7b7"
+    }
+
+    style * where time == "Tolerate" {
+        fill "#0c4a6e33"
+        stroke "#38bdf8"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        color "#7dd3fc"
+    }
+
+    style * where time == "Migrate" {
+        fill "#78350f33"
+        stroke "#fbbf24"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#fde68a"
+    }
+
+    style * where time == "Eliminate" {
+        fill "#88133733"
+        stroke "#f87171"
+        stroke_width "1.5px"
+        stroke_style "dotted"
+        color "#fecdd3"
+    }
+
+    // ==============================================================================
+    // 11. Semantic Conditional Overrides: Data & System Security Classification
+    // ==============================================================================
+    style * where classification == "Restricted" {
+        fill "#450a0a33"
+        stroke "#f87171"
+        stroke_width "2px"
+        color "#fca5a5"
+    }
+
+    style * where classification == "Confidential" {
+        fill "#43140733"
+        stroke "#fb923c"
+        stroke_width "1.5px"
+        color "#fdba74"
+    }
+
+    style * where classification == "Internal" {
+        fill "#17255433"
+        stroke "#60a5fa"
+        stroke_width "1.5px"
+        color "#93c5fd"
+    }
+
+    style * where classification == "Public" {
+        fill "#064e3b33"
+        stroke "#4ade80"
+        stroke_width "1px"
+        color "#86efac"
+    }
+
+    // ==============================================================================
+    // 12. Semantic Conditional Overrides: System Criticality
+    // ==============================================================================
+    style system where criticality == "Mission-Critical" {
+        fill "#450a0a33"
+        stroke "#f87171"
+        stroke_width "2px"
+        color "#fca5a5"
+    }
+
+    style system where criticality == "Business-Critical" {
+        fill "#43140733"
+        stroke "#fb923c"
+        stroke_width "1.5px"
+        color "#fdba74"
+    }
+
+    // ==============================================================================
+    // 13. Semantic Conditional Overrides: Risk & Threat Severity
+    // ==============================================================================
+    style * where risk == "Critical" {
+        fill "#450a0a33"
+        stroke "#f87171"
+        stroke_width "2px"
+        color "#fca5a5"
+    }
+
+    style * where risk == "High" {
+        fill "#43140733"
+        stroke "#fb923c"
+        stroke_width "1.5px"
+        color "#fdba74"
+    }
+
+    style * where risk == "Medium" {
+        fill "#78350f33"
+        stroke "#fbbf24"
+        stroke_width "1.5px"
+        color "#fde68a"
+    }
+
+    style * where risk == "Low" {
+        fill "#064e3b33"
+        stroke "#4ade80"
+        stroke_width "1px"
+        color "#86efac"
+    }
+
+    // ==============================================================================
+    // 14. Semantic Conditional Overrides: Lifecycle Phase
+    // ==============================================================================
+    style * where phase == "Plan" {
+        fill "#1d2027"
+        stroke "#64748b"
+        stroke_width "1px"
+        color "#cbd5e1"
+    }
+
+    style * where phase == "Build" {
+        fill "#1e3a5f33"
+        stroke "#60a5fa"
+        stroke_width "1.5px"
+        color "#93c5fd"
+    }
+
+    style * where phase == "Run" {
+        fill "#064e3b33"
+        stroke "#4ade80"
+        stroke_width "1.5px"
+        color "#86efac"
+    }
+
+    style * where phase == "PhaseOut" {
+        fill "#78350f33"
+        stroke "#fbbf24"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#fde68a"
+    }
+
+    style * where phase == "Retired" {
+        fill "#1d2027"
+        stroke "#475569"
+        stroke_width "1px"
+        stroke_style "dotted"
+        color "#94a3b8"
+    }
+}

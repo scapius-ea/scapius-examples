@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
   "view_id": "customer_onboarding_context",
-  "revision": "sha256:bf9cc326ce5da328b27bf21f407e3d48f9563275d86120ee83143ce54b318160",
-  "updated_at_utc": "2026-09-11T08:51:41.449718Z",
+  "revision": "sha256:0cd38563d401aad51fe6f56becd3bf261e902d89e088ae9fbfbfe35c77faab6d",
+  "updated_at_utc": "2026-10-24T05:44:05.445348Z",
   "nodes": {
     "customer": {
-      "x": 225,
-      "y": 376,
+      "x": 124.30658437795515,
+      "y": 404.54360931309344,
       "width": 280,
-      "height": 96
+      "height": 125
     },
     "app_mobile_banking": {
-      "x": 20,
-      "y": 64,
+      "x": 26.344663141335047,
+      "y": 69.82593634006358,
       "width": 280,
-      "height": 96
+      "height": 160
     },
     "system_core_banking": {
-      "x": 40,
-      "y": 40,
-      "width": 320,
-      "height": 200
+      "x": 99.80658437795509,
+      "y": 23.131788466560714,
+      "width": 329,
+      "height": 260
     },
     "onboardingNote": {
-      "x": 535,
-      "y": 376,
+      "x": 444,
+      "y": 384.5436093130933,
       "width": 340,
       "height": 136
     }
@@ -35,8 +35,8 @@
       "end_point": null,
       "anchors": null,
       "label_offset": {
-        "x": 123,
-        "y": 41,
+        "x": -119,
+        "y": 36,
         "width": null,
         "height": null
       }

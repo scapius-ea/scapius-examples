@@ -20,9 +20,9 @@ Scapius enforces a closed, semantically typed set of 16 relationship verbs. Free
 | **`migrates_to`** | Architectural migration path from legacy asset to target destination. | `system`, `app`, `infrastructure` | `system`, `app`, `environment` |
 | **`depends_on`** | Direct structural dependency between runtime components. | Any entity | Any entity |
 | **`governed_by`** | Architecture asset or control is regulated by or bound to a standard/policy. | `system`, `app`, `control`, `data_object`, `agent` | `policy`, `standard` |
-| **`mitigates`** | Security control reduces the risk of a threat or vulnerability. | `control` | `threat`, `vulnerability` |
+| **`mitigates`** | Security control reduces the risk of a threat. *(⚠️ Target cannot be a `vulnerability`)* | `control` | `threat` |
 | **`protects`** | Security control provides perimeter or defense-in-depth shielding to target. | `control` | `app`, `system`, `data_object`, `infrastructure` |
-| **`targets`** | Threat or vulnerability compromises or exploits the target system/app. | `threat`, `vulnerability` | `app`, `system`, `component`, `data_object` |
+| **`targets`** | Threat or vulnerability compromises or exploits the target system/app/data. | `threat`, `vulnerability` | `app`, `system`, `component`, `data_object`, `vulnerability` |
 | **`encloses`** | Trust boundary physically or logically wraps around member assets. | `trust_boundary` | `app`, `system`, `infrastructure` |
 
 ---
@@ -56,3 +56,28 @@ control_card_tokenization governed_by standard_pci_dss "Requirement 3.4" {
     status Compliant
 }
 ```
+
+---
+
+## 3. `protects` Relationship Mechanism & Target Rules
+
+When authoring `control protects <target>`:
+1. **Auto-Derived Mechanisms**:
+   * `control_category "Cryptography"` automatically derives `mechanism "Encryption"`. It is valid for applications, systems, infrastructure, and `data_object`s.
+   * `control_category "Identity & Access Management"` automatically derives `mechanism "Authentication"`.
+2. **Explicit Mechanism Required**:
+   * Controls categorized under `"Network Security"`, `"Application Security"`, or `"Data Protection"` protecting an application MUST declare an explicit `{ mechanism "Monitoring" }` block:
+     ```scapius
+     control_waf protects app_mobile_portal "Inspects incoming HTTPS traffic" {
+         mechanism "Monitoring"
+     }
+     ```
+3. **Data Object Target Constraints**:
+   * `data_object` **does not support** `mechanism "Monitoring"`:
+     ```scapius
+     // ❌ Compiler Error: Target entity type 'DataObject' is not allowed for mechanism 'Monitoring'
+     control_waf protects data_customer_pii "Logs access" { mechanism "Monitoring" }
+
+     // ✅ Valid: Use a Cryptography control to protect data objects
+     control_hsm protects data_customer_pii "Encrypts data at rest"
+     ```

@@ -1,56 +1,56 @@
 {
   "schema_version": 1,
   "view_id": "integration_view",
-  "revision": "sha256:82106f3d6b553a41b5e48ada9277d1cb389ec5739a6ee29878990a1fbbfd8c7b",
-  "updated_at_utc": "2026-09-13T10:48:54.458125Z",
+  "revision": "sha256:430dfed2e515801dae862277a9ef57cd2629b51a03355247f819265447cee37d",
+  "updated_at_utc": "2026-10-23T09:56:11.210691Z",
   "nodes": {
     "customer": {
-      "x": 598.3987321406184,
-      "y": 104.37971424989504,
+      "x": 1032,
+      "y": 48,
       "width": 280,
-      "height": 96
+      "height": 125
     },
     "app_mobile_banking": {
       "x": 20,
       "y": 64,
       "width": 280,
-      "height": 96
+      "height": 160
     },
     "system_core_banking": {
-      "x": 40,
-      "y": 40,
+      "x": 40.00000000000003,
+      "y": -43.62028575010497,
       "width": 320,
-      "height": 180
+      "height": 244
     },
     "agent_support_bot": {
       "x": 598.3987321406184,
       "y": -96,
       "width": 280,
-      "height": 96
+      "height": 126
     },
     "agent_fraud_detective": {
-      "x": 598.3987321406184,
-      "y": 480,
-      "width": 316,
-      "height": 96
+      "x": 576,
+      "y": 552,
+      "width": 280,
+      "height": 126
     },
     "compliance_officer": {
-      "x": 598.3987321406184,
-      "y": 254,
+      "x": 576,
+      "y": 260,
       "width": 280,
-      "height": 96
+      "height": 125
     },
     "app_aml_monitor": {
       "x": 20,
-      "y": 64,
+      "y": 72,
       "width": 280,
-      "height": 96
+      "height": 160
     },
     "system_payments": {
       "x": 40,
       "y": 260,
-      "width": 320,
-      "height": 180
+      "width": 321,
+      "height": 260
     }
   },
   "edges": {
@@ -59,8 +59,19 @@
       "end_point": null,
       "anchors": null,
       "label_offset": {
-        "x": 22,
-        "y": 12,
+        "x": 61,
+        "y": -43,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_mobile_banking-serves-agent_support_bot": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": -2,
+        "y": -25,
         "width": null,
         "height": null
       }

@@ -1,7 +1,7 @@
 workspace neo_bank "Neo Bank Enterprise Architecture" {
 
     styles {
-        theme "themes/neobank-portfolio.theme"
+        theme "material"
 
         style "system" {
             shape "rounded_rectangle"
@@ -9,12 +9,12 @@ workspace neo_bank "Neo Bank Enterprise Architecture" {
         }
 
         style "app" {
-            shape "pill"
+            shape "rounded_rectangle"
             css_class "card border-secondary text-primary"
         }
 
         style "actor" {
-            shape "actor"
+            shape "person"
             css_class "actor-node text-center"
         }
 
