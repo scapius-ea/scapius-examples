@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "view_id": "customer_onboarding_context",
+  "revision": "sha256:20367e4465117e56c565733e235968c4fdd78c57f1cae3e52ec0807468d375fd",
+  "updated_at_utc": "2026-10-31T05:04:53.575843Z",
+  "nodes": {
+    "cap_identity_verification": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "cap_account_provisioning": {
+      "x": 336,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "cap_onboarding": {
+      "x": 24,
+      "y": 64,
+      "width": 636,
+      "height": 235
+    },
+    "cap_customer_service": {
+      "x": 313,
+      "y": 1305,
+      "width": 680,
+      "height": 319
+    },
+    "customer": {
+      "x": 793,
+      "y": 329,
+      "width": 280,
+      "height": 156
+    },
+    "proc_onboarding": {
+      "x": 410,
+      "y": 629,
+      "width": 280,
+      "height": 154
+    },
+    "comp_account_ledger_adapter": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "app_deposit_accounts": {
+      "x": 24,
+      "y": 64,
+      "width": 324,
+      "height": 235
+    },
+    "system_core_banking": {
+      "x": 1041,
+      "y": 1305,
+      "width": 368,
+      "height": 319
+    },
+    "comp_mobile_ui": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "comp_local_wallet_cache": {
+      "x": 336,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "app_mobile_banking": {
+      "x": 696,
+      "y": 925,
+      "width": 636,
+      "height": 235
+    },
+    "agent_support_bot": {
+      "x": 703,
+      "y": 40,
+      "width": 280,
+      "height": 153
+    },
+    "goal_reduce_onboarding": {
+      "x": 87,
+      "y": 925,
+      "width": 280,
+      "height": 154
+    },
+    "kpi_onboarding_time": {
+      "x": 40,
+      "y": 621,
+      "width": 280,
+      "height": 168
+    },
+    "onboardingNote": {
+      "x": 720,
+      "y": 629,
+      "width": 340,
+      "height": 136
+    }
+  },
+  "edges": {}
+}

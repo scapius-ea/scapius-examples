@@ -1,0 +1,489 @@
+theme "default" {
+    // ==========================================================
+    // NexusEA "Default" Theme — Pastel / Light
+    //
+    // Same layer-hue-family logic and shape assignments as the
+    // dark version (so the two themes are drop-in swaps for one
+    // another), but rebuilt around soft, desaturated pastel
+    // fills with a light canvas in mind. Strokes carry a bit more
+    // saturation than the fills so node outlines stay legible;
+    // text colors are the deep/dark end of each hue for contrast
+    // against the pastel fill.
+    // ==========================================================
+
+    // ----------------------------------------------------------
+    // Strategy Layer — Violet family
+    // (capability, goal, kpi)
+    // ----------------------------------------------------------
+
+    style capability {
+        shape "rounded_rectangle"
+        css_class "capability-node"
+        fill "#ede9fe"
+        stroke "#a78bfa"
+        stroke_width "1.5px"
+        color "#4c1d95"
+    }
+
+    style goal {
+        shape "rounded_rectangle"
+        css_class "goal-node"
+        fill "#fce7f3"
+        stroke "#f472b6"
+        stroke_width "1.5px"
+        color "#831843"
+    }
+
+    style kpi {
+        shape "octagon"
+        css_class "kpi-node"
+        fill "#dcfce7"
+        stroke "#4ade80"
+        stroke_width "1.5px"
+        color "#14532d"
+    }
+
+    // ----------------------------------------------------------
+    // Business Architecture — Amber/Warm family
+    // (actor, process, group)
+    // ----------------------------------------------------------
+
+    style actor {
+        shape "person"
+        css_class "actor-node"
+        fill "#ffedd5"
+        stroke "#fb923c"
+        stroke_width "2px"
+        color "#7c2d12"
+    }
+
+    style process {
+        shape "chevron"
+        css_class "process-node"
+        fill "#fef3c7"
+        stroke "#f59e0b"
+        stroke_width "1.5px"
+        color "#78350f"
+    }
+
+    style value_stream {
+        shape "rectangle"
+        css_class "value-stream-node"
+        fill "#fef3c7"
+        stroke "#f59e0b"
+        stroke_width "2px"
+        color "#78350f"
+    }
+
+    style stage {
+        shape "chevron"
+        css_class "stage-node"
+        fill "#fffbeb"
+        stroke "#fbbf24"
+        stroke_width "1.5px"
+        color "#92400e"
+    }
+
+    style group {
+        shape "folder"
+        css_class "group-node"
+        fill "transparent"
+        stroke "#cbd5e1"
+        stroke_width "1px"
+        stroke_style "dashed"
+        color "#475569"
+    }
+
+    // ----------------------------------------------------------
+    // Application Architecture — Blue family
+    // (system, app, component, data_object, agent)
+    // ----------------------------------------------------------
+
+    style system {
+        shape "rounded_rectangle"
+        css_class "system-node"
+        fill "#dbeafe"
+        stroke "#60a5fa"
+        stroke_width "2.5px"
+        color "#1e3a8a"
+    }
+
+    style app {
+        shape "rounded_rectangle"
+        css_class "app-node"
+        fill "#e0edfe"
+        stroke "#3b82f6"
+        stroke_width "2px"
+        color "#1e40af"
+    }
+
+    style component {
+        shape "rounded_rectangle"
+        css_class "component-node"
+        fill "#e0e7ff"
+        stroke "#818cf8"
+        stroke_width "1.5px"
+        color "#3730a3"
+    }
+
+    style data_object {
+        shape "cylinder"
+        css_class "data-object-node"
+        fill "#e0f2fe"
+        stroke "#38bdf8"
+        stroke_width "1.5px"
+        color "#075985"
+    }
+
+    style agent {
+        shape "hexagon"
+        css_class "agent-node"
+        fill "#fae8ff"
+        stroke "#e879f9"
+        stroke_width "2px"
+        color "#701a75"
+    }
+
+    // ----------------------------------------------------------
+    // Technology Architecture — Emerald/Teal family
+    // (infrastructure, environment)
+    // ----------------------------------------------------------
+
+    style infrastructure {
+        shape "rounded_rectangle"
+        css_class "infrastructure-node"
+        fill "#d1fae5"
+        stroke "#34d399"
+        stroke_width "1.5px"
+        color "#065f46"
+    }
+
+    style environment {
+        shape "rounded_rectangle"
+        css_class "environment-node"
+        fill "#dcfce7"
+        stroke "#6ee7b7"
+        stroke_width "2.5px"
+        stroke_style "dashed"
+        color "#065f46"
+    }
+
+    // ----------------------------------------------------------
+    // Security Architecture — Rose (danger) + Teal (protective)
+    // (threat, vulnerability, risk_scenario, control, trust_boundary)
+    // ----------------------------------------------------------
+
+    style threat {
+        shape "octagon"
+        css_class "threat-node"
+        fill "#fee2e2"
+        stroke "#f87171"
+        stroke_width "2px"
+        color "#7f1d1d"
+    }
+
+    style vulnerability {
+        shape "octagon"
+        css_class "vulnerability-node"
+        fill "#ffedd5"
+        stroke "#fb923c"
+        stroke_width "1.5px"
+        color "#7c2d12"
+    }
+
+    style risk_scenario {
+        shape "octagon"
+        css_class "risk-scenario-node"
+        fill "#ffe4e6"
+        stroke "#fb7185"
+        stroke_width "2px"
+        color "#881337"
+    }
+
+    style control {
+        shape "shield"
+        css_class "control-node"
+        fill "#ccfbf1"
+        stroke "#2dd4bf"
+        stroke_width "1.5px"
+        color "#134e4a"
+    }
+
+    style trust_boundary {
+        shape "rectangle"
+        css_class "trust-boundary-node"
+        fill "transparent"
+        stroke "#5eead4"
+        stroke_width "2px"
+        stroke_style "dashed"
+        color "#134e4a"
+    }
+
+    style cluster {
+        shape "rounded_rectangle"
+        css_class "cluster-node"
+        fill "rgba(241, 245, 249, 0.4)"
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        border_radius "8px"
+        color "#475569"
+    }
+
+    // ----------------------------------------------------------
+    // Governance & Policy — Indigo family
+    // (policy, standard)
+    // ----------------------------------------------------------
+
+    style policy {
+        shape "document"
+        css_class "policy-node"
+        fill "#e0e7ff"
+        stroke "#a5b4fc"
+        stroke_width "1.5px"
+        color "#312e81"
+    }
+
+    style standard {
+        shape "document"
+        css_class "standard-node"
+        fill "#e0e7ff"
+        stroke "#6366f1"
+        stroke_width "1.5px"
+        color "#312e81"
+    }
+
+    // ==========================================================
+    // Relationship (Verb) Styles
+    // Same semantic families as the dark theme, tuned to stay
+    // visible against a light canvas without turning neon.
+    // ==========================================================
+
+    style relationship {
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        color "#475569"
+    }
+
+    style realizes {
+        stroke "#34d399"
+        stroke_width "2px"
+        stroke_style "solid"
+        color "#065f46"
+    }
+
+    style serves {
+        stroke "#60a5fa"
+        stroke_width "2px"
+        stroke_style "solid"
+        color "#1e40af"
+    }
+
+    style hosts {
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#475569"
+    }
+
+    style reads {
+        stroke "#7dd3fc"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#0369a1"
+    }
+
+    style writes {
+        stroke "#0ea5e9"
+        stroke_width "2px"
+        stroke_style "solid"
+        color "#075985"
+    }
+
+    style flows_to {
+        stroke "#fbbf24"
+        stroke_width "2px"
+        stroke_style "dashed"
+        color "#92400e"
+    }
+
+    style triggers {
+        stroke "#f87171"
+        stroke_width "2px"
+        stroke_style "dashed"
+        color "#991b1b"
+    }
+
+    style composed_of {
+        stroke "#cbd5e1"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        color "#475569"
+    }
+
+    style influences {
+        stroke "#f472b6"
+        stroke_width "1.5px"
+        stroke_style "dotted"
+        color "#9d174d"
+    }
+
+    style migrates_to {
+        stroke "#fb7185"
+        stroke_width "2px"
+        stroke_style "dotted"
+        color "#9f1239"
+    }
+
+    style depends_on {
+        stroke "#c084fc"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#6b21a8"
+    }
+
+    style governed_by {
+        stroke "#a5b4fc"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#3730a3"
+    }
+
+    style mitigates {
+        stroke "#2dd4bf"
+        stroke_width "2px"
+        stroke_style "solid"
+        color "#115e59"
+    }
+
+    style protects {
+        stroke "#5eead4"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#115e59"
+    }
+
+    style targets {
+        stroke "#fb7171"
+        stroke_width "2px"
+        stroke_style "solid"
+        color "#991b1b"
+    }
+
+
+    // ==========================================================
+    // Layer Background Styles
+    // Very light, low-opacity washes so nested layer panels
+    // still read as translucent glass panes on a light canvas
+    // rather than flat pastel blocks.
+    // ==========================================================
+
+    style layer {
+        fill "#f8fafcaa"
+        stroke "#cbd5e1"
+        stroke_width "1px"
+        stroke_style "solid"
+        color "#334155"
+    }
+
+    style "Strategy Layer" {
+        fill "#ede9fe99"
+        stroke "#a78bfa"
+        color "#4c1d95"
+    }
+
+    style "Business Architecture" {
+        fill "#ffedd599"
+        stroke "#fb923c"
+        color "#7c2d12"
+    }
+
+    style "Application Architecture" {
+        fill "#dbeafe99"
+        stroke "#60a5fa"
+        color "#1e3a8a"
+    }
+
+    style "Technology Architecture" {
+        fill "#d1fae599"
+        stroke "#34d399"
+        color "#065f46"
+    }
+
+    style "Security Architecture" {
+        fill "#fee2e299"
+        stroke "#f87171"
+        color "#7f1d1d"
+    }
+
+    style "Governance & Policy" {
+        fill "#e0e7ff99"
+        stroke "#818cf8"
+        color "#312e81"
+    }
+
+    style infrastructure where id == "inf_aws_eks" {
+        icon "tech:kubernetes"
+    }
+
+    style app where id == "app_instant_pay" {
+        icon "aws:api-gateway"
+    }
+
+    style app where id == "app_aml_monitor" {
+        icon "tech:kafka"
+    }
+
+    style app where id == "app_auth_api" {
+        icon "tech:auth0"
+    }
+
+    style data_object where id == "data_ledger_tx" {
+        icon "tech:postgresql"
+    }
+
+    style component where id == "comp_ledger_db" {
+        icon "tech:postgresql"
+    }
+
+    style component where id == "comp_ledger_api" {
+        icon "tech:spring-boot"
+    }
+
+    style component where id == "comp_payment_router" {
+        icon "tech:go"
+    }
+
+    style component where id == "comp_rule_engine" {
+        icon "tech:python"
+    }
+
+    style component where id == "comp_settlement_queue" {
+        icon "tech:kafka"
+    }
+
+    // ----------------------------------------------------------
+    // Workspace Custom Assets (assets:<path>)
+    // ----------------------------------------------------------
+
+    style infrastructure where id == "inf_ibm_z16" {
+        icon "assets:systems/mainframe.svg"
+    }
+
+    style system where id == "system_core_banking" {
+        icon "assets:systems/core-banking.svg"
+    }
+
+    style app where id == "app_mobile_banking" {
+        icon "azure:mobile.svg"
+    }
+
+    style app where id == "app_card_authorization" {
+        icon "assets:systems/payment-network.svg"
+    }
+
+    style control where id == "control_card_tokenization" {
+        icon "assets:security/hsm.svg"
+    }
+}

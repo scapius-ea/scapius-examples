@@ -1,0 +1,79 @@
+layer "Business Architecture" {
+    actor cardholder "Credit Card Customer" {
+        description "Retail customer holding one or more DigiBank-issued credit cards"
+        owner "VP Credit Card Products"
+        role "Cardholder"
+        is_external true
+        attr location "Global"
+        attr department "Retail"
+        tags ["external", "persona"]
+    }
+
+    actor card_operations_analyst "Card Operations Analyst" {
+        description "Investigates disputes, chargebacks, and card-level fraud alerts"
+        owner "Head of Credit Card Operations"
+        role "Card Operations Analyst"
+        is_external false
+        attr location "HQ"
+        attr department "Credit Card Operations"
+        tags ["internal"]
+    }
+
+    process proc_card_application "Credit Card Application & Issuance" {
+        description "Application intake, credit decisioning, and physical/virtual card issuance"
+        owner "Head of Credit Card Operations"
+        criticality "Business-Critical"
+        risk "Medium"
+        automation_level "High"
+        attr duration "Instant decision, 5-7 days physical delivery"
+        sla "Instant decision"
+    }
+
+    process proc_card_authorization "Card Transaction Authorization" {
+        description "Real-time approval or decline of card transactions at point of sale or online checkout"
+        owner "Card Processing Operations"
+        criticality "Mission-Critical"
+        risk "Low"
+        automation_level "Fully-Automated"
+        attr duration "Under 200 milliseconds"
+        sla "300ms p99"
+
+        relationships {
+            this triggers proc_card_dispute "Dispute workflow" {
+                cardinality OneToMany
+                description "A subsequent customer-flagged transaction can enter the dispute workflow"
+            }
+        }
+    }
+
+    process proc_card_dispute "Card Dispute & Chargeback Resolution" {
+        description "Investigation and resolution of customer-reported unauthorized or incorrect card charges"
+        owner "Card Operations Analyst Team"
+        criticality "Business-Critical"
+        risk "Medium"
+        automation_level "Medium"
+        attr duration "Up to 45 days per network rules"
+        sla "45 calendar days"
+    }
+}
+
+// Credit Card Relationships
+cardholder triggers proc_card_application "Card application" {
+    cardinality OneToMany
+    description "Applies for a new credit card via mobile or web"
+}
+cardholder triggers proc_card_authorization "Purchase transaction" {
+    cardinality OneToMany
+    description "Initiates a purchase transaction at point of sale or online"
+}
+cardholder triggers proc_card_dispute "Report charge" {
+    cardinality OneToMany
+    description "Reports an unauthorized or incorrect charge"
+}
+card_operations_analyst serves cardholder "Dispute investigation" { description "Investigates and resolves reported disputes" }
+support_rep serves cardholder "Card servicing" { description "Handles general card servicing inquiries escalated from self-service" }
+
+proc_card_application realizes cap_card_application_processing "App processing" { description "Executes card application intake and decisioning capability" }
+proc_card_authorization realizes cap_card_auth_settlement "Auth settlement" { description "Executes real-time authorization and settlement capability" }
+proc_card_dispute realizes cap_card_disputes "Dispute resolution" { description "Executes dispute and chargeback resolution capability" }
+proc_card_application influences goal_double_customers "Issuance growth" { description "New card issuance is a growth and cross-sell lever for the active customer base" }

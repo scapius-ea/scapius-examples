@@ -1,0 +1,447 @@
+layer "Application Architecture" {
+
+    system system_core_banking "Core Banking System" {
+        description "The relational transactional ledger system"
+        owner "Core Banking Platform Team"
+        criticality "Mission-Critical"
+        risk "Low"
+        cost 1200000 year
+        version "9.4.1"
+        status "Active"
+        tier "Tier-1"
+        deployment_model "Hybrid Cloud"
+        time Migrate
+        attr vendor "IBM/DigiBank"
+        attr url "https://core.internal.digibank.com"
+        security {
+            confidentiality High
+            integrity Critical
+            availability Critical
+        }
+
+        app app_ledger_service "Ledger Service API" {
+            description "Core immutable general ledger service providing transaction posting and double-entry accounting APIs"
+            owner "Core Banking Platform Team"
+            version "4.1.0"
+            status "Active"
+            tier "Tier-1"
+            deployment_model "Kubernetes"
+            internet_facing false
+            attr vendor "In-House"
+            attr url "https://ledger.internal.digibank.com"
+            security {
+                confidentiality High
+                integrity Critical
+                availability Critical
+            }
+
+            component comp_ledger_api "Ledger Service Engine" {
+                version "4.1.0"
+                status "Active"
+                technology "Java / Spring Boot"
+                api_type "REST"
+                attr repo "git://github.com/digibank/ledger-service-engine"
+            }
+
+            component comp_ledger_db "Primary Ledger Database" {
+                version "15.3"
+                status "Active"
+                technology "PostgreSQL RDS"
+                api_type "SQL"
+                attr repo "git://github.com/digibank/core-ledger-db"
+            }
+
+            relationships {
+                comp_ledger_api flows_to comp_ledger_db "Sanctioned path" {
+                    cardinality OneToOne
+                    description "Internal service layer is the only sanctioned path to the ledger database"
+                }
+                this depends_on inf_ibm_z16 "Mainframe ledger" { description "Ultimately executes against the mainframe ledger engine" }
+            }
+
+            lifecycle {
+                phase Run start "2021-03-01" end "2027-12-31"
+                phase Retire start "2028-01-01"
+            }
+            score {
+                business_value 9.5
+                tech_fit 3.5
+            }
+        }
+
+        app app_deposit_accounts "Deposit Account Servicing" {
+            description "Checking and savings account opening, holds, transfers, and closure processing"
+            owner "Deposit Operations Lead"
+            version "3.0.1"
+            status "Active"
+            tier "Tier-1"
+            deployment_model "Kubernetes"
+            internet_facing false
+            attr vendor "In-House"
+            security {
+                confidentiality High
+                integrity Critical
+                availability Critical
+            }
+
+            component comp_account_ledger_adapter "Deposit Account Ledger Adapter" {
+                technology "Java / Spring Boot"
+                api_type "REST"
+                attr repo "git://github.com/digibank/deposit-account-adapter"
+            }
+
+            lifecycle {
+                phase Run start "2022-01-15" end "2028-06-30"
+                phase Retire start "2028-07-01"
+            }
+            score {
+                business_value 9.0
+                tech_fit 7.2
+            }
+        }
+
+        lifecycle {
+            phase Run start "2024-01-01" end "2028-01-01"
+            phase Retire start "2028-01-01"
+        }
+        score {
+            business_value 6.0
+            tech_fit 3.0
+        }
+    }
+
+    // The strategic replacement platform: shown mid-build, deliberately
+    // styled differently (see main.ea "status == Planned" rule) so viewers
+    // can tell live estate apart from the roadmap at a glance.
+    system system_core_banking_cloud "Next-Gen Core Banking Platform" {
+        description "Cloud-native, event-sourced ledger platform replacing the mainframe core"
+        owner "Core Banking Platform Team"
+        criticality "Mission-Critical"
+        risk "Medium"
+        cost 3500000 year
+        version "0.9.0-beta"
+        status "Planned"
+        tier "Tier-1"
+        deployment_model "Kubernetes"
+        time Invest
+        attr vendor "In-House"
+        security {
+            confidentiality High
+            integrity Critical
+            availability Critical
+        }
+
+        lifecycle {
+            phase Plan start "2026-01-01" end "2026-06-30"
+            phase Build start "2026-07-01" end "2027-06-30"
+            phase Run start "2027-07-01"
+        }
+        score {
+            business_value 9.7
+            tech_fit 9.4
+        }
+    }
+
+    system system_payments "Payment Hub System" {
+        description "Handles routing and integration with external payment networks"
+        owner "Payments Engineering"
+        criticality "Mission-Critical"
+        risk "Medium"
+        cost 650000 year
+        version "2.1.0"
+        status "Active"
+        security {
+            confidentiality High
+            integrity Critical
+            availability Critical
+        }
+
+        app app_instant_pay "Instant Payments API" {
+            description "High-throughput instant payments gateway integrating with FedNow and RTP networks"
+            owner "Payments Engineering"
+            version "2.1.0"
+            status "Active"
+            tier "Tier-1"
+            internet_facing true
+            attr url "https://payments.digibank.com"
+            security {
+                confidentiality High
+                integrity Critical
+                availability Critical
+            }
+
+            component comp_payment_router "Instant Payment Router" {
+                technology "Go"
+                api_type "REST"
+                attr repo "git://github.com/digibank/instant-pay-router"
+            }
+
+            component comp_settlement_queue "Settlement Queue Consumer" {
+                technology "Apache Kafka"
+                api_type "AMQP"
+                attr repo "git://github.com/digibank/payment-queue-consumer"
+            }
+
+            lifecycle {
+                phase Plan start "2024-01-01" end "2024-06-30"
+                phase Build start "2024-07-01" end "2025-05-31"
+                phase Run start "2025-06-01"
+            }
+
+            score {
+                business_value 9.5
+                tech_fit 9.0
+            }
+        }
+
+        lifecycle {
+            phase Run start "2025-06-01"
+        }
+        score {
+            business_value 9.8
+            tech_fit 9.2
+        }
+    }
+
+    system system_compliance "Compliance and Risk Monitoring" {
+        description "Monitors activities and scans for financial crime patterns"
+        owner "Compliance Ops"
+        criticality "Business-Critical"
+        risk "High"
+        cost 450000 year
+        version "1.8.0"
+        time Tolerate
+        security {
+            confidentiality High
+            integrity High
+            availability Medium
+        }
+
+        app app_aml_monitor "AML Transaction Monitor" {
+            description "Real-time transaction monitoring engine detecting money laundering patterns and structuring activities"
+            owner "AML Compliance Lead"
+            version "1.8.0"
+            status "Active"
+            internet_facing false
+            security {
+                confidentiality High
+                integrity High
+                availability Medium
+            }
+
+            component comp_rule_engine "Fraud ML Rule Engine" {
+                technology "Python Scikit-Learn"
+                attr repo "git://github.com/digibank/aml-rule-engine"
+            }
+        }
+
+        app app_sanctions_screening "Sanctions Screening Engine" {
+            description "Automated screening against OFAC, PEP, and global sanctions watchlists during onboarding and transaction execution"
+            owner "AML Compliance Lead"
+            version "2.4.0"
+            status "Active"
+            internet_facing false
+            attr vendor "In-House"
+            security {
+                confidentiality High
+                integrity High
+                availability Medium
+            }
+        }
+
+        app app_sar_filing "Suspicious Activity Report Filing System" {
+            description "Workflow management and electronic submission portal for Suspicious Activity Reports to FinCEN"
+            owner "Compliance Ops"
+            version "1.3.0"
+            status "Active"
+            internet_facing false
+            security {
+                confidentiality High
+                integrity High
+                availability Medium
+            }
+        }
+
+        lifecycle {
+            phase Run start "2023-01-01"
+        }
+        score {
+            business_value 2.5
+            tech_fit 7.0
+        }
+    }
+
+    // customer-facing channel apps, grouped so the diagram can call out
+    // "everything the customer directly touches" as one visual unit.
+    group "Customer Digital Channels" {
+        app app_mobile_banking "DigiBank Mobile Application" {
+            description "Native iOS and Android retail banking application"
+            owner "Mobile App Team"
+            version "3.2.1"
+            status "Active"
+            tier "Tier-1"
+            deployment_model "AppStore"
+            internet_facing true
+            time Invest
+            attr vendor "In-House"
+            attr url "https://digibank.com/app"
+            security {
+                confidentiality High
+                integrity High
+                availability High
+            }
+
+            component comp_mobile_ui "Mobile UI Framework" {
+                version "3.2"
+                technology "Flutter / Dart"
+                attr repo "git://github.com/digibank/mobile-app-ui"
+            }
+
+            component comp_local_wallet_cache "Local Wallet Cache" {
+                version "1.0"
+                technology "SQLite SQLCipher"
+            }
+
+            lifecycle {
+                phase Plan start "2023-01-01" end "2023-06-30"
+                phase Build start "2023-07-01" end "2024-02-28"
+                phase Run start "2024-03-01"
+            }
+
+            score {
+                business_value 9.0
+                tech_fit 8.5
+            }
+        }
+    }
+
+    // AI Agents, grouped as their own fleet since they are governed,
+    // monitored, and reasoned about differently to traditional apps.
+    group "AI Agent Fleet" {
+        agent agent_support_bot "NeoHelp Onboarding chatbot" {
+            description "Conversational AI that resolves onboarding problems and answers retail banking questions"
+            owner "AI Operations Lead"
+            model "gpt-4o-mini"
+            ai_governance {
+                autonomy_level "Autonomous"
+                human_in_loop false
+            }
+            attr memory_type "VectorStore"
+            attr guardrails "NeMo-Guardrails"
+            cost 420000 year
+            criticality "Business-Critical"
+        }
+
+        agent agent_fraud_detective "AML Suspicious Transaction Review Agent" {
+            description "Analyses transaction telemetry, flags anomalies, and drafts regulatory compliance reports"
+            owner "Fraud Ops Lead"
+            model "claude-3-5-sonnet"
+            ai_governance {
+                autonomy_level "Human-In-The-Loop"
+                human_in_loop true
+            }
+            attr memory_type "Long-Term"
+            attr guardrails "Llama-Guard"
+            cost 650000 year
+            criticality "Business-Critical"
+        }
+    }
+
+    // Data Objects
+    data_object data_customer_record "Customer KYC Profile" {
+        description "Regulatory identity information, address verification, and credit check results"
+        owner "Identity Operations"
+        classification Restricted
+        pii true
+        phi false
+        attr source_of_truth "Customer Profile Service"
+        attr retention "7 years"
+        attr format "JSON"
+        security {
+            confidentiality High
+            integrity High
+            availability High
+        }
+    }
+
+    data_object data_ledger_tx "Ledger Transaction Record" {
+        description "Official debit/credit entries, account transfer traces, and balance adjustments"
+        owner "Ledger Database Admin"
+        classification Confidential
+        pii false
+        attr source_of_truth "PostgreSQL Ledger DB"
+        attr retention "Indefinite"
+        attr format "Database Log"
+        security {
+            confidentiality High
+            integrity Critical
+            availability Critical
+        }
+    }
+}
+
+// Application Layer Relationships
+app_mobile_banking realizes cap_onboarding "Onboarding flow" { description "Executes onboarding flows" }
+app_mobile_banking serves customer "Retail interface" { description "Provides user interface to retail customers" }
+app_mobile_banking flows_to app_instant_pay "Payment request" { tags "REST/JSON" description "Transmits transfer requests to payments API" }
+app_mobile_banking flows_to agent_support_bot "Support chat integration" { tags "gRPC" description "Routes in-app customer support queries to the AI chatbot" }
+app_mobile_banking writes data_customer_record "Submit KYC profile" { description "Transmits customer onboarding identity and KYC verification details" }
+app_mobile_banking reads data_customer_record "Profile query" { description "Retrieves user KYC profile and verification status" }
+
+agent_support_bot serves customer "Troubleshoot signup" { description "Helps customer troubleshoot sign-up problems" }
+agent_support_bot realizes cap_customer_support "Customer support" { description "Realizes customer service support desk capability" }
+agent_support_bot triggers proc_onboarding "Start registration" { description "Starts registration process on customer command" }
+
+app_instant_pay writes data_ledger_tx "Record ledger" {
+    cardinality OneToMany
+    description "Records payment ledger transaction"
+}
+app_instant_pay flows_to app_aml_monitor "Transaction telemetry" { tags "Event Stream" description "Streams real-time payment transactions for AML pattern detection" }
+comp_payment_router flows_to comp_settlement_queue "Enqueue payment" { description "Queues verified payment instructions for asynchronous clearing" }
+comp_settlement_queue writes data_ledger_tx "Settlement batch log" { description "Persists asynchronous settlement events to the ledger transaction store" }
+comp_settlement_queue flows_to comp_ledger_db "Ledger updates" { description "Executes settled batch updates against the primary ledger database" }
+
+app_ledger_service reads data_ledger_tx "Wallet balance" { description "Queries ledger database to show wallet balance" }
+app_aml_monitor reads data_ledger_tx "Telemetry feed" { description "Processes payment telemetry feeds to detect suspicious patterns" }
+app_aml_monitor triggers agent_fraud_detective "Anomalous transaction review" { description "Routes flagged high-risk transactions to the fraud AI review agent" }
+agent_fraud_detective flows_to app_aml_monitor "Review findings" { description "Feedback loop delivering confidence scores and triage outcomes back to AML models" }
+
+app_sanctions_screening realizes cap_sanctions_screening "Sanctions screening" { description "Screens customers and counterparties against sanctions and watch lists" }
+app_sar_filing realizes cap_sar "SAR filing" { description "Prepares and files suspicious activity reports with regulators" }
+app_sanctions_screening reads data_customer_record "KYC screening" { description "Screens KYC identity data against sanctions lists at onboarding and periodically thereafter" }
+app_aml_monitor triggers app_sar_filing "Suspicious case" { description "Confirmed suspicious patterns trigger a case for SAR filing" }
+
+agent_fraud_detective serves compliance_officer "Fraud summary" { description "Generates fraud summaries and drafts reports" }
+agent_fraud_detective reads data_customer_record "Risk evaluation" { description "Examines customer identity files for risk evaluation" }
+agent_fraud_detective triggers proc_fraud_alert "Compliance review" { description "Spawns a manual compliance review workflow" }
+app_deposit_accounts reads data_customer_record "Customer details" { description "Reads customer demographics for identity verification" }
+app_ledger_service reads data_customer_record "Account owner" { description "Reads account owner metadata for balance reporting" }
+
+app_mobile_banking depends_on app_deposit_accounts "Balance display" { description "Displays deposit account balances to the user" }
+app_instant_pay flows_to app_ledger_service "Ledger settlement" { description "Posts real-time transfer settlements to the core ledger" }
+app_instant_pay flows_to app_mobile_banking "Payments API" { tags "REST/JSON" description "Exposes the real-time payments REST API for the mobile app to consume" }
+support_rep reads system_core_banking "Account access" {
+    cardinality ManyToMany
+    description "Read-only access to customer account details to resolve support cases"
+}
+
+// Additional structural and dependency relationships
+app_instant_pay depends_on app_ledger_service "Balance check" { description "Requires an authoritative balance check from the ledger before settling" }
+
+// Planned modernization path
+system_core_banking migrates_to system_core_banking_cloud "Core modernization" {
+    cardinality OneToOne
+    description "Multi-year modernization replacing the mainframe ledger with a cloud-native platform"
+}
+
+// Application → Technology cross-layer dependency
+system_core_banking_cloud depends_on inf_aws_eks "Cloud-native platform" { description "The next-gen platform is built cloud-native against the shared EKS cluster from day one" }
+
+app_deposit_accounts realizes cap_deposit_servicing "Deposit servicing" { description "Automates checking and savings account servicing operations" }
+app_deposit_accounts reads data_ledger_tx "Posted balances" { description "Reads posted balances to service holds, transfers, and closures" }
+app_deposit_accounts writes data_ledger_tx "Servicing adjustments" { description "Posts account servicing adjustments back to the ledger" }
+personal_banking_advisor reads app_deposit_accounts "Servicing console" {
+    cardinality ManyToMany
+    description "Uses the servicing console to action customer requests"
+}
+

@@ -1,0 +1,387 @@
+layer "Security Architecture" {
+
+    group "Trust Boundaries" {
+        trust_boundary tb_public_internet "Public Internet Zone" {
+            description "Untrusted external network segment where customer devices and public traffic originate"
+            owner "Chief Information Security Officer"
+            boundary_type "Network"
+            trust_level "None"
+            relationships {
+                this encloses customer
+                this encloses app_mobile_banking
+                this encloses app_instant_pay
+                this encloses app_cms
+                this encloses app_card_issuance
+                this encloses app_mortgage_origination
+            }
+        }
+
+        trust_boundary tb_internal_corp_network "Internal Corporate Network" {
+            description "Trusted internal network for employees and back-office operations"
+            owner "Chief Information Security Officer"
+            boundary_type "Network"
+            trust_level "High"
+            relationships {
+                this encloses support_rep
+                this encloses compliance_officer
+                this encloses system_compliance
+            }
+        }
+
+        trust_boundary tb_pci_secure_enclave "PCI Secure Enclave" {
+            description "Segmented, hardened network zone isolating cardholder and payment processing systems"
+            owner "Payments Security Team"
+            boundary_type "Zone"
+            trust_level "Critical"
+            relationships {
+                this encloses system_payments
+                this encloses app_instant_pay
+                this encloses inf_ibm_z16
+                this encloses system_credit_card
+                this encloses app_card_authorization
+            }
+        }
+    }
+
+    group "Security Controls" {
+        control control_mfa "Multi-Factor Authentication" {
+            description "Step-up authentication using a second factor for all customer and privileged logins"
+            owner "Identity & Access Management Team"
+            control_type "Preventive"
+            control_category "Identity & Access Management"
+            framework "NIST 800-53"
+            implementation_status "Implemented"
+            effectiveness "High"
+        }
+
+        control control_encryption_at_rest "Data-at-Rest Encryption" {
+            description "AES-256 encryption applied to sensitive data stores"
+            owner "Platform Security Engineering"
+            control_type "Preventive"
+            control_category "Cryptography"
+            framework "PCI-DSS"
+            implementation_status "Implemented"
+            effectiveness "High"
+            cost 120000 year
+        }
+
+        control control_siem_monitoring "SIEM Continuous Monitoring" {
+            description "Centralized log aggregation and anomaly alerting across cloud infrastructure"
+            owner "Security Operations Center"
+            control_type "Detective"
+            control_category "Security Monitoring"
+            framework "NIST 800-53"
+            implementation_status "Implemented"
+            effectiveness "Medium"
+        }
+
+        control control_waf "Web Application Firewall" {
+            description "Layer-7 filtering protecting internet-facing applications from common exploits"
+            owner "Platform Security Engineering"
+            control_type "Preventive"
+            control_category "Network Security"
+            framework "OWASP"
+            implementation_status "Implemented"
+            effectiveness "Medium"
+        }
+
+        control control_dlp "Data Loss Prevention (DLP) Monitoring" {
+            description "Content-inspection monitoring across email, endpoint, and API egress paths for sensitive data leaving sanctioned channels"
+            owner "Security Operations Center"
+            control_type "Detective"
+            control_category "Data Security"
+            framework "NIST 800-53"
+            implementation_status "Partially Implemented"
+            effectiveness "Medium"
+            cost 90000 year
+        }
+
+        control control_paw "Privileged Access Workstations" {
+            description "Hardened, isolated workstations required for all administrative access to production systems, reducing the blast radius of a compromised standard endpoint"
+            owner "Identity & Access Management Team"
+            control_type "Preventive"
+            control_category "Identity & Access Management"
+            framework "NIST 800-53"
+            implementation_status "Planned"
+            effectiveness "Low"
+        }
+
+        control control_card_tokenization "Card Data Tokenization" {
+            description "Replaces primary account numbers with network tokens for storage and transmission, so raw card data never persists outside the authorization path"
+            owner "Payments Security Team"
+            control_type "Preventive"
+            control_category "Cryptography"
+            framework "PCI-DSS"
+            implementation_status "Implemented"
+            effectiveness "High"
+            cost 150000 year
+        }
+    }
+
+    group "Regulatory Standards" {
+        standard standard_pci_dss "PCI-DSS v4.0" {
+            description "Payment Card Industry Data Security Standard"
+            owner "Compliance Office"
+            standard_type "Industry"
+        }
+
+        standard standard_iso_27001 "ISO/IEC 27001:2022" {
+            description "International standard for information security management systems"
+            owner "Compliance Office"
+            standard_type "International"
+        }
+
+        standard standard_sox "Sarbanes-Oxley Act" {
+            description "US regulation governing internal controls over financial reporting"
+            owner "Chief Financial Officer"
+            standard_type "Regulatory"
+        }
+
+        standard standard_internal_secure_coding "DigiBank Secure Software Development Standard" {
+            description "Internal engineering standard defining mandatory secure coding, dependency review, and pre-release security testing practices"
+            owner "Platform Security Engineering"
+            standard_type "Internal"
+        }
+    }
+
+    group "Threats & Vulnerabilities" {
+        threat threat_credential_stuffing "Credential Stuffing Attack" {
+            description "Automated attempts to log in using leaked username/password pairs"
+            owner "Security Operations Center"
+            category Spoofing
+            tags ["identity-attack", "credential-stuffing"]
+            likelihood Medium
+            impact High
+            risk_rating "High"
+            probability 35
+            mitigation_status Mitigated
+        }
+
+        threat threat_insider_fraud "Insider Trading / Fraud" {
+            description "Malicious or negligent internal actor abusing privileged access, then concealing the activity"
+            owner "Compliance Office"
+            category Repudiation
+            tags ["insider-threat"]
+            likelihood Low
+            impact Critical
+            risk_rating "High"
+            probability 8
+            mitigation_status Open
+        }
+
+        threat threat_ddos "Distributed Denial of Service" {
+            description "Volumetric attack aimed at degrading availability of customer-facing services"
+            owner "Security Operations Center"
+            category DoS
+            tags ["availability-attack"]
+            likelihood Medium
+            impact Medium
+            risk_rating "Medium"
+            probability 40
+            mitigation_status Mitigated
+        }
+
+        threat threat_ledger_tampering "Unauthorized Ledger Record Tampering" {
+            description "Direct manipulation of ledger entries to falsify balances or transaction history, bypassing application-layer controls"
+            owner "Ledger Infrastructure Team"
+            category Tampering
+            tags ["data-integrity"]
+            likelihood Low
+            impact Critical
+            risk_rating "High"
+            probability 5
+            mitigation_status Open
+        }
+
+        threat threat_api_data_leakage "Unmasked PII in API Error Responses" {
+            description "Verbose error payloads on customer-facing APIs occasionally echo back unmasked identity fields, disclosing more than intended to the client"
+            owner "Platform Security Engineering"
+            category "Info Disclosure"
+            tags ["data-leakage"]
+            likelihood Low
+            impact Medium
+            risk_rating "Medium"
+            probability 15
+            mitigation_status Accepted
+        }
+
+        threat threat_agent_privilege_escalation "AI Agent Excessive Permission Scope" {
+            description "The fraud review agent's service identity carries broader IAM permissions on the EKS cluster than its task requires, creating a path to lateral privilege escalation if the agent is compromised or manipulated"
+            owner "AI Governance Board"
+            category "Privilege Escalation"
+            tags ["ai-governance", "least-privilege"]
+            likelihood Medium
+            impact High
+            risk_rating "High"
+            probability 22
+            mitigation_status Open
+        }
+
+        threat threat_card_not_present_fraud "Card-Not-Present Fraud" {
+            description "Stolen or synthetic card credentials used for fraudulent online and phone transactions where the physical card is never presented"
+            owner "Card Processing Operations"
+            category Spoofing
+            tags ["card-fraud", "identity-attack"]
+            likelihood High
+            impact High
+            risk_rating "High"
+            probability 45
+            mitigation_status Mitigated
+        }
+
+        vulnerability vuln_outdated_tls "Outdated TLS Cipher Suite Support" {
+            description "Legacy ledger endpoint still accepts deprecated TLS 1.1 cipher suites"
+            owner "Ledger Infrastructure Team"
+            cvss_score 7.4
+            cve_id "CVE-2024-31337"
+        }
+
+        vulnerability vuln_unpatched_dependency "Unpatched Third-Party ML Dependency" {
+            description "AML monitoring pipeline uses an outdated scikit-learn version with a known deserialization flaw"
+            owner "Fraud Security Director"
+            cvss_score 8.1
+            cve_id "CVE-2025-40221"
+        }
+
+        vulnerability vuln_verbose_errors "Verbose Error Messages on Public Endpoint" {
+            description "Public content endpoint returns full stack traces on malformed requests, disclosing internal framework and path details"
+            owner "Head of Brand"
+            cvss_score 3.1
+            cve_id "CVE-2024-58812"
+        }
+
+        vulnerability vuln_missing_rate_limiting "Missing Rate Limiting on Authentication Endpoint" {
+            description "Mobile app login endpoint has no server-side rate limiting, increasing exposure to automated credential stuffing attempts"
+            owner "Platform Security Engineering"
+            cvss_score 5.4
+            cve_id "CVE-2025-11004"
+        }
+
+        vulnerability vuln_mortgage_file_upload "Unvalidated File Upload in Mortgage Document Portal" {
+            description "Document upload feature on the vendor-hosted mortgage application portal does not validate file type or scan for embedded content before storage"
+            owner "Mortgage Operations Lead"
+            cvss_score 7.8
+            cve_id "CVE-2025-22750"
+        }
+    }
+
+    risk_scenario risk_data_breach "Customer PII Data Breach" {
+        description "Unauthorized exfiltration of customer KYC and identity data"
+        owner "Chief Information Security Officer"
+        inherent_likelihood "High"
+        inherent_impact "Critical"
+        inherent_rating "Critical"
+        residual_likelihood "Low"
+        residual_impact "High"
+        residual_rating "Medium"
+        treatment "Mitigate"
+    }
+
+    risk_scenario risk_payment_fraud "Real-Time Payment Fraud" {
+        description "Fraudulent instant payment transactions evading detection controls"
+        owner "Fraud Security Director"
+        inherent_likelihood "Medium"
+        inherent_impact "High"
+        inherent_rating "High"
+        residual_likelihood "Low"
+        residual_impact "Medium"
+        residual_rating "Low"
+        treatment "Mitigate"
+    }
+
+    risk_scenario risk_vendor_concentration "Vendor / SaaS Concentration Risk" {
+        description "A material share of back-office, regulatory, and marketing capability depends on a small number of SaaS vendors hosted in the shared vendor enclave, creating correlated outage and data-handling exposure"
+        owner "Vendor & Third-Party Risk Management"
+        inherent_likelihood "Medium"
+        inherent_impact "High"
+        inherent_rating "High"
+        residual_likelihood "Medium"
+        residual_impact "Medium"
+        residual_rating "Medium"
+        treatment "Accept"
+    }
+
+    risk_scenario risk_regulatory_penalty "Regulatory Non-Compliance Penalty Risk" {
+        description "Errors or delays in quarterly regulatory filings could trigger financial penalties or supervisory action"
+        owner "Head of Regulatory Affairs"
+        inherent_likelihood "Medium"
+        inherent_impact "Critical"
+        inherent_rating "Critical"
+        residual_likelihood "Low"
+        residual_impact "High"
+        residual_rating "Medium"
+        treatment "Transfer"
+    }
+
+    risk_scenario risk_card_fraud_loss "Credit Card Fraud Loss Exposure" {
+        description "Card-not-present and account-takeover fraud driving direct financial loss and network chargeback exposure"
+        owner "Card Processing Operations"
+        inherent_likelihood "High"
+        inherent_impact "High"
+        inherent_rating "High"
+        residual_likelihood "Medium"
+        residual_impact "Medium"
+        residual_rating "Medium"
+        treatment "Mitigate"
+    }
+}
+
+// Security Relationships
+control_mfa mitigates threat_credential_stuffing "Blocks account takeover even when credentials are compromised"
+control_mfa protects customer "Requires a second authentication factor for every customer login"
+control_mfa protects app_mobile_banking "Enforces step-up MFA for sensitive actions"
+control_encryption_at_rest protects data_customer_record "Encrypts KYC profile data at rest"
+control_encryption_at_rest protects data_ledger_tx "Applies AES-256 encryption to ledger transaction records at rest"
+control_encryption_at_rest mitigates risk_data_breach "Breach reduction" { description "Reduces the residual likelihood and impact of a customer data breach" }
+control_siem_monitoring protects inf_aws_eks "Telemetry monitoring" { description "Continuously monitors cluster telemetry for anomalous behaviour" }
+control_waf protects app_mobile_banking "L7 traffic filter" { mechanism "Access Control" description "Filters malicious layer-7 traffic before it reaches the mobile backend" }
+control_waf protects app_instant_pay "Payment API WAF" { mechanism "Access Control" description "Filters malicious traffic on the instant payment API" }
+control_waf protects app_cms "Public CMS WAF" { mechanism "Access Control" description "Protects public content endpoints against web application exploits" }
+control_paw protects compliance_officer "Enforces privileged access workstation sessions"
+
+
+threat_credential_stuffing targets app_mobile_banking "Brute-force login" { description "Attackers attempt to brute-force customer login credentials at scale" }
+threat_insider_fraud targets compliance_officer "Privileged abuse" { description "Represents the risk of a privileged internal user abusing access" }
+threat_ddos targets app_instant_pay "Degrade availability" { description "Aims to degrade availability of the instant payments API" }
+
+vuln_outdated_tls targets app_ledger_service "Transport security" {
+    cardinality OneToOne
+    description "Weakens transport security for ledger balance queries"
+}
+vuln_unpatched_dependency targets app_aml_monitor "RCE risk" { description "Introduces a remote-code-execution risk in the fraud pipeline" }
+vuln_verbose_errors targets app_cms "Framework exposure" { description "Exposes internal framework details to unauthenticated visitors" }
+vuln_missing_rate_limiting targets app_mobile_banking "Automated throttling" { description "Removes a natural throttle on automated login attempts" }
+vuln_mortgage_file_upload targets app_mortgage_origination "Document upload risk" { description "Unscanned document uploads could deliver malicious content through the vendor-hosted portal" }
+
+risk_data_breach targets cap_customer_service "Customer trust" { description "A breach would materially damage customer trust and support operations" }
+risk_payment_fraud targets cap_real_time_payments "Payment trust" { description "Elevated fraud risk could undermine trust in the real-time payment capability" }
+risk_vendor_concentration targets cap_back_office "Back office operations lean heavily on the SaaS vendor enclave for finance, HR, and reconciliation tooling"
+risk_vendor_concentration governed_by policy_third_party_risk "Acceptance of concentration risk is documented under the third-party risk management policy"
+risk_regulatory_penalty targets cap_regulatory_reporting "Filing errors or delays expose the regulatory reporting capability to supervisory penalty"
+risk_card_fraud_loss targets cap_card_transaction_servicing "Fraud losses and chargeback exposure sit directly against the card transaction processing capability"
+
+system_payments governed_by standard_pci_dss "Adheres to card payment industry security requirements" { status "Compliant" }
+system_core_banking governed_by standard_sox "Subject to financial reporting control requirements" { status "Compliant" }
+system_compliance governed_by standard_iso_27001 "Aligned to international information security management practices" { status "Compliant" }
+system_core_banking_cloud governed_by standard_internal_secure_coding "Built against the internal secure development standard from day one" { status "Compliant" }
+system_credit_card governed_by standard_pci_dss "Cardholder data handling is governed by PCI-DSS requirements" { status "Compliant" }
+app_sanctions_screening governed_by standard_iso_27001 "Sanctions screening security controls" { status "Compliant" }
+app_sar_filing governed_by standard_sox "Regulatory filing control framework" { status "Compliant" }
+
+control_dlp mitigates threat_api_data_leakage "Egress inspection reduces the chance of unmasked PII leaving via API responses going unnoticed"
+control_dlp protects data_customer_record "Monitors for unsanctioned egress of KYC profile data" { mechanism "Access Control" }
+control_paw mitigates threat_insider_fraud "Once implemented, isolates privileged admin sessions from general-purpose endpoints; still Planned, which is why insider fraud remains an open threat"
+control_waf mitigates threat_ddos "Layer-7 filtering and rate-shaping absorb a portion of volumetric request floods"
+control_card_tokenization mitigates threat_card_not_present_fraud "Tokenized card numbers limit the value of intercepted transaction data to a fraudster"
+control_card_tokenization protects data_card_transaction "Ensures raw PAN data is never persisted in the transaction record store"
+control_card_tokenization protects app_card_issuance "Tokenizes card credentials at intake"
+
+threat_ledger_tampering targets comp_ledger_db "Aims to alter transaction history at the database layer, below application-level validation"
+threat_api_data_leakage targets app_instant_pay "Malformed payment requests can trigger verbose error responses that echo customer identity fields"
+threat_agent_privilege_escalation targets agent_fraud_detective "Excess IAM scope on the agent's service identity is the exploitable surface"
+threat_card_not_present_fraud targets app_card_authorization "Targets the authorization engine with stolen or synthetic card credentials"
+threat_card_not_present_fraud targets app_card_issuance "Fraudulent application and card takeover attempts"
+
+// Security → Technology cross-layer dependency
+control_mfa depends_on inf_aws_eks "Authentication service enforcing MFA runs on the shared EKS cluster"
+

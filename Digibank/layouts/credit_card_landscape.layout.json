@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "view_id": "credit_card_landscape",
+  "revision": "sha256:efe53f1b132f8d3a1cada4a62e0771652ca4e4c5250c2be80a71ce305bc72e59",
+  "updated_at_utc": "2026-10-31T05:37:14.689058Z",
+  "nodes": {
+    "cardholder": {
+      "x": 1142,
+      "y": 40,
+      "width": 280,
+      "height": 156
+    },
+    "cap_card_application_processing": {
+      "x": 24,
+      "y": 247,
+      "width": 280,
+      "height": 151
+    },
+    "cap_card_provisioning": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "cap_card_issuance_lifecycle": {
+      "x": 49,
+      "y": 64,
+      "width": 324,
+      "height": 418
+    },
+    "cap_card_auth_settlement": {
+      "x": 24,
+      "y": 430,
+      "width": 280,
+      "height": 151
+    },
+    "cap_card_disputes": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "cap_rewards_loyalty": {
+      "x": 24,
+      "y": 247,
+      "width": 280,
+      "height": 151
+    },
+    "cap_card_transaction_servicing": {
+      "x": 49,
+      "y": 518,
+      "width": 324,
+      "height": 601
+    },
+    "cap_credit_card_services": {
+      "x": 1142,
+      "y": 786,
+      "width": 393,
+      "height": 1139
+    },
+    "app_card_issuance": {
+      "x": 500,
+      "y": 64,
+      "width": 280,
+      "height": 158
+    },
+    "comp_auth_rules_engine": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "app_card_authorization": {
+      "x": 24,
+      "y": 252,
+      "width": 324,
+      "height": 235
+    },
+    "app_card_rewards": {
+      "x": 500,
+      "y": 441,
+      "width": 280,
+      "height": 155
+    },
+    "app_card_disputes": {
+      "x": 500,
+      "y": 254,
+      "width": 280,
+      "height": 155
+    },
+    "system_credit_card": {
+      "x": 40,
+      "y": 851,
+      "width": 800,
+      "height": 616
+    },
+    "comp_ledger_api": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "comp_ledger_db": {
+      "x": 24,
+      "y": 247,
+      "width": 280,
+      "height": 151
+    },
+    "app_ledger_service": {
+      "x": 24,
+      "y": 64,
+      "width": 324,
+      "height": 418
+    },
+    "comp_account_ledger_adapter": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "app_deposit_accounts": {
+      "x": 24,
+      "y": 518,
+      "width": 324,
+      "height": 235
+    },
+    "system_core_banking": {
+      "x": 1759,
+      "y": 975,
+      "width": 368,
+      "height": 773
+    },
+    "comp_payment_router": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "comp_settlement_queue": {
+      "x": 24,
+      "y": 247,
+      "width": 280,
+      "height": 151
+    },
+    "app_instant_pay": {
+      "x": 24,
+      "y": 64,
+      "width": 324,
+      "height": 418
+    },
+    "system_payments": {
+      "x": 1152,
+      "y": 236,
+      "width": 368,
+      "height": 502
+    }
+  },
+  "edges": {
+    "app_card_authorization-triggers-app_card_disputes": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 73,
+        "y": 20,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

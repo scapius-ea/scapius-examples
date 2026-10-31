@@ -1,0 +1,133 @@
+layer "Application Architecture" {
+
+    group "Mortgage Origination & Servicing" {
+        system system_mortgage "Mortgage Origination & Servicing Platform" {
+            description "Digital mortgage application intake, underwriting decisioning, and ongoing loan servicing"
+            owner "VP Mortgage Lending"
+            criticality "Business-Critical"
+            risk "Medium"
+            cost 720000 year
+            version "8.1.0"
+            status "Active"
+            tier "Tier-2"
+            deployment_model "SaaS"
+            time Migrate
+            attr vendor "ICE Mortgage Technology (Encompass)"
+            security {
+                confidentiality High
+                integrity High
+                availability High
+            }
+
+            app app_mortgage_origination "Mortgage Application Portal" {
+                description "Digital borrower intake portal for residential mortgage loan applications and document uploads"
+                owner "Mortgage Operations Lead"
+                version "8.1.0"
+                status "Active"
+                internet_facing true
+                attr url "https://homeloans.digibank.com/apply"
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+
+                lifecycle {
+                    phase Plan start "2023-06-01" end "2023-11-30"
+                    phase Build start "2023-12-01" end "2024-07-31"
+                    phase Run start "2024-08-01"
+                }
+                score {
+                    business_value 9.0
+                    tech_fit 8.4
+                }
+            }
+
+            app app_underwriting_engine "Automated Underwriting Engine" {
+                description "Automated loan underwriting engine evaluating debt-to-income ratios, collateral appraisals, and creditworthiness"
+                owner "Chief Underwriting Officer"
+                version "8.1.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+
+                lifecycle {
+                    phase Plan start "2023-08-01" end "2024-01-31"
+                    phase Build start "2024-02-01" end "2024-09-30"
+                    phase Run start "2024-10-01"
+                }
+                score {
+                    business_value 9.6
+                    tech_fit 8.9
+                }
+            }
+
+            app app_mortgage_servicing "Mortgage Servicing System" {
+                description "Post-closing loan servicing platform managing escrow disbursements, monthly payment collections, and payoff requests"
+                owner "Mortgage Servicing Operations"
+                version "8.1.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+            }
+
+            lifecycle {
+                phase Run start "2021-09-01"
+            }
+            score {
+                business_value 7.4
+                tech_fit 4.2
+            }
+        }
+    }
+
+    data_object data_mortgage_application "Mortgage Application File" {
+        description "Borrower financial disclosures, property details, and supporting documentation for a home loan application"
+        owner "Mortgage Operations Lead"
+        classification Restricted
+        pii true
+        attr source_of_truth "Mortgage Application Portal"
+        attr retention "7 years post-closing"
+        attr format "Document Bundle"
+        security {
+            confidentiality High
+            integrity High
+            availability High
+        }
+    }
+}
+
+// Mortgage Application Relationships
+system_mortgage realizes cap_home_lending "Mortgage capability" { description "Provides digital mortgage application intake, underwriting, and loan servicing" }
+system_mortgage depends_on system_core_banking "Disbursement and escrow" { description "Integrates with core banking for loan disbursement and monthly escrow debit processing" }
+
+app_mortgage_origination serves customer "Mortgage application portal" { description "Provides digital intake and disclosure portal for home loan borrowers" }
+app_mortgage_origination realizes cap_loan_application_intake "Application intake" { description "Captures borrower financial details and required disclosures" }
+app_underwriting_engine realizes cap_underwriting_appraisal "Underwriting review" { description "Runs automated pre-qualification and supports manual underwriting review" }
+app_mortgage_servicing realizes cap_escrow_payment_processing "Escrow processing" { description "Processes monthly payments and administers escrow disbursements" }
+app_mortgage_servicing realizes cap_loan_modification "Hardship modification" { description "Supports hardship-driven loan modification and payoff workflows" }
+app_mortgage_servicing depends_on system_core_banking "Disbursement ledger" { description "Disburses funded loans into borrower deposit accounts in core banking" }
+
+app_mortgage_origination writes data_mortgage_application "Update file" {
+    cardinality OneToOne
+    description "Creates and updates the application file as the borrower completes each step"
+}
+app_underwriting_engine reads data_mortgage_application "Underwriting decision" { description "Reads the application file to run underwriting decisioning" }
+app_underwriting_engine reads data_customer_record "KYC verification" { description "Cross-references KYC identity data as part of underwriting verification" }
+app_mortgage_origination flows_to app_underwriting_engine "Submit queue" {
+    tags "Event Stream"
+    description "Submits completed applications into the underwriting queue"
+}
+app_underwriting_engine triggers app_mortgage_servicing "Servicing handoff" {
+    cardinality OneToOne
+    description "Approved and funded loans are handed off into ongoing servicing"
+}
+

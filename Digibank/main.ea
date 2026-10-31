@@ -1,0 +1,105 @@
+workspace DigiBank "DigiBank Enterprise Architecture" {
+    // Root layout, configurations, and global visual styles.
+    // This file is the workspace entry point. Every other .ea file in this
+    // project is a workspace fragment (a bare sequence of statements) that is
+    // merged into this single workspace by the tooling.
+    styles {
+        theme "default.theme"
+
+        style "system" {
+            shape "rounded_rectangle"
+            css_class "card shadow-sm border-primary"
+        }
+
+        style "app" {
+            shape "rounded_rectangle"
+            css_class "card border-secondary text-primary"
+        }
+
+        style "agent" {
+            shape "hexagon"
+            css_class "card border-success bg-success-subtle text-success"
+        }
+
+        style "actor" {
+            shape "person"
+            css_class "actor-node text-center"
+        }
+
+        style "goal" {
+            shape "chevron"
+            css_class "bg-info-subtle border-info text-info-emphasis"
+        }
+
+        style "kpi" {
+            shape "octagon"
+            css_class "bg-warning-subtle border-warning text-warning-emphasis"
+        }
+
+        style "policy" {
+            shape "document"
+            css_class "bg-slate-subtle border-slate text-slate-emphasis"
+        }
+
+        style "control" {
+            shape "shield"
+            css_class "bg-emerald-subtle border-emerald text-emerald-emphasis"
+        }
+
+        style "threat" {
+            shape "octagon"
+            css_class "bg-danger-subtle border-danger text-danger-emphasis"
+        }
+
+        style "vulnerability" {
+            shape "octagon"
+            css_class "bg-orange-subtle border-orange text-orange-emphasis"
+        }
+
+        style "risk_scenario" {
+            shape "octagon"
+            css_class "bg-rose-subtle border-rose text-rose-emphasis"
+        }
+
+        style "standard" {
+            shape "document"
+            css_class "bg-indigo-subtle border-indigo text-indigo-emphasis"
+        }
+
+        style "trust_boundary" {
+            shape "rectangle"
+            css_class "trust-boundary-node"
+        }
+
+        style "group" {
+            shape "folder"
+            css_class "group-node"
+        }
+
+        // Condition-based styling: anything flagged High risk gets a hard
+        // visual callout regardless of its entity type.
+        style * where risk == "High" {
+            css_class "border-danger bg-danger-subtle text-danger"
+            border_width "3px"
+        }
+
+        // Anything still in planning gets a muted, dashed treatment so
+        // roadmap items are visually distinct from live estate.
+        style * where status == "Planned" {
+            css_class "opacity-60"
+            stroke_style "dashed"
+        }
+
+        // Anything explicitly marked for decommission is greyed out.
+        style * where treatment == "Mitigate" {
+            css_class "border-warning"
+        }
+
+        // Identifier selector: target one specific node directly rather than
+        // an entity type or a condition. Useful for calling out the crown
+        // jewel of the estate on landscape views.
+        style system_core_banking {
+            custom_css "outline: 3px dashed #f59e0b; outline-offset: 4px;"
+        }
+    }
+}

@@ -1,0 +1,109 @@
+layer "Business Architecture" {
+    actor customer "Retail Customer" {
+        description "The primary consumer of digital banking services"
+        owner "Marketing and Growth"
+        role "Customer"
+        is_external true
+        attr location "Global"
+        attr department "Retail"
+        tags ["external", "persona"]
+    }
+
+    actor support_rep "Customer Support Agent" {
+        description "Internal support representative addressing customer inquiries"
+        owner "Customer Service Operations"
+        role "Support Agent"
+        is_external false
+        attr location "Onsite / Remote"
+        attr department "Customer Support"
+        tags ["internal"]
+    }
+
+    actor compliance_officer "Compliance Analyst" {
+        description "Specialist evaluating transaction fraud alerts and AML issues"
+        owner "Risk Management"
+        role "Compliance Officer"
+        is_external false
+        attr location "HQ"
+        attr department "Risk and Compliance"
+        tags ["internal"]
+    }
+
+    process proc_onboarding "Digital Wallet Onboarding" {
+        description "Flow for registering, scanning KYC docs, verifying identity, and opening account"
+        owner "Onboarding Product Team"
+        criticality "Business-Critical"
+        risk "Medium"
+        automation_level "High"
+        attr duration "12 minutes"
+        sla "5 minutes"
+
+        // relationshipBlock form: relationships nested inside the entity
+        // body, using 'this' to refer back to the enclosing entity instead
+        // of repeating its identifier.
+        relationships {
+            this triggers proc_lending "Fast-track lending" {
+                cardinality OneToOne
+                description "Well-qualified applicants can be fast-tracked into a lending offer during onboarding"
+            }
+        }
+    }
+
+    process proc_lending "Retail Lending Underwriting" {
+        description "Applying for a personal loan, performing credit check, and disbursing funds"
+        owner "Lending Operations"
+        criticality "Business-Critical"
+        risk "High"
+        automation_level "Medium"
+        attr duration "2 hours"
+    }
+
+    process proc_payment_settlement "Real-Time Fund Transfer" {
+        description "Processing peer-to-peer or bank-to-bank instant money transfers"
+        owner "Core Payment Team"
+        criticality "Mission-Critical"
+        risk "Low"
+        automation_level "Fully-Automated"
+        attr duration "2 seconds"
+        sla "5 seconds"
+    }
+
+    process proc_fraud_alert "Fraud Case Remediation" {
+        description "Investigating suspicious transfers and taking account hold action"
+        owner "Fraud Ops"
+        criticality "Business-Critical"
+        risk "High"
+        automation_level "Manual"
+        attr duration "30 minutes"
+    }
+}
+
+// Business Layer Relationships
+customer triggers proc_onboarding "Signup flow" {
+    cardinality OneToMany
+    description "Launches signup flow in mobile app"
+}
+customer triggers proc_payment_settlement "Money transfer" {
+    cardinality OneToMany
+    description "Initiates real-time money transfer"
+}
+customer writes data_customer_record "Submit KYC data" {
+    cardinality OneToMany
+    description "Submits personal identification and biometric verification data"
+}
+support_rep serves customer "Escalated support" {
+    cardinality ManyToMany
+    description "Resolves issues escalated by automated chat bots"
+}
+compliance_officer serves proc_fraud_alert "Case review" { description "Manually reviews flagged cases" }
+
+proc_onboarding realizes cap_onboarding "Onboarding capability" { description "Executes digital onboarding capability" }
+proc_lending realizes cap_credit_scoring "Credit scoring" { description "Executes underwriting capabilities" }
+proc_payment_settlement realizes cap_real_time_payments "Instant payment" { description "Executes instant payment transfer capability" }
+proc_fraud_alert realizes cap_fraud_detection "Fraud prevention" { description "Executes fraud prevention steps" }
+
+proc_onboarding influences goal_reduce_onboarding "Goal performance" { description "Performance of onboarding process dictates goal achievement" }
+
+// Business → Application cross-layer dependencies
+proc_onboarding depends_on app_mobile_banking "Mobile flow" { description "Onboarding steps are executed entirely through the mobile app's guided flow" }
+proc_payment_settlement depends_on app_instant_pay "Instant API" { description "Real-time transfer processing depends on the instant payments API being available" }

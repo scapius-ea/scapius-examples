@@ -1,0 +1,123 @@
+layer "Strategy Layer" {
+    goal goal_double_customers "Double Active Customer Base" {
+        description "Increase active digital banking customers to 5 million by 2028"
+        owner "Chief Executive Officer"
+        priority High
+        attr target_date "2028-12-31"
+    }
+
+    goal goal_ai_first "AI-First Support Strategy" {
+        description "Automate at least 70% of support requests via conversational AI"
+        owner "VP of Customer Operations"
+        priority High
+        attr target_date "2027-06-30"
+    }
+
+    goal goal_reduce_onboarding "Minimize Onboarding Friction" {
+        description "Reduce onboarding duration from registration to active wallet to under 5 minutes"
+        owner "Product Director, Retail"
+        priority Medium
+        attr target_date "2026-12-31"
+    }
+
+    goal goal_modernize_core "Modernize Core Banking Platform" {
+        description "Retire the on-premises mainframe ledger in favour of a cloud-native core banking platform"
+        owner "Chief Technology Officer"
+        priority High
+        attr target_date "2028-06-30"
+    }
+
+    goal goal_grow_card_portfolio "Grow Credit Card Portfolio" {
+        description "Expand active credit card accounts and cross-sell rate among existing deposit customers"
+        owner "VP Credit Card Products"
+        priority Medium
+        attr target_date "2027-12-31"
+    }
+
+    goal goal_expand_corporate_banking "Expand Corporate Banking Relationships" {
+        description "Grow the number of active corporate treasury relationships and associated deposit balances"
+        owner "VP Corporate Banking"
+        priority Medium
+        attr target_date "2028-03-31"
+    }
+
+    kpi kpi_active_customers "Active Digital Customers Count" {
+        description "Monthly active digital customers using mobile/web app"
+        owner "Growth Analytics Team"
+        target_value 5000000
+        current_value 2500000
+        unit "users"
+        trend Up
+    }
+
+    kpi kpi_ai_support_containment "AI Support Containment Rate" {
+        description "Percentage of customer support inquiries handled entirely by AI without agent escalation"
+        owner "AI Operations Lead"
+        target_value 70
+        current_value 45
+        unit "%"
+        trend Up
+    }
+
+    kpi kpi_onboarding_time "Average Onboarding Duration" {
+        description "Average time in minutes from app install to first successful transaction"
+        owner "UX Research Team"
+        target_value 5
+        current_value 12
+        unit "minutes"
+        trend Down
+    }
+
+    kpi kpi_platform_availability "Core Platform Availability" {
+        description "Rolling 12-month uptime of the core banking and payments platforms"
+        owner "SRE Platform Team"
+        target_value 99.99
+        current_value 99.97
+        unit "%"
+        trend Stable
+    }
+
+    kpi kpi_card_approval_rate "Credit Card Application Approval Rate" {
+        description "Share of credit card applications approved instantly without manual referral"
+        owner "Head of Credit Card Operations"
+        target_value 75
+        current_value 61
+        unit "%"
+        trend Up
+    }
+
+    kpi kpi_mortgage_cycle_time "Mortgage Origination Cycle Time" {
+        description "Average calendar days from mortgage application submission to closing"
+        owner "VP Mortgage Lending"
+        target_value 21
+        current_value 34
+        unit "days"
+        trend Down
+    }
+
+    kpi kpi_corporate_deposits "Corporate Deposit Growth" {
+        description "Total deposit volume held across commercial and treasury accounts"
+        owner "VP Corporate Banking"
+        target_value 1500000000
+        current_value 920000000
+        unit "USD"
+        trend Up
+    }
+}
+
+// Strategic influences
+kpi_active_customers influences goal_double_customers "Customer scaling" { description "Measures progress toward customer scaling goal" }
+kpi_ai_support_containment influences goal_ai_first "AI containment" { description "Direct KPI measuring conversational AI containment success" }
+kpi_onboarding_time influences goal_reduce_onboarding "Friction reduction" { description "Direct KPI for customer friction reduction" }
+kpi_platform_availability influences goal_modernize_core "Availability driver" { description "Availability pressure is a key driver behind core modernization" }
+goal_reduce_onboarding influences goal_double_customers "Onboarding growth" { description "Frictionless onboarding directly drives customer growth" }
+goal_modernize_core influences goal_double_customers "Core prerequisite" {
+    cardinality OneToOne
+    description "A resilient, scalable core is a prerequisite for customer growth"
+}
+kpi_card_approval_rate influences goal_grow_card_portfolio "Portfolio growth" { description "Faster, higher approval rates directly grow the active card portfolio" }
+kpi_mortgage_cycle_time influences goal_double_customers "Cycle time driver" { description "Faster mortgage cycle times reduce borrower drop-off and support broader customer growth" }
+kpi_corporate_deposits influences goal_expand_corporate_banking "Treasury volume" { description "Direct KPI measuring expansion in corporate treasury balances" }
+goal_ai_first influences goal_double_customers "Support scalability" { description "Automated support scales sustainably as the customer base doubles" }
+goal_grow_card_portfolio influences goal_double_customers "Cross-sell growth" { description "Card cross-sell expands active account relationships" }
+goal_expand_corporate_banking influences goal_double_customers "Enterprise growth" { description "Corporate banking relationships provide deposit liquidity that fuels retail expansion" }

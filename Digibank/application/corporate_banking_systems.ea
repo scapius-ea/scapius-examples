@@ -1,0 +1,115 @@
+layer "Application Architecture" {
+
+    group "Corporate & Commercial Banking Systems" {
+        system system_corporate_banking "Corporate & Commercial Banking Platform" {
+            description "Business account management, cash management, commercial lending, and trade finance processing"
+            owner "VP Corporate Banking"
+            criticality "Business-Critical"
+            risk "Medium"
+            cost 860000 year
+            version "3.6.0"
+            status "Active"
+            tier "Tier-1"
+            deployment_model "Kubernetes"
+            time Invest
+            attr vendor "In-House"
+            security {
+                confidentiality High
+                integrity High
+                availability High
+            }
+
+            app app_business_account_mgmt "Business Account Management Console" {
+                description "Administrative portal for corporate entity relationship managers, authorized signatories, and mandate configurations"
+                owner "VP Corporate Banking"
+                version "3.6.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+            }
+
+            app app_cash_management "Cash Management & Treasury Portal" {
+                description "Corporate treasury portal for liquidity sweeps, bulk wire payments, and multi-currency account management"
+                owner "Head of Treasury Operations"
+                version "3.6.0"
+                status "Active"
+                tier "Tier-1"
+                internet_facing true
+                attr url "https://treasury.digibank.com"
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability Critical
+                }
+            }
+
+            app app_trade_finance "Trade Finance Processing System" {
+                description "Letters of credit and documentary collections processing system for commercial trade customers"
+                owner "Head of Trade Finance"
+                version "2.1.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+            }
+
+            lifecycle {
+                phase Run start "2023-02-01"
+            }
+            score {
+                business_value 8.3
+                tech_fit 7.6
+            }
+        }
+    }
+
+    data_object data_corporate_account "Corporate Account Profile" {
+        description "Business entity details, KYB verification records, and treasury service configuration for corporate clients"
+        owner "Corporate Onboarding Lead"
+        classification Confidential
+        pii false
+        attr source_of_truth "Business Account Management Console"
+        attr retention "7 years post-relationship-close"
+        attr format "Database Record"
+        security {
+            confidentiality High
+            integrity High
+            availability High
+        }
+    }
+}
+
+// Corporate & Commercial Banking Relationships
+system_corporate_banking realizes cap_corporate_banking "Corporate banking capability" { description "Provides business account onboarding, cash management, and trade finance" }
+system_corporate_banking realizes goal_expand_corporate_banking "Corporate expansion" { description "Drives strategic expansion in corporate treasury relationships and balances" }
+system_corporate_banking depends_on system_core_banking "General ledger posting" { description "Posts commercial settlement entries to the corporate general ledger" }
+
+app_cash_management serves corporate_treasury_client "Treasury portal" { description "Provides digital treasury portal for cash sweeps and payments" }
+app_business_account_mgmt serves corporate_relationship_manager "Onboarding console" { description "Provides relationship manager interface for business onboarding" }
+app_business_account_mgmt realizes cap_business_account_onboarding "KYB verification" { description "Manages KYB verification and entity documentation for new corporate accounts" }
+app_cash_management realizes cap_cash_management_treasury "Treasury liquidity" { description "Provides liquidity sweeps, payment initiation, and balance reporting for treasury clients" }
+app_trade_finance realizes cap_trade_finance_processing "Trade processing" { description "Processes letters of credit, documentary collections, and cross-border trade instruments" }
+
+app_business_account_mgmt writes data_corporate_account "Account profile" {
+    cardinality OneToOne
+    description "Creates and maintains the corporate account profile during onboarding"
+}
+app_business_account_mgmt flows_to app_cash_management "Client activation" { description "Provisions onboarded corporate client into treasury portal" }
+app_cash_management reads data_corporate_account "Entitlement check" { description "Reads account and entitlement configuration to authorize treasury actions" }
+app_cash_management writes data_ledger_tx "Post transactions" {
+    cardinality OneToMany
+    description "Posts sweep and payment-initiation transactions to the ledger"
+}
+app_trade_finance reads data_corporate_account "Counterparty check" { description "Verifies counterparty and entity details before issuing trade instruments" }
+app_cash_management flows_to app_ledger_service "Payment instruction" {
+    tags "REST/JSON"
+    description "Submits authorized treasury payment instructions for settlement"
+}
+

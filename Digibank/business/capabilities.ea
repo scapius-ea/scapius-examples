@@ -1,0 +1,659 @@
+layer "Business Architecture" {
+
+    // ==========================================
+    // 1.0 Retail Banking Operations
+    // ==========================================
+    capability cap_retail_banking "Retail Banking Operations" {
+        description "All customer-facing retail banking services"
+        owner "VP Retail Banking"
+        maturity "Managed"
+        number "1.0"
+        attr strategic_value "High"
+
+        capability cap_lending "Consumer Lending" {
+            description "End-to-end loan application and servicing capability"
+            owner "Lending Product Lead"
+            maturity "Defined"
+            number "1.1"
+            attr strategic_value "High"
+
+            capability cap_credit_scoring "Automated Credit Scoring" {
+                description "Real-time automated credit underwriting"
+                owner "Risk Modeling Team"
+                maturity "Optimizing"
+                number auto
+                attr strategic_value "Very-High"
+
+                lifecycle {
+                    phase Build start "2024-01-01" end "2024-09-01"
+                    phase Run start "2024-09-02"
+                }
+                score {
+                    business_value 8.8
+                    tech_fit 9.0
+                }
+            }
+        }
+
+        capability cap_payments "Payments and Transfers" {
+            description "Processing internal, domestic, and international transfers"
+            owner "VP of Payments"
+            maturity "Optimizing"
+            number "1.2"
+            attr strategic_value "High"
+
+            capability cap_real_time_payments "Real-Time Payments" {
+                description "Instant clearing and settlement"
+                owner "Real-Time Rails Lead"
+                maturity "Optimizing"
+                number auto
+                attr strategic_value "Very-High"
+            }
+        }
+    }
+
+    // ==========================================
+    // 2.0 customer Service & Ops
+    // ==========================================
+    capability cap_customer_service "Customer Service & Ops" {
+        description "Support operations and user lifecycle management"
+        owner "VP Customer Operations"
+        maturity "Defined"
+        number "2.0"
+        attr strategic_value "High"
+
+        capability cap_onboarding "Digital Onboarding" {
+            description "KYC/AML customer acquisition and digital verification"
+            owner "Onboarding Product Manager"
+            maturity "Initial"
+            number "2.1"
+            attr strategic_value "Very-High"
+
+            score {
+                business_value 8.0
+                tech_fit 6.0
+            }
+
+            capability cap_identity_verification "Identity Verification (KYC)" {
+                description "Document capture, liveness checks, and identity proofing against government records"
+                owner "Identity Operations"
+                maturity "Managed"
+                number auto
+                attr strategic_value "Very-High"
+            }
+
+            capability cap_account_provisioning "Account Provisioning" {
+                description "Automated creation and configuration of new customer wallet accounts"
+                owner "Onboarding Product Manager"
+                maturity "Defined"
+                number auto
+                attr strategic_value "High"
+            }
+        }
+
+        capability cap_customer_support "Customer Support Services" {
+            description "Ticketing, chat support, and customer resolution"
+            owner "Support Ops Director"
+            maturity "Managed"
+            number "2.2"
+            attr strategic_value "Medium"
+
+            capability cap_case_management "Case Management" {
+                description "Tracking, prioritizing, and resolving customer service tickets end to end"
+                owner "Support Ops Director"
+                maturity "Managed"
+                number auto
+                attr strategic_value "Medium"
+            }
+
+            capability cap_live_chat_messaging "Live Chat & Messaging" {
+                description "Real-time human and AI-assisted messaging channels for customer support"
+                owner "Support Ops Director"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+
+            capability cap_contact_center_ops "Contact Center Operations" {
+                description "Phone-channel call routing, IVR self-service, and omnichannel ticket handling across voice, chat, and email"
+                owner "Head of Contact Center Operations"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+    }
+
+    // ==========================================
+    // 3.0 Risk and Compliance Management
+    // ==========================================
+    capability cap_risk_compliance "Risk and Compliance Management" {
+        description "Ensuring financial regulation adherence and security"
+        owner "Chief Risk Officer"
+        maturity "Defined"
+        number "3.0"
+        attr strategic_value "High"
+
+        capability cap_fraud_detection "Real-Time Fraud Prevention" {
+            description "Proactive machine learning fraud analysis"
+            owner "Fraud Security Director"
+            maturity "Optimizing"
+            number "3.1"
+            attr strategic_value "Very-High"
+
+            score {
+                business_value 8.7
+                tech_fit 7.8
+            }
+
+            capability cap_transaction_scoring "Real-Time Transaction Scoring" {
+                description "Streaming ML scoring of every transaction for fraud probability"
+                owner "Fraud Security Director"
+                maturity "Optimizing"
+                number auto
+                attr strategic_value "Very-High"
+            }
+
+            capability cap_fraud_case_investigation "Fraud Case Investigation" {
+                description "Analyst and AI-assisted triage and investigation of flagged fraud cases"
+                owner "Fraud Ops"
+                maturity "Managed"
+                number auto
+                attr strategic_value "High"
+            }
+        }
+
+        capability cap_aml_compliance "Anti-Money Laundering (AML)" {
+            description "Transaction monitoring and regulatory reporting"
+            owner "AML Compliance Lead"
+            maturity "Managed"
+            number "3.2"
+            attr strategic_value "High"
+
+            capability cap_sanctions_screening "Sanctions Screening" {
+                description "Real-time screening of customers and counterparties against sanctions and watch lists"
+                owner "AML Compliance Lead"
+                maturity "Managed"
+                number auto
+                attr strategic_value "Very-High"
+            }
+
+            capability cap_sar "Suspicious Activity Reporting" {
+                description "Preparation and regulatory filing of suspicious activity reports"
+                owner "AML Compliance Lead"
+                maturity "Defined"
+                number auto
+                attr strategic_value "High"
+            }
+        }
+
+        capability cap_regulatory_reporting "Regulatory Reporting & Compliance" {
+            description "Preparation, validation, and submission of mandated regulatory filings"
+            owner "Head of Regulatory Affairs"
+            maturity "Defined"
+            number "3.3"
+            attr strategic_value "High"
+
+            capability cap_regulatory_filings_management "Regulatory Filings Management" {
+                description "End-to-end lifecycle management of regulatory filings and submission deadlines"
+                owner "Head of Regulatory Affairs"
+                maturity "Defined"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_compliance_policy_management "Compliance Policy Management" {
+                description "Authoring, versioning, and attestation of internal compliance policies"
+                owner "Chief Compliance Officer"
+                maturity "Initial"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+
+        capability cap_data_privacy "Data Privacy & Protection" {
+            description "Customer consent management and data subject rights fulfillment"
+            owner "Chief Privacy Officer"
+            maturity "Managed"
+            number "3.4"
+            attr strategic_value "High"
+
+            capability cap_consent_management "Consent Management" {
+                description "Capturing, storing, and honouring customer consent preferences across channels"
+                owner "Chief Privacy Officer"
+                maturity "Managed"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_data_subject_rights "Data Subject Rights Management" {
+                description "Handling access, correction, and erasure requests under privacy regulation"
+                owner "Chief Privacy Officer"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+    }
+
+    // ==========================================
+    // 4.0 Back Office Operations
+    // ==========================================
+    capability cap_back_office "Back Office Operations" {
+        description "Internal operational functions that keep the bank's books, people, and settlements running"
+        owner "Chief Operating Officer"
+        maturity "Managed"
+        number "4.0"
+        attr strategic_value "Medium"
+
+        capability cap_reconciliation_ops "Reconciliation & Settlement Ops" {
+            description "Matching and settling transactions across internal ledgers and external counterparties"
+            owner "Head of Treasury Operations"
+            maturity "Managed"
+            number "4.1"
+            attr strategic_value "High"
+
+            capability cap_nostro_reconciliation "Nostro/Vostro Reconciliation" {
+                description "Automated daily matching of correspondent bank account statements against the internal ledger"
+                owner "Head of Treasury Operations"
+                maturity "Managed"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_exception_management "Exception Management" {
+                description "Investigation and resolution of unmatched or breaking reconciliation items"
+                owner "Treasury Operations"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+
+        capability cap_finance_gl "Finance & General Ledger" {
+            description "Corporate finance, statutory accounting, and general ledger management"
+            owner "VP Finance Operations"
+            maturity "Managed"
+            number "4.2"
+            attr strategic_value "Medium"
+
+            capability cap_regulatory_financial_reporting "Regulatory Financial Reporting" {
+                description "Preparation of statutory and regulatory financial statements"
+                owner "VP Finance Operations"
+                maturity "Managed"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_apar "Accounts Payable/Receivable" {
+                description "Processing of vendor payments and incoming receivables"
+                owner "Finance Shared Services"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Low"
+            }
+        }
+
+        capability cap_hr_workforce "HR & Workforce Management" {
+            description "Employee lifecycle management from hire to retire"
+            owner "Chief People Officer"
+            maturity "Defined"
+            number "4.3"
+            attr strategic_value "Low"
+
+            capability cap_employee_onboarding "Employee Onboarding" {
+                description "Internal onboarding, provisioning, and orientation for new hires"
+                owner "Chief People Officer"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Low"
+            }
+
+            capability cap_payroll_administration "Payroll Administration" {
+                description "Calculation, approval, and disbursement of employee pay and benefits"
+                owner "Chief People Officer"
+                maturity "Managed"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+    }
+
+    // ==========================================
+    // 5.0 Marketing & Growth
+    // ==========================================
+    capability cap_marketing "Marketing & Growth" {
+        description "Customer acquisition, engagement, and brand management functions"
+        owner "Chief Marketing Officer"
+        maturity "Defined"
+        number "5.0"
+        attr strategic_value "High"
+
+        capability cap_campaign_management "Campaign Management" {
+            description "Planning, execution, and orchestration of multi-channel marketing campaigns"
+            owner "VP Marketing Technology"
+            maturity "Defined"
+            number "5.1"
+            attr strategic_value "High"
+
+            capability cap_digital_advertising "Digital Advertising" {
+                description "Paid search, social, and display advertising acquisition channels"
+                owner "Head of Performance Marketing"
+                maturity "Managed"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_lifecycle_marketing "Lifecycle Marketing" {
+                description "Triggered, behaviour-based customer communications across the account lifecycle"
+                owner "VP Marketing Technology"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+
+        capability cap_customer_insights "Customer Insights & Analytics" {
+            description "Understanding customer behaviour to drive personalization and growth decisions"
+            owner "Director of Customer Analytics"
+            maturity "Optimizing"
+            number "5.2"
+            attr strategic_value "Very-High"
+
+            capability cap_segmentation_personalization "Segmentation & Personalization" {
+                description "Building customer segments and tailoring experiences based on behavioural data"
+                owner "Director of Customer Analytics"
+                maturity "Optimizing"
+                number auto
+                attr strategic_value "Very-High"
+            }
+
+            capability cap_marketing_attribution "Marketing Attribution" {
+                description "Measuring channel and campaign contribution to acquisition and revenue outcomes"
+                owner "Director of Customer Analytics"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+
+        capability cap_brand_content "Brand & Content" {
+            description "Management of brand identity, public content, and social presence"
+            owner "Head of Brand"
+            maturity "Initial"
+            number "5.3"
+            attr strategic_value "Low"
+
+            capability cap_content_management "Content Management" {
+                description "Authoring and publishing content to the public website and marketing properties"
+                owner "Head of Brand"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Low"
+            }
+
+            capability cap_social_media_management "Social Media Management" {
+                description "Planning, publishing, and monitoring brand social media presence"
+                owner "Head of Brand"
+                maturity "Initial"
+                number auto
+                attr strategic_value "Low"
+            }
+        }
+    }
+
+    // ==========================================
+    // 6.0 Personal Banking & Deposits
+    // ==========================================
+    capability cap_personal_banking "Personal Banking & Deposits" {
+        description "Checking and savings account servicing, statements, and relationship banking for individual customers"
+        owner "VP Personal Banking"
+        maturity "Managed"
+        number "6.0"
+        attr strategic_value "High"
+
+        capability cap_deposit_account_mgmt "Deposit Account Management" {
+            description "Opening, maintaining, and servicing checking and savings deposit accounts"
+            owner "VP Personal Banking"
+            maturity "Managed"
+            number "6.1"
+            attr strategic_value "High"
+
+            capability cap_deposit_servicing "Checking & Savings Account Servicing" {
+                description "Day-to-day account maintenance: holds, transfers, standing instructions, and closures"
+                owner "Deposit Operations Lead"
+                maturity "Managed"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_account_statements "Account Statements & Documentation" {
+                description "Generation and delivery of periodic statements, tax documents, and account notices"
+                owner "Deposit Operations Lead"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+
+        capability cap_personal_banking_advisory "Personal Banking Advisory" {
+            description "Relationship-based guidance helping customers select products and manage their financial position"
+            owner "VP Personal Banking"
+            maturity "Defined"
+            number "6.2"
+            attr strategic_value "Medium"
+
+            capability cap_financial_wellness "Financial Wellness Coaching" {
+                description "Budgeting insights, spend analysis, and savings goal tracking surfaced to customers"
+                owner "Head of Financial Wellness"
+                maturity "Initial"
+                number auto
+                attr strategic_value "Medium"
+            }
+
+            capability cap_relationship_banking "Relationship Banking" {
+                description "Proactive outreach and tailored product recommendations for higher-value personal banking relationships"
+                owner "VP Personal Banking"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+    }
+
+    // ==========================================
+    // 7.0 Credit Card Services
+    // ==========================================
+    capability cap_credit_card_services "Credit Card Services" {
+        description "End-to-end credit card issuance, transaction processing, rewards, and dispute handling"
+        owner "VP Credit Card Products"
+        maturity "Managed"
+        number "7.0"
+        attr strategic_value "High"
+
+        capability cap_card_issuance_lifecycle "Card Issuance & Lifecycle" {
+            description "Application decisioning, card production, and activation through to reissue and closure"
+            owner "Head of Credit Card Operations"
+            maturity "Defined"
+            number "7.1"
+            attr strategic_value "High"
+
+            capability cap_card_application_processing "Card Application Processing" {
+                description "Intake, credit decisioning, and approval workflow for new credit card applications"
+                owner "Head of Credit Card Operations"
+                maturity "Defined"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_card_provisioning "Card Provisioning & Activation" {
+                description "Physical and virtual card issuance, mobile wallet provisioning, and activation"
+                owner "Head of Credit Card Operations"
+                maturity "Managed"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+
+        capability cap_card_transaction_servicing "Card Transaction Processing & Servicing" {
+            description "Real-time authorization, settlement, rewards accrual, and dispute resolution for card transactions"
+            owner "VP Credit Card Products"
+            maturity "Optimizing"
+            number "7.2"
+            attr strategic_value "Very-High"
+
+            capability cap_card_auth_settlement "Authorization & Settlement" {
+                description "Real-time transaction authorization against network rails and downstream settlement"
+                owner "Card Processing Operations"
+                maturity "Optimizing"
+                number auto
+                attr strategic_value "Very-High"
+
+                lifecycle {
+                    phase Run start "2022-04-01"
+                }
+                score {
+                    business_value 9.1
+                    tech_fit 8.4
+                }
+            }
+
+            capability cap_card_disputes "Dispute & Chargeback Management" {
+                description "Investigation and resolution of customer-initiated card transaction disputes and network chargebacks"
+                owner "Card Operations Analyst Team"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+
+            capability cap_rewards_loyalty "Rewards & Loyalty Management" {
+                description "Points accrual, redemption, and loyalty tier administration for credit card rewards programs"
+                owner "Card Processing Operations"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+    }
+
+    // ==========================================
+    // 8.0 Home Lending & Mortgage
+    // ==========================================
+    capability cap_home_lending "Home Lending & Mortgage" {
+        description "Mortgage origination through servicing for residential home loans"
+        owner "VP Mortgage Lending"
+        maturity "Defined"
+        number "8.0"
+        attr strategic_value "High"
+
+        capability cap_mortgage_origination "Mortgage Origination" {
+            description "Application intake, underwriting, appraisal coordination, and closing for new mortgage loans"
+            owner "Chief Underwriting Officer"
+            maturity "Defined"
+            number "8.1"
+            attr strategic_value "High"
+
+            capability cap_loan_application_intake "Loan Application Intake" {
+                description "Digital capture of borrower financial details, documentation, and disclosures"
+                owner "Mortgage Operations Lead"
+                maturity "Initial"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_underwriting_appraisal "Underwriting & Appraisal Coordination" {
+                description "Automated and manual underwriting decisioning paired with third-party appraisal ordering and review"
+                owner "Chief Underwriting Officer"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Very-High"
+            }
+        }
+
+        capability cap_mortgage_servicing "Mortgage Servicing" {
+            description "Ongoing payment collection, escrow administration, and loan modification for active mortgages"
+            owner "VP Mortgage Lending"
+            maturity "Managed"
+            number "8.2"
+            attr strategic_value "Medium"
+
+            capability cap_escrow_payment_processing "Payment Processing & Escrow Management" {
+                description "Monthly payment collection, escrow disbursement for taxes and insurance, and payoff calculation"
+                owner "Mortgage Servicing Operations"
+                maturity "Managed"
+                number auto
+                attr strategic_value "Medium"
+            }
+
+            capability cap_loan_modification "Loan Modification & Payoff Processing" {
+                description "Hardship-driven loan modification workflows and full payoff processing"
+                owner "Mortgage Servicing Operations"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Low"
+            }
+        }
+    }
+
+    // ==========================================
+    // 9.0 Corporate & Commercial Banking
+    // ==========================================
+    capability cap_corporate_banking "Corporate & Commercial Banking" {
+        description "Business account services, treasury management, commercial lending, and trade finance for corporate clients"
+        owner "VP Corporate Banking"
+        maturity "Defined"
+        number "9.0"
+        attr strategic_value "High"
+
+        capability cap_business_account_services "Business Account Services" {
+            description "Onboarding, know-your-business verification, and treasury management for corporate deposit accounts"
+            owner "VP Corporate Banking"
+            maturity "Defined"
+            number "9.1"
+            attr strategic_value "High"
+
+            capability cap_business_account_onboarding "Business Account Onboarding" {
+                description "Know-Your-Business (KYB) verification and entity documentation for new corporate accounts"
+                owner "Corporate Onboarding Lead"
+                maturity "Initial"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_cash_management_treasury "Cash Management & Treasury Services" {
+                description "Liquidity management, sweep accounts, and payment initiation tools for corporate treasury clients"
+                owner "Head of Treasury Sales"
+                maturity "Defined"
+                number auto
+                attr strategic_value "Very-High"
+            }
+        }
+
+        capability cap_commercial_lending_trade "Commercial Lending & Trade Finance" {
+            description "Underwriting and processing of commercial credit facilities and cross-border trade finance instruments"
+            owner "Head of Trade Finance"
+            maturity "Defined"
+            number "9.2"
+            attr strategic_value "Medium"
+
+            capability cap_commercial_underwriting "Commercial Credit Underwriting" {
+                description "Financial analysis and risk-based decisioning for business loans and credit lines"
+                owner "Chief Underwriting Officer"
+                maturity "Defined"
+                number auto
+                attr strategic_value "High"
+            }
+
+            capability cap_trade_finance_processing "Trade Finance Processing" {
+                description "Letters of credit, documentary collections, and cross-border trade settlement processing"
+                owner "Head of Trade Finance"
+                maturity "Initial"
+                number auto
+                attr strategic_value "Medium"
+            }
+        }
+    }
+}
+
+// Business → Application cross-layer dependency
+cap_fraud_detection depends_on app_aml_monitor "Real-time fraud prevention capability is realized through the AML transaction monitoring application's scoring pipeline"

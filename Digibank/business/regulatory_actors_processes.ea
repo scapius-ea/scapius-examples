@@ -1,0 +1,63 @@
+layer "Business Architecture" {
+    actor regulatory_reporting_officer "Regulatory Reporting Officer" {
+        description "Prepares and submits mandated regulatory filings to financial authorities"
+        owner "Head of Regulatory Affairs"
+        role "Regulatory Officer"
+        is_external false
+        attr location "HQ"
+        attr department "Regulatory Affairs"
+        tags ["internal"]
+    }
+
+    actor data_privacy_officer "Data Privacy Officer" {
+        description "Oversees customer consent handling and data subject rights fulfillment"
+        owner "Chief Privacy Officer"
+        role "Privacy Officer"
+        is_external false
+        attr location "HQ"
+        attr department "Privacy Office"
+        tags ["internal"]
+    }
+
+    process proc_regulatory_filing "Quarterly Regulatory Filing Submission" {
+        description "Compilation, validation, and submission of quarterly regulatory returns"
+        owner "Head of Regulatory Affairs"
+        criticality "Mission-Critical"
+        risk "High"
+        automation_level "Medium"
+        attr duration "5 days"
+        sla "Regulatory deadline"
+    }
+
+    process proc_consent_capture "Customer Consent Capture" {
+        description "Recording and updating customer marketing and data-processing consent preferences"
+        owner "Chief Privacy Officer"
+        criticality "Business-Critical"
+        risk "Medium"
+        automation_level "Fully-Automated"
+        attr duration "Instant"
+    }
+
+    process proc_data_subject_request "Data Subject Rights Request Handling" {
+        description "Processing customer requests to access, correct, or erase their personal data"
+        owner "Chief Privacy Officer"
+        criticality "Business-Critical"
+        risk "Medium"
+        automation_level "Medium"
+        attr duration "30 days"
+        sla "30 calendar days"
+    }
+}
+
+// Regulatory & Privacy Relationships
+regulatory_reporting_officer triggers proc_regulatory_filing "Quarterly filing" {
+    cardinality OneToMany
+    description "Owns preparation and sign-off of each quarterly filing"
+}
+data_privacy_officer serves proc_data_subject_request "Rights request review" { description "Reviews and approves data subject rights requests" }
+data_privacy_officer triggers proc_consent_capture "Consent oversight" { description "Oversees the consent capture workflow" }
+
+proc_regulatory_filing realizes cap_regulatory_filings_management "Filings capability" { description "Executes the regulatory filings management capability" }
+proc_consent_capture realizes cap_consent_management "Consent capability" { description "Executes the consent management capability" }
+proc_data_subject_request realizes cap_data_subject_rights "Rights capability" { description "Executes the data subject rights management capability" }
+proc_regulatory_filing influences goal_modernize_core "Filing automation" { description "Manual filing effort is a driver for platform modernization investment" }

@@ -1,0 +1,59 @@
+# manifest.yaml
+#
+# DigiBank workspace configuration. This file is workspace-scoped config,
+# not architecture-as-code — it never defines entities or relationships.
+# Per grammar design discipline: cost.currency is NOT a per-entity grammar
+# field (see costStatement in NexusEAGrammar.g4); currency is a single
+# workspace-level setting declared here.
+
+workspace:
+  name: "DigiBank"
+  currency: "USD"
+
+# ── scoring_rules ────────────────────────────────────────────────────
+# Weights/thresholds consumed by backend-computed composite metrics
+# (e.g. modernization urgency index, cost-to-value density, security
+# posture score). The dashboard spec defines only the metric *contract*
+# (reads/output shape) — the actual weighting lives here so it stays
+# architect-editable without a grammar/schema change.
+scoring_rules:
+  portfolio_quadrant:
+    # score{} tech_fit/business_value are both authored 0-10 by architects.
+    axis_min: 0
+    axis_max: 10
+    quadrant_midpoint: 5.0
+  modernization_urgency_index:
+    weights:
+      time_class: 0.4        # Migrate/Eliminate weighted highest
+      risk: 0.25
+      criticality: 0.2
+      lifecycle_phase: 0.15
+  cost_to_value_density:
+    weights:
+      business_value: 0.6
+      annualized_cost: 0.4
+  security_posture_score:
+    weights:
+      open_critical_vulnerabilities: 0.35
+      unmitigated_high_threats: 0.3
+      control_coverage: 0.2
+      residual_risk_rating: 0.15
+
+# ── governance ───────────────────────────────────────────────────────
+# Editing this section is architect-gated in the paid tier (RBAC). In
+# OSS v1 (single-user) it's honored as documentation of intent only.
+governance:
+  manifest_editable_by: ["architect"]
+  enum_labels:
+    # Display-string overrides only. Canonical grammar enum symbols
+    # (Tolerate/Invest/Migrate/Eliminate, Plan/Build/Run/Retire, etc.)
+    # are preserved in the AST/compiler; this remaps how they render.
+    timeClass:
+      Tolerate: "Tolerate"
+      Invest: "Invest"
+      Migrate: "Migrate / Modernize"
+      Eliminate: "Eliminate / Sunset"
+    mitigationStatus:
+      open: "Open"
+      mitigated: "Mitigated"
+      accepted: "Risk Accepted"

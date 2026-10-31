@@ -1,0 +1,83 @@
+layer "Business Architecture" {
+    actor corporate_relationship_manager "Corporate Relationship Manager" {
+        description "Manages the end-to-end relationship for corporate and commercial banking clients"
+        owner "VP Corporate Banking"
+        role "Relationship Manager"
+        is_external false
+        attr location "HQ / Regional Office"
+        attr department "Corporate Banking"
+        tags ["internal"]
+    }
+
+    actor corporate_treasury_client "Corporate Treasury Client" {
+        description "Business client using treasury management and cash management services"
+        owner "VP Corporate Banking"
+        role "Corporate Client"
+        is_external true
+        attr location "Global"
+        attr department "External"
+        tags ["external", "persona"]
+    }
+
+    process proc_business_account_onboarding "Business Account Onboarding" {
+        description "Know-Your-Business (KYB) verification, entity documentation, and account setup for new corporate clients"
+        owner "Corporate Onboarding Lead"
+        criticality "Business-Critical"
+        risk "Medium"
+        automation_level "Medium"
+        attr duration "3-5 business days"
+        sla "5 business days"
+    }
+
+    process proc_commercial_underwriting "Commercial Credit Underwriting" {
+        description "Financial statement analysis and risk-based decisioning for business loans and revolving credit lines"
+        owner "Chief Underwriting Officer"
+        criticality "Business-Critical"
+        risk "High"
+        automation_level "Medium"
+        attr duration "10-15 business days"
+    }
+
+    process proc_trade_finance_processing "Trade Finance Transaction Processing" {
+        description "Issuance and settlement of letters of credit, documentary collections, and cross-border trade instruments"
+        owner "Head of Trade Finance"
+        criticality "Business-Critical"
+        risk "Medium"
+        automation_level "Low"
+        attr duration "2-7 business days"
+    }
+
+    process proc_cash_management_ops "Cash Management & Sweep Processing" {
+        description "Daily liquidity sweeps, payment initiation, and account balance reporting for treasury clients"
+        owner "Head of Treasury Sales"
+        criticality "Mission-Critical"
+        risk "Low"
+        automation_level "Fully-Automated"
+        attr duration "End-of-day batch plus real-time reporting"
+        sla "99.9% batch completion"
+    }
+}
+
+// Corporate & Commercial Banking Relationships
+corporate_treasury_client triggers proc_business_account_onboarding "Client onboarding" {
+    cardinality OneToMany
+    description "Initiates onboarding as a new corporate banking client"
+}
+corporate_relationship_manager triggers proc_business_account_onboarding "KYB sponsorship" {
+    cardinality OneToMany
+    description "Sponsors and shepherds the client through KYB verification"
+}
+corporate_relationship_manager triggers proc_commercial_underwriting "Credit request" {
+    cardinality OneToMany
+    description "Submits credit requests on behalf of corporate clients"
+}
+corporate_treasury_client triggers proc_cash_management_ops "Treasury payments" {
+    cardinality OneToMany
+    description "Initiates payments and liquidity sweeps via the treasury portal"
+}
+corporate_relationship_manager serves corporate_treasury_client "Account advisory" { description "Provides ongoing relationship management and advisory" }
+
+proc_business_account_onboarding realizes cap_business_account_onboarding "Onboarding capability" { description "Executes business account onboarding and KYB capability" }
+proc_commercial_underwriting realizes cap_commercial_underwriting "Underwriting capability" { description "Executes commercial credit underwriting capability" }
+proc_trade_finance_processing realizes cap_trade_finance_processing "Trade capability" { description "Executes trade finance transaction processing capability" }
+proc_cash_management_ops realizes cap_cash_management_treasury "Executes cash management and treasury services capability"

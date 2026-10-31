@@ -1,0 +1,77 @@
+layer "Business Architecture" {
+    actor personal_banking_advisor "Personal Banking Advisor" {
+        description "Relationship banker guiding individual customers on deposit products and financial wellness"
+        owner "VP Personal Banking"
+        role "Personal Banking Advisor"
+        is_external false
+        attr location "Branch / Remote"
+        attr department "Personal Banking"
+        tags ["internal"]
+    }
+
+    actor contact_center_agent "Contact Center Agent" {
+        description "Phone-channel representative handling inbound customer calls via the IVR and call routing platform"
+        owner "Head of Contact Center Operations"
+        role "Contact Center Agent"
+        is_external false
+        attr location "Onsite / Remote"
+        attr department "Contact Center"
+        tags ["internal"]
+    }
+
+    process proc_deposit_account_servicing "Checking & Savings Account Servicing" {
+        description "Day-to-day servicing of deposit accounts: holds, transfers, standing instructions, and closures"
+        owner "Deposit Operations Lead"
+        criticality "Business-Critical"
+        risk "Low"
+        automation_level "High"
+        attr duration "Instant to 1 business day"
+        sla "1 business day"
+    }
+
+    process proc_account_statement_generation "Statement & Document Generation" {
+        description "Periodic generation and delivery of account statements, tax documents, and notices"
+        owner "Deposit Operations Lead"
+        criticality "Standard"
+        risk "Low"
+        automation_level "Fully-Automated"
+        attr duration "Automated monthly batch"
+    }
+
+    process proc_contact_center_triage "Contact Center Call Triage & Routing" {
+        description "IVR-driven intent capture and routing of inbound customer calls to the correct queue or self-service flow"
+        owner "Head of Contact Center Operations"
+        criticality "Business-Critical"
+        risk "Low"
+        automation_level "High"
+        attr duration "Under 60 seconds to route"
+        sla "80% of calls answered within 60 seconds"
+    }
+}
+
+// Personal Banking & Contact Center Relationships
+personal_banking_advisor serves customer "Product guidance" { description "Provides relationship-based product guidance and financial wellness coaching" }
+contact_center_agent triggers proc_contact_center_triage "Escalated calls" {
+    cardinality OneToMany
+    description "Handles calls escalated past the self-service IVR flow"
+}
+customer triggers proc_contact_center_triage "Contact support" {
+    cardinality OneToMany
+    description "Calls in to the contact center for support or servicing requests"
+}
+customer triggers proc_deposit_account_servicing "Deposit requests" {
+    cardinality OneToMany
+    description "Requests holds, transfers, or standing instructions on a deposit account"
+}
+contact_center_agent serves customer "Servicing requests" {
+    cardinality ManyToMany
+    description "Resolves servicing requests escalated from the IVR"
+}
+
+proc_deposit_account_servicing realizes cap_deposit_servicing "Servicing capability" { description "Executes day-to-day checking and savings account servicing capability" }
+proc_account_statement_generation realizes cap_account_statements "Statement capability" { description "Executes statement and document generation capability" }
+proc_contact_center_triage realizes cap_contact_center_ops "Triage capability" { description "Executes contact center call routing and triage capability" }
+personal_banking_advisor triggers proc_deposit_account_servicing "Advised servicing" {
+    cardinality OneToMany
+    description "Initiates servicing requests on behalf of advised customers"
+}

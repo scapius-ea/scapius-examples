@@ -1,0 +1,139 @@
+layer "Application Architecture" {
+
+    group "Regulatory & Privacy Systems" {
+        system system_regulatory_reporting "Regulatory Reporting Platform" {
+            description "Automates preparation, validation, and submission of regulatory filings to financial authorities"
+            owner "Head of Regulatory Affairs"
+            criticality "Mission-Critical"
+            risk "Medium"
+            cost 390000 year
+            version "4.0.1"
+            status "Active"
+            tier "Tier-1"
+            deployment_model "Kubernetes"
+            time Invest
+            security {
+                confidentiality High
+                integrity Critical
+                availability High
+            }
+
+            app app_reg_filings "Regulatory Filings Manager" {
+                description "Compiles and formats prudential and supervisory reports for central bank submission"
+                owner "Head of Regulatory Affairs"
+                version "4.0.1"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability High
+                }
+            }
+
+            app app_policy_mgmt "Compliance Policy Management Portal" {
+                description "Internal repository and attestations portal for banking regulations and operating policies"
+                owner "Compliance Office"
+                version "4.0.1"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability High
+                }
+            }
+
+            lifecycle {
+                phase Run start "2023-01-01"
+            }
+            score {
+                business_value 8.6
+                tech_fit 7.9
+            }
+        }
+
+        system system_privacy_management "Data Privacy & Consent Management Platform" {
+            description "Manages customer consent capture, preference centers, and data subject rights requests"
+            owner "Chief Privacy Officer"
+            criticality "Business-Critical"
+            risk "Medium"
+            cost 180000 year
+            version "2.2.0"
+            status "Active"
+            deployment_model "SaaS"
+            time Invest
+            attr vendor "OneTrust"
+            security {
+                confidentiality High
+                integrity High
+                availability High
+            }
+
+            app app_consent_mgmt "Consent Management Platform" {
+                description "Centralized customer privacy preferences and consent management engine across digital channels"
+                owner "Chief Privacy Officer"
+                version "2.2.0"
+                status "Active"
+                internet_facing true
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+            }
+
+            app app_dsr_mgmt "Data Subject Rights Management Portal" {
+                description "Customer self-service portal and backend orchestration for GDPR and CCPA Data Subject Access Requests"
+                owner "Chief Privacy Officer"
+                version "2.2.0"
+                status "Active"
+                internet_facing true
+                time "Eliminate"
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+                score {
+                    business_value 2.0
+                    tech_fit 2.5
+                }
+            }
+
+            lifecycle {
+                phase Run start "2023-06-01"
+            }
+            score {
+                business_value 7.0
+                tech_fit 7.6
+            }
+        }
+    }
+}
+
+// Regulatory & Privacy Application Relationships
+system_regulatory_reporting realizes cap_regulatory_reporting "Regulatory reporting capability" { description "Provides enterprise regulatory return preparation and submission" }
+system_privacy_management realizes cap_data_privacy "Data privacy capability" { description "Provides customer consent and data subject rights management" }
+
+app_reg_filings realizes cap_regulatory_filings_management "Automated filings" { description "Automates compilation and submission of regulatory filings" }
+app_policy_mgmt realizes cap_compliance_policy_management "Policy management" { description "Manages authoring, versioning, and attestation of compliance policies" }
+app_consent_mgmt realizes cap_consent_management "Consent preferences" { description "Captures and enforces customer consent preferences" }
+app_dsr_mgmt realizes cap_data_subject_rights "DSR processing" { description "Processes customer data access, correction, and erasure requests" }
+
+app_reg_filings reads data_ledger_tx "Return calculations" { description "Pulls transaction data required for regulatory return calculations" }
+app_dsr_mgmt reads data_customer_record "KYC retrieval" {
+    cardinality OneToOne
+    description "Retrieves and redacts customer KYC data to fulfil access and erasure requests"
+}
+app_consent_mgmt flows_to system_cdp "Consent state" {
+    tags "Event Stream"
+    description "Publishes up-to-date consent state so downstream marketing systems can honour it"
+}
+system_privacy_management flows_to system_regulatory_reporting "Compliance audit logs" { description "Feeds privacy consent and request logs into compliance returns" }
+
+system_regulatory_reporting governed_by standard_sox "SOX compliance" { status "Compliant" description "Filings are produced under SOX-controlled processes" }
+app_reg_filings governed_by standard_sox "SOX filing controls" { status "Compliant" description "Statutory reporting outputs are governed by SOX control requirements" }
+system_privacy_management governed_by policy_data_privacy "Privacy policy" { description "Platform operation is governed by the enterprise data privacy policy" }
+app_consent_mgmt governed_by policy_data_privacy "Consent handling" { status "Compliant" description "Consent capture is governed by enterprise privacy policy" }
+app_dsr_mgmt governed_by policy_data_privacy "Rights policy" { description "Rights-fulfilment workflow is governed by the enterprise data privacy policy" }

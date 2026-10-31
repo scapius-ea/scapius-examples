@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "view_id": "strategy_view",
+  "revision": "sha256:9568fb6c2841a2c6a8c765a3be0c1deca28503d8dc0e66becddfaf1c0f7cff95",
+  "updated_at_utc": "2026-10-31T05:37:24.797485Z",
+  "nodes": {
+    "goal_double_customers": {
+      "x": 1003,
+      "y": 648,
+      "width": 280,
+      "height": 154
+    },
+    "goal_ai_first": {
+      "x": 43,
+      "y": 351,
+      "width": 280,
+      "height": 154
+    },
+    "goal_reduce_onboarding": {
+      "x": 363,
+      "y": 351,
+      "width": 280,
+      "height": 154
+    },
+    "goal_modernize_core": {
+      "x": 683,
+      "y": 351,
+      "width": 280,
+      "height": 154
+    },
+    "goal_grow_card_portfolio": {
+      "x": 1003,
+      "y": 351,
+      "width": 280,
+      "height": 154
+    },
+    "goal_expand_corporate_banking": {
+      "x": 1323,
+      "y": 351,
+      "width": 280,
+      "height": 154
+    },
+    "kpi_active_customers": {
+      "x": 1643,
+      "y": 344,
+      "width": 280,
+      "height": 168
+    },
+    "kpi_ai_support_containment": {
+      "x": 43,
+      "y": 40,
+      "width": 280,
+      "height": 168
+    },
+    "kpi_onboarding_time": {
+      "x": 363,
+      "y": 40,
+      "width": 280,
+      "height": 168
+    },
+    "kpi_platform_availability": {
+      "x": 683,
+      "y": 40,
+      "width": 280,
+      "height": 168
+    },
+    "kpi_card_approval_rate": {
+      "x": 1003,
+      "y": 40,
+      "width": 280,
+      "height": 168
+    },
+    "kpi_mortgage_cycle_time": {
+      "x": 1963,
+      "y": 344,
+      "width": 280,
+      "height": 168
+    },
+    "kpi_corporate_deposits": {
+      "x": 1323,
+      "y": 40,
+      "width": 280,
+      "height": 168
+    },
+    "noteId": {
+      "x": 1313,
+      "y": 648,
+      "width": 340,
+      "height": 156
+    }
+  },
+  "edges": {
+    "kpi_active_customers-influences-goal_double_customers": {
+      "start_point": {
+        "x": 1783,
+        "y": 608,
+        "width": null,
+        "height": null
+      },
+      "end_point": {
+        "x": 1213,
+        "y": 608,
+        "width": null,
+        "height": null
+      },
+      "anchors": [],
+      "label_offset": null
+    },
+    "goal_reduce_onboarding-influences-goal_double_customers": {
+      "start_point": {
+        "x": 503,
+        "y": 608,
+        "width": null,
+        "height": null
+      },
+      "end_point": {
+        "x": 1073,
+        "y": 608,
+        "width": null,
+        "height": null
+      },
+      "anchors": [],
+      "label_offset": null
+    },
+    "kpi_mortgage_cycle_time-influences-goal_double_customers": {
+      "start_point": {
+        "x": 2103,
+        "y": 618,
+        "width": null,
+        "height": null
+      },
+      "end_point": {
+        "x": 1248,
+        "y": 618,
+        "width": null,
+        "height": null
+      },
+      "anchors": [],
+      "label_offset": null
+    },
+    "goal_ai_first-influences-goal_double_customers": {
+      "start_point": {
+        "x": 183,
+        "y": 618,
+        "width": null,
+        "height": null
+      },
+      "end_point": {
+        "x": 1038,
+        "y": 618,
+        "width": null,
+        "height": null
+      },
+      "anchors": [],
+      "label_offset": null
+    }
+  }
+}

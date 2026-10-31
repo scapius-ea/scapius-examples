@@ -25,7 +25,11 @@ This repository provides realistic, production-grade example models showcasing h
 
 ## 📂 Available Workspaces
 
-### 1. NeoBank Reference Architecture (`Neobank/`)
+### 1. DigiBank Comprehensive Reference Architecture (`Digibank/`)
+
+The **DigiBank** workspace is a full-scale reference implementation exercising every rule in `NexusEAGrammar.g4` across a 9-domain enterprise architecture (retail deposits, credit cards, mortgages, corporate banking, AML compliance, back office, marketing, and contact centers) with full theme definitions, scoring rules, value streams, and dashboard metric coverage.
+
+### 2. NeoBank Reference Architecture (`Neobank/`)
 
 The **NeoBank** workspace models a cloud-native digital banking platform delivering instant payments, automated lending, and AI-assisted customer operations alongside legacy core banking systems.
 
@@ -57,6 +61,17 @@ The **NeoBank** workspace models a cloud-native digital banking platform deliver
 
 ```text
 scapius-examples/
+├── Digibank/                                 # 9-domain comprehensive AaC reference implementation
+│   ├── main.ea                               # Workspace entrypoint, styles, and global overrides
+│   ├── manifest.yaml                         # Workspace currency, scoring rules, and governance
+│   ├── default.theme                         # Complete standalone theme definition
+│   ├── strategy/                             # Strategy Layer: goals, KPIs
+│   ├── business/                             # Business Architecture: 9 domains, L1-L3 capabilities, value streams
+│   ├── application/                          # Systems, microservices, AI agents, shadow IT
+│   ├── technology/                           # Environments, AWS EKS, mainframe, SaaS enclaves
+│   ├── security/                             # Trust boundaries, controls, threats, vulnerabilities, standards
+│   ├── governance/                           # Policies, compliance links
+│   └── views/                                # Views spanning all 13 view types
 ├── Neobank/
 │   ├── main.ea                               # Workspace entrypoint, styling, and view definitions
 │   ├── strategy/

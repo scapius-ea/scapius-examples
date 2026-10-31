@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "view_id": "enterprise_support_functions",
+  "revision": "sha256:8b6dca01ad321d79de676c9a6172324d3cd2ec39b23de4425570076a19350c51",
+  "updated_at_utc": "2026-10-31T05:04:48.874665Z",
+  "nodes": {
+    "comp_report_builder": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "app_gl_reporting": {
+      "x": 24,
+      "y": 64,
+      "width": 324,
+      "height": 235
+    },
+    "app_apar": {
+      "x": 48,
+      "y": 335,
+      "width": 280,
+      "height": 155
+    },
+    "system_finance_erp": {
+      "x": 241,
+      "y": 40,
+      "width": 368,
+      "height": 510
+    },
+    "comp_matching_engine": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "app_nostro_recon": {
+      "x": 24,
+      "y": 64,
+      "width": 324,
+      "height": 235
+    },
+    "app_exception_mgmt": {
+      "x": 48,
+      "y": 335,
+      "width": 280,
+      "height": 155
+    },
+    "system_reconciliation": {
+      "x": 241,
+      "y": 594,
+      "width": 368,
+      "height": 510
+    },
+    "app_employee_onboarding_sys": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 155
+    },
+    "app_payroll": {
+      "x": 24,
+      "y": 251,
+      "width": 280,
+      "height": 155
+    },
+    "system_hris": {
+      "x": 265,
+      "y": 1148,
+      "width": 324,
+      "height": 426
+    },
+    "app_reg_filings": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 155
+    },
+    "app_policy_mgmt": {
+      "x": 24,
+      "y": 251,
+      "width": 280,
+      "height": 155
+    },
+    "system_regulatory_reporting": {
+      "x": 265,
+      "y": 1618,
+      "width": 324,
+      "height": 426
+    },
+    "app_consent_mgmt": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 156
+    },
+    "app_dsr_mgmt": {
+      "x": 24,
+      "y": 252,
+      "width": 280,
+      "height": 156
+    },
+    "system_privacy_management": {
+      "x": 265,
+      "y": 2088,
+      "width": 324,
+      "height": 428
+    },
+    "comp_email_engine": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 169
+    },
+    "app_campaign_manager": {
+      "x": 24,
+      "y": 64,
+      "width": 324,
+      "height": 253
+    },
+    "app_ad_tech": {
+      "x": 48,
+      "y": 353,
+      "width": 280,
+      "height": 155
+    },
+    "system_marketing_cloud": {
+      "x": 441,
+      "y": 2560,
+      "width": 368,
+      "height": 528
+    },
+    "app_segmentation": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 155
+    },
+    "app_attribution": {
+      "x": 24,
+      "y": 251,
+      "width": 280,
+      "height": 155
+    },
+    "system_cdp": {
+      "x": 1070,
+      "y": 3108,
+      "width": 324,
+      "height": 426
+    },
+    "app_cms": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 156
+    },
+    "app_social_media": {
+      "x": 24,
+      "y": 252,
+      "width": 280,
+      "height": 156
+    },
+    "system_brand_cms": {
+      "x": 265,
+      "y": 3132,
+      "width": 324,
+      "height": 428
+    },
+    "app_ivr": {
+      "x": 24,
+      "y": 252,
+      "width": 280,
+      "height": 156
+    },
+    "app_ticketing": {
+      "x": 473,
+      "y": 253,
+      "width": 280,
+      "height": 155
+    },
+    "app_knowledge_base": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 156
+    },
+    "system_contact_center": {
+      "x": 40,
+      "y": 3604,
+      "width": 773,
+      "height": 428
+    }
+  },
+  "edges": {}
+}

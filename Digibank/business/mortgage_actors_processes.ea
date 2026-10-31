@@ -1,0 +1,76 @@
+layer "Business Architecture" {
+    actor mortgage_loan_officer "Mortgage Loan Officer" {
+        description "Guides borrowers through the mortgage application process and structures loan terms"
+        owner "VP Mortgage Lending"
+        role "Loan Officer"
+        is_external false
+        attr location "Branch / Remote"
+        attr department "Mortgage Lending"
+        tags ["internal"]
+    }
+
+    actor mortgage_underwriter "Mortgage Underwriter" {
+        description "Evaluates borrower risk, verifies documentation, and issues underwriting decisions on mortgage applications"
+        owner "Chief Underwriting Officer"
+        role "Underwriter"
+        is_external false
+        attr location "HQ"
+        attr department "Underwriting"
+        tags ["internal"]
+    }
+
+    process proc_mortgage_application "Mortgage Loan Application" {
+        description "Digital capture of borrower financial details, property information, and required disclosures"
+        owner "Mortgage Operations Lead"
+        criticality "Business-Critical"
+        risk "Medium"
+        automation_level "Medium"
+        attr duration "30-45 minutes"
+    }
+
+    process proc_mortgage_underwriting "Mortgage Underwriting & Appraisal" {
+        description "Automated pre-qualification followed by manual underwriting review and third-party appraisal coordination"
+        owner "Chief Underwriting Officer"
+        criticality "Business-Critical"
+        risk "High"
+        automation_level "Medium"
+        attr duration "5-10 business days"
+        sla "10 business days"
+
+        relationships {
+            this triggers proc_mortgage_servicing "Servicing transition" {
+                cardinality OneToOne
+                description "Approved and funded loans transition into ongoing servicing"
+            }
+        }
+    }
+
+    process proc_mortgage_servicing "Mortgage Payment Servicing" {
+        description "Monthly payment collection, escrow administration, and borrower servicing for active mortgage loans"
+        owner "Mortgage Servicing Operations"
+        criticality "Business-Critical"
+        risk "Low"
+        automation_level "High"
+        attr duration "Recurring monthly cycle"
+    }
+}
+
+// Mortgage & Home Lending Relationships
+customer triggers proc_mortgage_application "Home loan application" {
+    cardinality OneToMany
+    description "Applies for a home loan via the mortgage application portal"
+}
+mortgage_loan_officer triggers proc_mortgage_application "Application assistance" {
+    cardinality OneToMany
+    description "Assists borrowers in structuring and submitting the application"
+}
+mortgage_underwriter serves mortgage_loan_officer "Underwriting decisions" { description "Provides underwriting decisions and conditions back to the loan officer" }
+mortgage_underwriter triggers proc_mortgage_underwriting "Underwriting workflow" {
+    cardinality OneToMany
+    description "Owns the underwriting review and appraisal coordination workflow"
+}
+
+proc_mortgage_application realizes cap_loan_application_intake "Application capability" { description "Executes mortgage loan application intake capability" }
+proc_mortgage_underwriting realizes cap_underwriting_appraisal "Underwriting capability" { description "Executes underwriting and appraisal coordination capability" }
+proc_mortgage_servicing realizes cap_escrow_payment_processing "Escrow capability" { description "Executes payment processing and escrow management capability" }
+proc_mortgage_underwriting influences goal_modernize_core "Underwriting bottleneck" { description "Manual underwriting bottlenecks are a driver behind the broader platform modernization programme" }

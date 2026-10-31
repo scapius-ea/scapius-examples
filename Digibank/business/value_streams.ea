@@ -1,0 +1,175 @@
+layer "Business Architecture" {
+    value_stream vs_customer_onboarding "Customer Onboarding Stream" {
+        description "End-to-end journey from digital application to account opening and wallet activation"
+        owner "VP Customer Operations"
+
+        stage stage_capture_application "Capture Digital Application" {
+            order 1
+            description "Applicant submits personal details and preferences via mobile app"
+            relationships {
+                cap_onboarding realizes this
+            }
+        }
+
+        stage stage_verify_identity "Verify Identity & KYC" {
+            order 2
+            description "Biometric liveness check and document verification against government records"
+            relationships {
+                cap_identity_verification realizes this
+            }
+        }
+
+        stage stage_provision_account "Provision Account & Wallet" {
+            order 3
+            description "Automated ledger account creation, virtual debit card issuance, and initial funding setup"
+            relationships {
+                cap_account_provisioning realizes this
+            }
+        }
+    }
+
+    value_stream vs_consumer_lending "Consumer Lending Stream" {
+        description "Digital loan application, automated credit decisioning, and rapid disbursement"
+        owner "Lending Product Lead"
+
+        stage stage_submit_loan_app "Submit Loan Application" {
+            order 1
+            description "Customer requests loan amount, duration, and specifies purpose"
+            relationships {
+                cap_lending realizes this
+            }
+        }
+
+        stage stage_underwriting "Credit Underwriting & Scoring" {
+            order 2
+            description "Real-time automated credit score calculation and risk policy check"
+            relationships {
+                cap_credit_scoring realizes this
+            }
+        }
+
+        stage stage_disburse_funds "Disburse Funds" {
+            order 3
+            description "Instant fund transfer to customer wallet upon digital contract signature"
+            relationships {
+                cap_real_time_payments realizes this
+            }
+        }
+    }
+
+    value_stream vs_fraud_resolution "Fraud Detection & Case Resolution Stream" {
+        description "End-to-end journey from a suspicious transaction being flagged to case investigation, remediation, and regulatory reporting"
+        owner "Fraud Security Director"
+
+        stage stage_detect_anomaly "Detect Transaction Anomaly" {
+            order 1
+            description "Streaming ML models score every transaction in real time for fraud probability"
+            relationships {
+                cap_transaction_scoring realizes this
+            }
+        }
+
+        stage stage_investigate_case "Investigate Flagged Case" {
+            order 2
+            description "AI-assisted triage drafts a case summary; a compliance analyst confirms and directs next steps"
+            relationships {
+                agent_fraud_detective realizes this
+            }
+        }
+
+        stage stage_remediate_and_report "Remediate & Report" {
+            order 3
+            description "Confirmed cases trigger account remediation action and, where warranted, a Suspicious Activity Report filing"
+            relationships {
+                proc_fraud_alert realizes this
+            }
+        }
+    }
+
+    value_stream vs_credit_card_issuance "Credit Card Application & Issuance Stream" {
+        description "End-to-end journey from a credit card application to an activated, ready-to-use card"
+        owner "VP Credit Card Products"
+
+        stage stage_apply_for_card "Apply for Card" {
+            order 1
+            description "Customer submits a credit card application through the app or web"
+            relationships {
+                cap_card_application_processing realizes this
+            }
+        }
+
+        stage stage_credit_decision "Credit Decision" {
+            order 2
+            description "Automated credit decisioning approves, declines, or refers the application for manual review"
+            relationships {
+                cap_credit_scoring realizes this
+            }
+        }
+
+        stage stage_card_provisioning "Card Provisioning & Activation" {
+            order 3
+            description "Physical card production and mobile wallet provisioning, followed by customer activation"
+            relationships {
+                cap_card_provisioning realizes this
+            }
+        }
+    }
+
+    value_stream vs_mortgage_origination "Mortgage Origination Stream" {
+        description "End-to-end journey from mortgage application submission through underwriting to loan closing"
+        owner "VP Mortgage Lending"
+
+        stage stage_submit_mortgage_app "Submit Mortgage Application" {
+            order 1
+            description "Borrower submits financial details, property information, and required disclosures"
+            relationships {
+                cap_loan_application_intake realizes this
+            }
+        }
+
+        stage stage_underwrite_appraise "Underwrite & Appraise" {
+            order 2
+            description "Automated pre-qualification, manual underwriting review, and third-party appraisal coordination"
+            relationships {
+                cap_underwriting_appraisal realizes this
+            }
+        }
+
+        stage stage_close_and_fund "Close & Fund Loan" {
+            order 3
+            description "Final disclosures, signing, and disbursement of loan funds at closing"
+            relationships {
+                cap_escrow_payment_processing realizes this
+            }
+        }
+    }
+
+    value_stream vs_corporate_onboarding "Corporate Client Onboarding Stream" {
+        description "End-to-end journey from a prospective corporate client to an active, fully-serviced treasury relationship"
+        owner "VP Corporate Banking"
+
+        stage stage_kyb_verification "Business KYB Verification" {
+            order 1
+            description "Know-Your-Business verification and entity documentation collection"
+            relationships {
+                cap_business_account_onboarding realizes this
+            }
+        }
+
+        stage stage_account_setup "Account Setup" {
+            order 2
+            description "Corporate deposit account and entitlement configuration"
+            relationships {
+                cap_deposit_servicing realizes this
+            }
+        }
+
+        stage stage_treasury_activation "Treasury Services Activation" {
+            order 3
+            description "Cash management, sweep, and payment initiation services provisioned for the client"
+            relationships {
+                cap_cash_management_treasury realizes this
+            }
+        }
+    }
+}

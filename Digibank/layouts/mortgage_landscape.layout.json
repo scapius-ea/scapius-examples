@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "view_id": "mortgage_landscape",
+  "revision": "sha256:ab13ae53cabc185d7341f9f6e3a946a42b12b98377bd2e2725cb619f43fe3a2c",
+  "updated_at_utc": "2026-10-31T05:37:02.303579Z",
+  "nodes": {
+    "cap_loan_application_intake": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 149
+    },
+    "cap_underwriting_appraisal": {
+      "x": 24,
+      "y": 245,
+      "width": 280,
+      "height": 149
+    },
+    "cap_mortgage_origination": {
+      "x": 29,
+      "y": 64,
+      "width": 324,
+      "height": 414
+    },
+    "cap_escrow_payment_processing": {
+      "x": 24,
+      "y": 245,
+      "width": 280,
+      "height": 149
+    },
+    "cap_loan_modification": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 149
+    },
+    "cap_mortgage_servicing": {
+      "x": 29,
+      "y": 514,
+      "width": 324,
+      "height": 414
+    },
+    "cap_home_lending": {
+      "x": 1150,
+      "y": 234,
+      "width": 373,
+      "height": 948
+    },
+    "customer": {
+      "x": 1150,
+      "y": 40,
+      "width": 280,
+      "height": 154
+    },
+    "comp_ledger_api": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 149
+    },
+    "comp_ledger_db": {
+      "x": 24,
+      "y": 245,
+      "width": 280,
+      "height": 149
+    },
+    "app_ledger_service": {
+      "x": 24,
+      "y": 64,
+      "width": 324,
+      "height": 414
+    },
+    "comp_account_ledger_adapter": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 149
+    },
+    "app_deposit_accounts": {
+      "x": 24,
+      "y": 514,
+      "width": 324,
+      "height": 233
+    },
+    "system_core_banking": {
+      "x": 1150,
+      "y": 1230,
+      "width": 368,
+      "height": 767
+    },
+    "app_mortgage_origination": {
+      "x": 487,
+      "y": 64,
+      "width": 280,
+      "height": 156
+    },
+    "app_underwriting_engine": {
+      "x": 24,
+      "y": 179,
+      "width": 280,
+      "height": 153
+    },
+    "app_mortgage_servicing": {
+      "x": 487,
+      "y": 241,
+      "width": 280,
+      "height": 153
+    },
+    "system_mortgage": {
+      "x": 40,
+      "y": 607,
+      "width": 787,
+      "height": 414
+    }
+  },
+  "edges": {
+    "cap_home_lending-composed_of-cap_mortgage_servicing": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 383,
+        "y": -5,
+        "width": null,
+        "height": null
+      }
+    },
+    "system_core_banking-composed_of-app_ledger_service": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 385,
+        "y": 469,
+        "width": null,
+        "height": null
+      }
+    },
+    "system_mortgage-depends_on-system_core_banking": {
+      "start_point": {
+        "x": 408,
+        "y": 1021,
+        "width": null,
+        "height": null
+      },
+      "end_point": {
+        "x": 1150,
+        "y": 1577,
+        "width": null,
+        "height": null
+      },
+      "anchors": [
+        {
+          "x": 445,
+          "y": 1627,
+          "width": null,
+          "height": null
+        }
+      ],
+      "label_offset": null
+    },
+    "app_mortgage_origination-realizes-cap_loan_application_intake": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 76,
+        "y": 1,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_mortgage_servicing-realizes-cap_escrow_payment_processing": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 76,
+        "y": 0,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_mortgage_servicing-realizes-cap_loan_modification": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 76,
+        "y": 35,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_underwriting_engine-triggers-app_mortgage_servicing": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 76,
+        "y": 12,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

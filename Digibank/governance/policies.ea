@@ -1,0 +1,56 @@
+layer "Governance & Policy" {
+    policy policy_data_privacy "Data Privacy & Retention Policy" {
+        description "Defines retention periods, access restrictions, and handling rules for customer personal data"
+        owner "Chief Privacy Officer"
+        policy_type "Data Governance"
+        enforcement "Mandatory"
+    }
+
+    policy policy_access_control "Least Privilege Access Control Policy" {
+        description "Requires role-based, least-privilege access to production systems and customer data"
+        owner "Chief Information Security Officer"
+        policy_type "Access Control"
+        enforcement "Mandatory"
+    }
+
+    policy policy_ai_governance "Responsible AI Usage Policy" {
+        description "Governs the design, oversight, and guardrails required for autonomous agents operating on customer or compliance data"
+        owner "AI Governance Board"
+        policy_type "AI Governance"
+        enforcement "Mandatory"
+    }
+
+    policy policy_third_party_risk "Third-Party & Vendor Risk Management Policy" {
+        description "Establishes vendor due-diligence, concentration monitoring, and periodic reassessment expectations for SaaS and outsourced providers"
+        owner "Vendor & Third-Party Risk Management"
+        policy_type "Vendor Risk Management"
+        enforcement "Recommended"
+    }
+
+    policy policy_cloud_security_baseline "Cloud Security Configuration Baseline" {
+        description "Recommended hardening baseline for cloud accounts, networking, and workload configuration; not yet contractually mandatory for all vendor-hosted enclaves"
+        owner "Platform Security Engineering"
+        policy_type "Cloud Security"
+        enforcement "Advisory"
+    }
+}
+
+// Governance Relationships
+data_customer_record governed_by policy_data_privacy "Data privacy" { description "Subject to enterprise data privacy governance rules" }
+risk_data_breach governed_by policy_data_privacy "Risk treatment" { description "Risk treatment plan is dictated by the data privacy policy" }
+system_core_banking governed_by policy_access_control "Access controls" { description "Production ledger access requires role-based least-privilege controls" }
+agent_support_bot governed_by policy_ai_governance "Support bot AI" { description "Operation of the support chatbot is bound by responsible AI usage rules" }
+agent_fraud_detective governed_by policy_ai_governance "Fraud detective AI" {
+    cardinality OneToOne
+    description "Human-in-the-loop review is mandated by responsible AI usage rules"
+}
+env_saas_vendor governed_by policy_third_party_risk "Vendor monitoring" { description "Vendor-hosted enclave is in scope for ongoing third-party risk monitoring" }
+env_aws_prod governed_by policy_cloud_security_baseline "Cloud baseline" { description "Production cloud enclave is measured against the advisory hardening baseline" }
+data_mortgage_application governed_by policy_data_privacy "Mortgage privacy" { description "Borrower financial disclosures are subject to enterprise data privacy governance" }
+data_corporate_account governed_by policy_data_privacy "Corporate privacy" { description "Corporate entity and KYB data is subject to enterprise data privacy governance" }
+system_mortgage governed_by policy_third_party_risk "Mortgage vendor risk" { description "Vendor-hosted mortgage platform is subject to ongoing third-party risk assessment" }
+system_contact_center governed_by policy_third_party_risk "Contact center risk" { description "Vendor-hosted contact center platform is subject to ongoing third-party risk assessment" }
+system_core_banking_cloud governed_by policy_cloud_security_baseline "Cloud architecture baseline" { description "Next-gen core banking platform adheres to cloud security hardening baselines" }
+app_sanctions_screening governed_by policy_data_privacy "Sanctions data privacy" { description "Screening logs and identity checks are governed by data privacy retention rules" }
+app_sar_filing governed_by policy_access_control "SAR access control" { description "Suspicious activity report filing requires strict least-privilege access" }
+system_finance_erp governed_by policy_third_party_risk "ERP SaaS risk" { description "Vendor-hosted financial ERP platform is subject to third-party risk management" }

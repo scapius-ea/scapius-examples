@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "view_id": "attack_surface_view",
+  "revision": "sha256:8b7d50e8d707087497bf6ad874e7bb58ccc4cee54369599468c0f312c2d7c2d9",
+  "updated_at_utc": "2026-08-28T12:10:44.492119Z",
+  "nodes": {
+    "tb_public_internet": {
+      "x": 2840,
+      "y": 688,
+      "width": 1880,
+      "height": 500
+    },
+    "tb_pci_secure_enclave": {
+      "x": 3313,
+      "y": 272,
+      "width": 620,
+      "height": 180
+    },
+    "control_mfa": {
+      "x": 4221,
+      "y": 40,
+      "width": 280,
+      "height": 96
+    },
+    "control_waf": {
+      "x": 2116,
+      "y": 40,
+      "width": 280,
+      "height": 96
+    },
+    "control_dlp": {
+      "x": 5018,
+      "y": 40,
+      "width": 340,
+      "height": 96
+    },
+    "control_card_tokenization": {
+      "x": 6418,
+      "y": 40,
+      "width": 280,
+      "height": 96
+    },
+    "threat_credential_stuffing": {
+      "x": 2648,
+      "y": 328,
+      "width": 280,
+      "height": 96
+    },
+    "threat_ddos": {
+      "x": 1893,
+      "y": 314,
+      "width": 292,
+      "height": 96
+    },
+    "threat_api_data_leakage": {
+      "x": 5018,
+      "y": 328,
+      "width": 340,
+      "height": 96
+    },
+    "threat_card_not_present_fraud": {
+      "x": 6284,
+      "y": 314,
+      "width": 280,
+      "height": 96
+    },
+    "vuln_verbose_errors": {
+      "x": 40,
+      "y": 356,
+      "width": 340,
+      "height": 96
+    },
+    "vuln_missing_rate_limiting": {
+      "x": 949,
+      "y": 356,
+      "width": 340,
+      "height": 96
+    },
+    "vuln_mortgage_file_upload": {
+      "x": 569,
+      "y": 356,
+      "width": 340,
+      "height": 96
+    },
+    "customer": {
+      "x": 20,
+      "y": 384,
+      "width": 280,
+      "height": 96
+    },
+    "app_card_issuance": {
+      "x": 980,
+      "y": 384,
+      "width": 280,
+      "height": 96
+    },
+    "system_credit_card": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "comp_settlement_queue": {
+      "x": 6098,
+      "y": 40,
+      "width": 280,
+      "height": 96
+    },
+    "app_instant_pay": {
+      "x": 320,
+      "y": 384,
+      "width": 280,
+      "height": 96
+    },
+    "system_payments": {
+      "x": 320,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "comp_mobile_ui": {
+      "x": 5778,
+      "y": 40,
+      "width": 280,
+      "height": 96
+    },
+    "comp_local_wallet_cache": {
+      "x": 1796,
+      "y": 40,
+      "width": 280,
+      "height": 96
+    },
+    "app_mobile_banking": {
+      "x": 1280,
+      "y": 384,
+      "width": 280,
+      "height": 96
+    },
+    "app_mortgage_origination": {
+      "x": 1580,
+      "y": 384,
+      "width": 280,
+      "height": 96
+    },
+    "system_mortgage": {
+      "x": 5398,
+      "y": 40,
+      "width": 340,
+      "height": 96
+    },
+    "app_cms": {
+      "x": 620,
+      "y": 384,
+      "width": 340,
+      "height": 96
+    },
+    "system_brand_cms": {
+      "x": 1432,
+      "y": 40,
+      "width": 324,
+      "height": 96
+    }
+  },
+  "edges": {}
+}

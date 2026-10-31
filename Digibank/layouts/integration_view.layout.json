@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "view_id": "integration_view",
+  "revision": "sha256:f82556d8fc22210879e9c1bac13205330328ecc391d4892f14a44d2832fc2129",
+  "updated_at_utc": "2026-10-30T08:45:12.052916Z",
+  "nodes": {
+    "comp_ledger_api": {
+      "x": 607,
+      "y": 448,
+      "width": 280,
+      "height": 151
+    },
+    "comp_ledger_db": {
+      "x": 1203,
+      "y": 544,
+      "width": 280,
+      "height": 151
+    },
+    "app_ledger_service": {
+      "x": 607,
+      "y": 312,
+      "width": 280,
+      "height": 158
+    },
+    "system_core_banking": {
+      "x": 50,
+      "y": 40,
+      "width": 280,
+      "height": 159
+    },
+    "comp_payment_router": {
+      "x": 60,
+      "y": 584,
+      "width": 280,
+      "height": 151
+    },
+    "comp_settlement_queue": {
+      "x": 607,
+      "y": 584,
+      "width": 280,
+      "height": 151
+    },
+    "app_instant_pay": {
+      "x": 40,
+      "y": 360,
+      "width": 280,
+      "height": 156
+    },
+    "system_payments": {
+      "x": 670.2769592428597,
+      "y": 856,
+      "width": 280,
+      "height": 156
+    },
+    "comp_rule_engine": {
+      "x": 50,
+      "y": 1128,
+      "width": 280,
+      "height": 154
+    },
+    "app_aml_monitor": {
+      "x": 607,
+      "y": 40,
+      "width": 280,
+      "height": 155
+    },
+    "system_compliance": {
+      "x": 390.2769592428596,
+      "y": 1128,
+      "width": 280,
+      "height": 160
+    },
+    "comp_mobile_ui": {
+      "x": 364.5644671042753,
+      "y": 856,
+      "width": 280,
+      "height": 151
+    },
+    "comp_local_wallet_cache": {
+      "x": 50,
+      "y": 856,
+      "width": 280,
+      "height": 151
+    },
+    "app_mobile_banking": {
+      "x": 607,
+      "y": 176,
+      "width": 280,
+      "height": 158
+    },
+    "agent_support_bot": {
+      "x": 1203,
+      "y": 176,
+      "width": 280,
+      "height": 155
+    },
+    "agent_fraud_detective": {
+      "x": 1203,
+      "y": 40,
+      "width": 280,
+      "height": 155
+    }
+  },
+  "edges": {}
+}

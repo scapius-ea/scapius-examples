@@ -1,0 +1,217 @@
+layer "Application Architecture" {
+
+    group "Back Office Systems" {
+        system system_finance_erp "Finance & Enterprise Resource Planning" {
+            description "Enterprise financial management platform covering general ledger, accounts payable/receivable, and statutory reporting"
+            owner "VP Finance Operations"
+            criticality "Business-Critical"
+            risk "Low"
+            cost 550000 year
+            version "12.2"
+            status "Active"
+            tier "Tier-2"
+            deployment_model "SaaS"
+            time Invest
+            attr vendor:name "SAP S/4HANA Cloud"
+            attr aws:region "us-east-1"
+            attr aws:account "finance-prod-001"
+            attr aws:network:name "finance-vpc"
+            attr aws:network:subnet "finance-subnet-1a"
+            security {
+                confidentiality High
+                integrity High
+                availability High
+            }
+
+            app app_gl_reporting "Regulatory Financial Reporting Engine" {
+                description "Generates general ledger statutory reports and balances for regulatory compliance"
+                owner "Finance Shared Services"
+                version "12.1"
+                status "Active"
+                tier "Tier-2"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+
+                component comp_report_builder "Statutory Report Builder" {
+                    technology "SAP Analytics Cloud"
+                    api_type "REST"
+                    attr repo "n/a - vendor SaaS module"
+                }
+            }
+
+            app app_apar "Accounts Payable & Receivable Module" {
+                description "Manages enterprise accounts payable, accounts receivable, and vendor invoice settlements"
+                owner "Finance Shared Services"
+                version "12.1"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+            }
+
+            lifecycle {
+                phase Run start "2022-03-01"
+            }
+            score {
+                business_value 7.2
+                tech_fit 7.8
+            }
+        }
+
+        system system_reconciliation "Reconciliation & Settlement Platform" {
+            description "Automated matching and exception management for nostro/vostro and internal ledger reconciliation"
+            owner "Head of Treasury Operations"
+            criticality "Business-Critical"
+            risk "Medium"
+            cost 280000 year
+            version "5.1"
+            status "Active"
+            deployment_model "Kubernetes"
+            time Invest
+            security {
+                confidentiality High
+                integrity Critical
+                availability High
+            }
+
+            app app_nostro_recon "Nostro/Vostro Reconciliation Engine" {
+                description "High-speed matching engine comparing internal ledger movements with correspondent bank nostro statements"
+                owner "Head of Treasury Operations"
+                version "5.3.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability High
+                }
+
+                component comp_matching_engine "Automated Transaction Matching Engine" {
+                    technology "Java / Apache Spark"
+                    api_type "Internal RPC"
+                    attr repo "git://github.com/digibank/recon-matching-engine"
+                }
+            }
+
+            app app_exception_mgmt "Reconciliation Exception Management Workbench" {
+                description "Workflow workbench for investigating reconciliation breaks, payment mismatches, and suspense account resolutions"
+                owner "Head of Treasury Operations"
+                version "5.3.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability High
+                }
+            }
+
+            lifecycle {
+                phase Run start "2023-05-01"
+            }
+            score {
+                business_value 7.5
+                tech_fit 8.2
+            }
+        }
+
+        system system_hris "HR & Workforce Management System" {
+            description "Core human resources platform covering the employee lifecycle from hire to retire"
+            owner "Chief People Officer"
+            criticality "Business-Critical"
+            risk "Low"
+            cost 310000 year
+            version "2024.1"
+            status "Active"
+            deployment_model "SaaS"
+            time Tolerate
+            attr vendor "Workday"
+            security {
+                confidentiality High
+                integrity High
+                availability Medium
+            }
+
+            app app_employee_onboarding_sys "Employee Onboarding Portal" {
+                description "Internal HR onboarding portal managing new hire provisioning, identity verification, and role assignments"
+                owner "Chief People Officer"
+                version "2024.R2"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity High
+                    availability Medium
+                }
+            }
+
+            app app_payroll "Payroll Administration System" {
+                description "Enterprise payroll administration computing wage disbursements, tax withholdings, and direct deposit postings"
+                owner "Finance Shared Services"
+                version "2024.R2"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability High
+                }
+            }
+
+            lifecycle {
+                phase Run start "2021-01-01"
+            }
+            score {
+                business_value 3.5
+                tech_fit 7.0
+            }
+        }
+    }
+
+    data_object data_employee_record "Employee HR Record" {
+        description "Employee personal, compensation, and employment history data"
+        owner "Chief People Officer"
+        classification Restricted
+        pii true
+        attr source_of_truth "Workday HRIS"
+        attr retention "7 years post-employment"
+        attr format "Database Record"
+        security {
+            confidentiality High
+            integrity High
+            availability High
+        }
+    }
+}
+
+// Back Office Application Relationships
+system_finance_erp realizes cap_finance_gl "General ledger capability" { description "Provides enterprise general ledger and accounts administration" }
+system_hris realizes cap_hr_workforce "HR workforce capability" { description "Provides enterprise HR and workforce management" }
+system_reconciliation realizes cap_reconciliation_ops "Reconciliation capability" { description "Provides automated nostro/vostro reconciliation and break handling" }
+
+app_nostro_recon realizes cap_nostro_reconciliation "Nostro matching" { description "Automates the core nostro/vostro matching capability" }
+app_exception_mgmt realizes cap_exception_management "Break resolution" { description "Supports investigation and resolution of reconciliation breaks" }
+app_gl_reporting realizes cap_regulatory_financial_reporting "Financial statements" { description "Produces statutory and regulatory financial statements" }
+app_apar realizes cap_apar "AP/AR processing" { description "Processes vendor payments and incoming receivables" }
+app_payroll realizes cap_payroll_administration "Payroll execution" { description "Executes payroll calculation and disbursement" }
+app_employee_onboarding_sys realizes cap_employee_onboarding "New hire provisioning" { description "Provisions accounts and records for new hires" }
+
+app_nostro_recon reads data_ledger_tx "Ledger records" { description "Reads ledger transaction records for daily matching" }
+app_payroll writes data_employee_record "Payroll history" { description "Maintains compensation and payroll history" }
+app_employee_onboarding_sys writes data_employee_record "Onboarding record" { description "Creates the employee record during onboarding" }
+
+system_reconciliation depends_on system_core_banking "Core ledger feed" { description "Reconciliation requires an authoritative feed from the core ledger" }
+system_reconciliation flows_to system_finance_erp "Reconciliation journal feed" { description "Settlement breaks and adjustments flow into general ledger reporting" }
+system_hris flows_to system_finance_erp "Payroll journal entries" { description "Monthly payroll disbursements post journal entries to the SAP general ledger" }
+system_finance_erp flows_to system_regulatory_reporting "Financial statement data" { description "General ledger balances feed automated regulatory returns" }
+
+app_gl_reporting governed_by standard_sox "SOX controls" { status "Compliant" description "Statutory reporting output is governed by SOX control requirements" }
+data_employee_record governed_by policy_data_privacy "Privacy governance" { description "Employee personal data is subject to enterprise privacy governance" }
+

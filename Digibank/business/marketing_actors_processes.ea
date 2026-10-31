@@ -1,0 +1,54 @@
+layer "Business Architecture" {
+    actor marketing_manager "Marketing Campaign Manager" {
+        description "Plans and launches multi-channel acquisition and lifecycle marketing campaigns"
+        owner "VP Marketing Technology"
+        role "Marketing Manager"
+        is_external false
+        attr location "HQ"
+        attr department "Marketing"
+        tags ["internal"]
+    }
+
+    actor data_analyst "Customer Data & Insights Analyst" {
+        description "Builds customer segments and measures marketing performance and attribution"
+        owner "Director of Customer Analytics"
+        role "Data Analyst"
+        is_external false
+        attr location "Remote"
+        attr department "Marketing Analytics"
+        tags ["internal"]
+    }
+
+    process proc_campaign_launch "Marketing Campaign Launch" {
+        description "End-to-end planning, approval, and go-live of a multi-channel marketing campaign"
+        owner "VP Marketing Technology"
+        criticality "Standard"
+        risk "Low"
+        automation_level "Medium"
+        attr duration "2 weeks"
+    }
+
+    process proc_segment_build "Customer Segment Build" {
+        description "Constructing and validating a new customer segment from behavioural and profile data"
+        owner "Director of Customer Analytics"
+        criticality "Standard"
+        risk "Low"
+        automation_level "High"
+        attr duration "1 day"
+    }
+}
+
+// Marketing Relationships
+marketing_manager triggers proc_campaign_launch "Launch campaign" {
+    cardinality OneToMany
+    description "Initiates a new campaign through the launch workflow"
+}
+data_analyst triggers proc_segment_build "Build segments" {
+    cardinality OneToMany
+    description "Builds new audience segments for targeting"
+}
+data_analyst serves marketing_manager "Targeting analysis" { description "Supplies segments and performance analysis to inform campaign targeting" }
+
+proc_campaign_launch realizes cap_digital_advertising "Ad capability" { description "Executes the digital advertising acquisition capability" }
+proc_segment_build realizes cap_segmentation_personalization "Segmentation capability" { description "Executes the segmentation and personalization capability" }
+proc_campaign_launch influences goal_double_customers "Growth lever" { description "Successful campaigns are a direct lever for customer growth" }

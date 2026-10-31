@@ -1,0 +1,204 @@
+layer "Application Architecture" {
+
+    group "Marketing Technology Stack" {
+        system system_marketing_cloud "Marketing Automation Platform" {
+            description "Omni-channel campaign orchestration and customer engagement platform"
+            owner "VP Marketing Technology"
+            criticality "Business-Critical"
+            risk "Medium"
+            cost 540000 year
+            version "Summer '26"
+            status "Active"
+            deployment_model "SaaS"
+            time Invest
+            attr vendor "Salesforce Marketing Cloud"
+            security {
+                confidentiality Medium
+                integrity Medium
+                availability Medium
+            }
+
+            app app_campaign_manager "Campaign Management Console" {
+                description "Multichannel marketing automation platform orchestrating email, push notifications, and SMS journeys"
+                owner "VP Marketing Technology"
+                version "Summer '26"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality Medium
+                    integrity Medium
+                    availability Medium
+                }
+
+                component comp_email_engine "Transactional & Bulk Email Delivery Engine" {
+                    technology "Salesforce Email Studio"
+                    api_type "REST"
+                }
+            }
+
+            app app_ad_tech "Digital Advertising Manager" {
+                description "Manages programmatic digital advertising spend, audience syndication, and conversion tracking"
+                owner "Head of Performance Marketing"
+                version "Summer '26"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality Medium
+                    integrity Medium
+                    availability Medium
+                }
+            }
+
+            lifecycle {
+                phase Run start "2023-09-01"
+            }
+            score {
+                business_value 7.8
+                tech_fit 8.0
+            }
+        }
+
+        system system_cdp "Customer Data Platform" {
+            description "Unified customer profile store powering segmentation, personalization, and marketing analytics"
+            owner "Director of Customer Analytics"
+            criticality "Business-Critical"
+            risk "Medium"
+            cost 410000 year
+            version "3.4.0"
+            status "Active"
+            deployment_model "Kubernetes"
+            time Invest
+            security {
+                confidentiality High
+                integrity High
+                availability High
+            }
+
+            app app_segmentation "Segmentation & Personalization Engine" {
+                description "Customer behavioral segmentation and real-time next-best-action recommendation engine"
+                owner "Director of Customer Analytics"
+                version "3.4.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+            }
+
+            app app_attribution "Marketing Attribution Analytics" {
+                description "Multi-touch attribution analytics modeling conversion paths across digital acquisition channels"
+                owner "Growth Analytics Team"
+                version "3.4.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity High
+                    availability High
+                }
+            }
+
+            lifecycle {
+                phase Run start "2024-02-01"
+            }
+            score {
+                business_value 8.0
+                tech_fit 8.3
+            }
+        }
+
+        system system_brand_cms "Content & Brand Management System" {
+            description "Web content management and social publishing platform for brand and marketing content"
+            owner "Head of Brand"
+            criticality "Standard"
+            risk "Low"
+            cost 95000 year
+            version "9.2"
+            status "Active"
+            deployment_model "SaaS"
+            time Tolerate
+            attr vendor "Contentful"
+            security {
+                confidentiality Low
+                integrity Medium
+                availability Medium
+            }
+
+            app app_cms "Public Website Content Management System" {
+                description "Headless CMS hosting marketing pages, product disclosures, and published rate tables"
+                owner "Head of Brand"
+                version "9.2"
+                status "Active"
+                internet_facing true
+                security {
+                    confidentiality Low
+                    integrity Medium
+                    availability Medium
+                }
+            }
+
+            app app_social_media "Social Media Management Tool" {
+                description "Brand publishing, community moderation, and social media listening console"
+                owner "Head of Brand"
+                version "9.2"
+                status "Active"
+                internet_facing true
+                attr vendor "Sprout Social"
+                security {
+                    confidentiality Low
+                    integrity Medium
+                    availability Medium
+                }
+            }
+
+            lifecycle {
+                phase Run start "2022-11-01"
+            }
+            score {
+                business_value 4.8
+                tech_fit 6.5
+            }
+        }
+    }
+
+    data_object data_customer_profile_360 "Unified Customer Profile" {
+        description "Consolidated marketing profile combining behavioural, demographic, and engagement data"
+        owner "Director of Customer Analytics"
+        classification Confidential
+        pii true
+        attr source_of_truth "Customer Data Platform"
+        attr retention "3 years post last activity"
+        attr format "JSON"
+        security {
+            confidentiality High
+            integrity High
+            availability High
+        }
+    }
+}
+
+// Marketing Application Relationships
+system_marketing_cloud realizes cap_campaign_management "Campaign management capability" { description "Provides enterprise campaign orchestration and advertising management" }
+system_cdp realizes cap_customer_insights "Customer insights capability" { description "Provides unified customer segmentation and analytics" }
+system_brand_cms realizes cap_brand_content "Brand content capability" { description "Provides web content and brand asset management" }
+
+app_campaign_manager realizes cap_digital_advertising "Paid campaigns" { description "Executes and orchestrates paid acquisition campaigns" }
+app_campaign_manager realizes cap_lifecycle_marketing "Lifecycle comms" { description "Drives triggered lifecycle communications" }
+app_ad_tech realizes cap_digital_advertising "Ad spend" { description "Manages paid search, social, and display advertising spend" }
+app_segmentation realizes cap_segmentation_personalization "Customer segments" { description "Builds and maintains customer segments" }
+app_attribution realizes cap_marketing_attribution "Growth attribution" { description "Measures channel and campaign contribution to growth" }
+app_cms realizes cap_content_management "Website publishing" { description "Publishes public website and marketing content" }
+app_social_media realizes cap_social_media_management "Social publishing" { description "Manages brand social media publishing and monitoring" }
+
+app_segmentation reads data_customer_profile_360 "Unified profile" { description "Reads the unified profile to build behavioural segments" }
+app_attribution reads data_customer_profile_360 "Engagement history" { description "Reads engagement history to attribute conversions to channels" }
+app_campaign_manager writes data_customer_profile_360 "Engagement events" { description "Writes campaign engagement events back to the unified profile" }
+app_campaign_manager flows_to app_segmentation "Segmentation signals" { tags "Event Stream" description "Shares campaign engagement signals for segmentation" }
+
+system_cdp depends_on app_mobile_banking "Event ingesting" { description "Ingests in-app behavioural events as a primary signal source" }
+system_marketing_cloud depends_on system_cdp "Audience segments" { description "Campaign orchestrations consume customer segments from CDP" }
+system_brand_cms flows_to system_marketing_cloud "Marketing content assets" { description "Publishes approved brand assets into email and campaign templates" }
+data_customer_profile_360 governed_by policy_data_privacy "Privacy governance" { description "Unified profile data is subject to enterprise privacy governance" }
+

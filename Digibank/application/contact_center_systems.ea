@@ -1,0 +1,93 @@
+layer "Application Architecture" {
+
+    group "Contact Center Platform" {
+        system system_contact_center "Contact Center & Support Platform" {
+            description "IVR call routing, omnichannel ticketing, and knowledge base supporting the phone and chat support channels"
+            owner "Head of Contact Center Operations"
+            criticality "Business-Critical"
+            risk "Low"
+            cost 410000 year
+            version "2024.3"
+            status "Active"
+            deployment_model "SaaS"
+            time Tolerate
+            attr vendor "Genesys Cloud CX"
+            security {
+                confidentiality High
+                integrity Medium
+                availability High
+            }
+
+            app app_ivr "Interactive Voice Response System" {
+                description "Telephony voice response and DTMF menu system routing customer inquiries to support queues"
+                owner "Head of Contact Center Operations"
+                version "2024.3"
+                status "Active"
+                internet_facing true
+                attr url "tel:+1-800-555-0199"
+                security {
+                    confidentiality High
+                    integrity Medium
+                    availability High
+                }
+            }
+
+            app app_ticketing "Support Ticketing System" {
+                description "Customer incident, dispute, and inquiry tracking system integrated across voice and digital channels"
+                owner "Support Ops Director"
+                version "2024.3"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity Medium
+                    availability High
+                }
+            }
+
+            app app_knowledge_base "Customer Support Knowledge Base" {
+                description "Self-service customer support documentation, FAQ articles, and contact center representative runbooks"
+                owner "Customer Service Operations"
+                version "2024.3"
+                status "Active"
+                internet_facing true
+                attr url "https://help.digibank.com"
+                security {
+                    confidentiality High
+                    integrity Medium
+                    availability High
+                }
+            }
+
+            lifecycle {
+                phase Run start "2022-08-01"
+            }
+            attr availability "99.95%"
+            attr max_concurrent_calls "500"
+            attr primary_region "us-east-1"
+        }
+    }
+}
+
+// Contact Center Relationships
+system_contact_center realizes cap_customer_support "Customer support capability" { description "Provides omnichannel telephony, ticketing, and knowledge management" }
+system_contact_center depends_on system_cdp "Customer 360 lookup" { description "Contact center routing and agent consoles consume unified customer profile context from CDP" }
+
+app_ivr realizes cap_contact_center_ops "Inbound routing" { description "Routes inbound calls to the correct queue or self-service flow" }
+app_ticketing realizes cap_case_management "Ticket tracking" { description "Tracks, prioritizes, and resolves customer service tickets across channels" }
+app_knowledge_base realizes cap_live_chat_messaging "Self-service articles" { description "Surfaces self-service articles alongside live chat and messaging support" }
+
+app_ivr triggers app_ticketing "Escalate ticket" {
+    cardinality OneToMany
+    description "Calls that cannot be resolved via self-service open a support ticket"
+}
+app_ticketing reads data_customer_record "Customer lookup" { description "Looks up customer identity and account context for the assigned agent" }
+agent_support_bot flows_to app_ticketing "Chatbot escalation" {
+    tags "Event Stream"
+    description "Escalates unresolved chatbot conversations into a ticket for a human agent"
+}
+contact_center_agent reads app_ticketing "Work tickets" {
+    cardinality ManyToMany
+    description "Works assigned tickets through to resolution"
+}
+

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "view_id": "data_flow_view",
+  "revision": "sha256:5ee585c7117e9f31786cb14ac10db84fc766149aff8ff2f51870da5826516d31",
+  "updated_at_utc": "2026-10-30T08:42:30.962277Z",
+  "nodes": {
+    "customer": {
+      "x": 1707,
+      "y": -24,
+      "width": 280,
+      "height": 96
+    },
+    "app_ledger_service": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "system_core_banking": {
+      "x": 1217,
+      "y": 768,
+      "width": 320,
+      "height": 180
+    },
+    "app_instant_pay": {
+      "x": 24,
+      "y": 72,
+      "width": 280,
+      "height": 96
+    },
+    "system_payments": {
+      "x": 432,
+      "y": 408,
+      "width": 324,
+      "height": 188
+    },
+    "app_aml_monitor": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "system_compliance": {
+      "x": 1157,
+      "y": 263,
+      "width": 380,
+      "height": 180
+    },
+    "app_mobile_banking": {
+      "x": 528,
+      "y": 0,
+      "width": 280,
+      "height": 96
+    },
+    "agent_fraud_detective": {
+      "x": 1176,
+      "y": -24,
+      "width": 340,
+      "height": 96
+    },
+    "data_customer_record": {
+      "x": 1707,
+      "y": 257,
+      "width": 280,
+      "height": 96
+    },
+    "data_ledger_tx": {
+      "x": 1707,
+      "y": 631,
+      "width": 280,
+      "height": 96
+    }
+  },
+  "edges": {
+    "app_mobile_banking-flows_to-app_instant_pay": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": -44,
+        "y": 57,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_instant_pay-writes-data_ledger_tx": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 71,
+        "y": 59,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_instant_pay-flows_to-app_mobile_banking": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 0,
+        "y": -25,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

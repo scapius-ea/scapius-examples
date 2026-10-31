@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "view_id": "core_banking_systems",
+  "revision": "sha256:c6fc943a781130d9bda3a78ce3ecd9cacb04261c046b7fba449fd31f65aa2159",
+  "updated_at_utc": "2026-10-10T06:11:12.689383Z",
+  "nodes": {
+    "comp_ledger_api": {
+      "x": 576,
+      "y": 144,
+      "width": 280,
+      "height": 151
+    },
+    "comp_ledger_db": {
+      "x": 120,
+      "y": 144,
+      "width": 280,
+      "height": 151
+    },
+    "app_ledger_service": {
+      "x": 25,
+      "y": 64,
+      "width": 936,
+      "height": 408
+    },
+    "comp_account_ledger_adapter": {
+      "x": 144,
+      "y": 144,
+      "width": 280,
+      "height": 151
+    },
+    "app_deposit_accounts": {
+      "x": 96,
+      "y": 552,
+      "width": 552,
+      "height": 384
+    },
+    "system_core_banking": {
+      "x": 1079,
+      "y": 146,
+      "width": 1248,
+      "height": 956
+    },
+    "comp_payment_router": {
+      "x": 72,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "comp_settlement_queue": {
+      "x": 445,
+      "y": 64,
+      "width": 280,
+      "height": 151
+    },
+    "app_instant_pay": {
+      "x": 20,
+      "y": 64,
+      "width": 816,
+      "height": 291
+    },
+    "system_payments": {
+      "x": 40,
+      "y": 216,
+      "width": 864,
+      "height": 396
+    },
+    "data_ledger_tx": {
+      "x": 332,
+      "y": 888,
+      "width": 280,
+      "height": 133
+    }
+  },
+  "edges": {
+    "app_instant_pay-depends_on-app_ledger_service": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": -1,
+        "y": 66,
+        "width": null,
+        "height": null
+      }
+    },
+    "app_deposit_accounts-reads-data_ledger_tx": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": 3,
+        "y": 47,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

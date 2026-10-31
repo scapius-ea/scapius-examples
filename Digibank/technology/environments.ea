@@ -1,0 +1,177 @@
+layer "Technology Architecture" {
+
+    group "Production Environments" {
+        environment env_aws_prod "AWS Cloud Production Enclave" {
+            description "Primary production cloud infrastructure hosted in AWS"
+            owner "Cloud Platform Ops"
+            env_type "Production"
+            region "us-east-1"
+            is_production true
+            provider "AWS"
+
+            infrastructure inf_aws_eks "Amazon Elastic Kubernetes Service Cluster" {
+                description "Kubernetes hosting layer for APIs and microservices"
+                owner "SRE Platform Team"
+                provider "AWS"
+                attr os "Bottlerocket Linux"
+                attr instance_type "m6i.2xlarge"
+                attr ip_address "10.100.0.0/16"
+                risk "Low"
+                criticality "Mission-Critical"
+                security {
+                    confidentiality High
+                    integrity High
+                    availability Critical
+                }
+            }
+        }
+
+        environment env_on_prem_mainframe "On-Premises Mainframe Enclave" {
+            description "Secure on-premises datacenter hosting the transactional ledger"
+            owner "Mainframe Operations"
+            env_type "Production"
+            region "Chicago-DC-Tier-4"
+            is_production true
+            provider "IBM"
+
+            infrastructure inf_ibm_z16 "IBM z16 Enterprise System" {
+                description "Transactional mainframe server running core banking ledger processes"
+                owner "Ledger Infrastructure Team"
+                provider "IBM"
+                time Eliminate
+                attr os "z/OS"
+                attr ip_address "192.168.12.80"
+                risk "Low"
+                criticality "Mission-Critical"
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability Critical
+                }
+            }
+        }
+
+        environment env_saas_vendor "Vendor-Hosted SaaS Enclave" {
+            description "Third-party managed cloud environment for outsourced SaaS platforms outside DigiBank's own infrastructure footprint"
+            owner "Vendor & Third-Party Risk Management"
+            env_type "SaaS"
+            region "Multi-Region"
+            is_production true
+            provider "Multi-Vendor"
+        }
+    }
+
+    group "Non-Production Environments" {
+        environment env_staging "Staging / Pre-Production Environment" {
+            description "Full-fidelity pre-production environment used for release validation and the next-gen core banking cutover rehearsal"
+            owner "SRE Platform Team"
+            env_type "Staging"
+            region "us-east-2"
+            is_production false
+            provider "AWS"
+
+            infrastructure inf_staging_eks "Staging Kubernetes Cluster" {
+                description "Scaled-down mirror of the production EKS cluster used for pre-release validation"
+                owner "SRE Platform Team"
+                provider "AWS"
+                attr os "Bottlerocket Linux"
+                attr instance_type "m6i.xlarge"
+                risk "Low"
+                criticality "Business-Critical"
+                security {
+                    confidentiality Medium
+                    integrity Medium
+                    availability Medium
+                }
+            }
+        }
+
+        environment env_dev_sandbox "Developer Sandbox Environment" {
+            description "Shared, non-production sandbox for feature development, prompt iteration, and integration testing"
+            owner "Cloud Platform Ops"
+            env_type "Development"
+            region "us-west-2"
+            is_production false
+            provider "AWS"
+
+            infrastructure inf_dev_sandbox_compute "Developer Sandbox Compute Cluster" {
+                description "Lightweight, ephemeral compute pool for development and agent prompt-iteration workloads"
+                owner "Cloud Platform Ops"
+                provider "AWS"
+                risk "Low"
+                criticality "Standard"
+                security {
+                    confidentiality Low
+                    integrity Low
+                    availability Low
+                }
+            }
+        }
+    }
+}
+
+// Tech Layer Hosting Mappings
+env_aws_prod hosts app_mobile_banking "Hosts serverless backends supporting app endpoints"
+env_aws_prod hosts agent_support_bot "Hosts conversational LLM bot application"
+env_aws_prod hosts agent_fraud_detective "Hosts fraud analysis agent container"
+env_on_prem_mainframe hosts system_core_banking "Hosts core database infrastructure"
+
+inf_aws_eks hosts app_instant_pay "Runs the instant payments routing API containers"
+inf_aws_eks hosts app_aml_monitor "Runs ML model pipeline containers"
+inf_ibm_z16 hosts app_ledger_service "Directly executes balance-altering ledger service transactions"
+
+// In-house built back office, regulatory, and marketing services run
+// alongside the rest of the containerized estate on the same EKS cluster.
+inf_aws_eks hosts app_nostro_recon "Runs the reconciliation matching engine containers"
+inf_aws_eks hosts app_exception_mgmt "Runs the exception management workbench containers"
+inf_aws_eks hosts app_segmentation "Runs the segmentation and personalization engine containers"
+inf_aws_eks hosts app_attribution "Runs the marketing attribution analytics containers"
+inf_aws_eks hosts app_reg_filings "Runs the regulatory filings manager containers"
+inf_aws_eks hosts app_policy_mgmt "Runs the compliance policy management portal containers"
+inf_aws_eks hosts app_sanctions_screening "Runs the sanctions screening engine containers"
+inf_aws_eks hosts app_sar_filing "Runs the SAR filing system containers"
+
+// Vendor-hosted SaaS platforms run entirely outside DigiBank's own
+// environments, in the third-party managed enclave.
+env_saas_vendor hosts app_gl_reporting "SAP-managed regulatory financial reporting module"
+env_saas_vendor hosts app_apar "SAP-managed accounts payable/receivable module"
+env_saas_vendor hosts app_employee_onboarding_sys "Workday-managed onboarding portal"
+env_saas_vendor hosts app_payroll "Workday-managed payroll system"
+env_saas_vendor hosts app_campaign_manager "Salesforce Marketing Cloud-managed campaign console"
+env_saas_vendor hosts app_ad_tech "Salesforce Marketing Cloud-managed advertising manager"
+env_saas_vendor hosts app_cms "Contentful-managed content management system"
+env_saas_vendor hosts app_social_media "Sprout Social-managed publishing tool"
+env_saas_vendor hosts app_consent_mgmt "OneTrust-managed consent management platform"
+env_saas_vendor hosts app_dsr_mgmt "OneTrust-managed data subject rights portal"
+
+// Datacenter exit strategy: workloads progressively move off the mainframe
+// enclave and onto the AWS production enclave.
+env_on_prem_mainframe migrates_to env_aws_prod "Datacenter exit" {
+    cardinality OneToOne
+    description "Datacenter exit programme retiring the mainframe enclave in favour of AWS"
+}
+
+// New department systems: in-house services run on the shared EKS
+// cluster; vendor-managed platforms run in the SaaS enclave.
+inf_aws_eks hosts app_card_issuance "Runs the card issuance service containers"
+inf_aws_eks hosts app_card_authorization "Runs the real-time authorization and settlement engine containers"
+inf_aws_eks hosts app_card_rewards "Runs the rewards and loyalty engine containers"
+inf_aws_eks hosts app_card_disputes "Runs the dispute and chargeback management containers"
+inf_aws_eks hosts app_business_account_mgmt "Runs the business account management console containers"
+inf_aws_eks hosts app_cash_management "Runs the cash management and treasury portal containers"
+inf_aws_eks hosts app_trade_finance "Runs the trade finance processing containers"
+inf_aws_eks hosts app_deposit_accounts "Runs the deposit account servicing containers"
+
+env_saas_vendor hosts app_mortgage_origination "ICE Mortgage Technology-managed application portal"
+env_saas_vendor hosts app_underwriting_engine "ICE Mortgage Technology-managed underwriting engine"
+env_saas_vendor hosts app_mortgage_servicing "ICE Mortgage Technology-managed servicing system"
+env_saas_vendor hosts app_ivr "Genesys Cloud-managed IVR and call routing"
+env_saas_vendor hosts app_ticketing "Genesys Cloud-managed ticketing system"
+env_saas_vendor hosts app_knowledge_base "Genesys Cloud-managed knowledge base"
+// Non-production hosting: staging rehearses the next-gen core cutover and
+// mirrors the mobile app build ahead of release; the dev sandbox is where
+// AI agent prompts and guardrails get iterated before promotion.
+env_staging hosts system_core_banking_cloud "Pre-production rehearsal environment for the next-gen core banking cutover"
+env_staging hosts app_mobile_banking "Staging build validated ahead of App Store / Play Store release"
+inf_staging_eks hosts app_instant_pay "Staging replica used for payments load and failover testing"
+env_dev_sandbox hosts agent_support_bot "Sandbox copy used to iterate on chatbot prompts and guardrail configuration before promotion"

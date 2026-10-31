@@ -1,0 +1,156 @@
+layer "Application Architecture" {
+
+    group "Credit Card Platform" {
+        system system_credit_card "Credit Card Platform" {
+            description "End-to-end credit card issuance, authorization, rewards, and dispute management"
+            owner "Head of Credit Card Operations"
+            criticality "Mission-Critical"
+            risk "Medium"
+            cost 980000 year
+            version "6.2.0"
+            status "Active"
+            tier "Tier-1"
+            deployment_model "Kubernetes"
+            time Invest
+            attr vendor "In-House"
+            security {
+                confidentiality High
+                integrity Critical
+                availability Critical
+            }
+
+            app app_card_issuance "Card Issuance Service" {
+                description "Manages credit card applications, physical and virtual card embossing, and lifecycle provisioning"
+                owner "VP Credit Card Products"
+                version "6.2.0"
+                status "Active"
+                tier "Tier-1"
+                internet_facing true
+                attr url "https://cards.digibank.com/apply"
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability Critical
+                }
+
+                lifecycle {
+                    phase Plan start "2022-03-01" end "2022-09-30"
+                    phase Build start "2022-10-01" end "2023-04-30"
+                    phase Run start "2023-05-01"
+                }
+                score {
+                    business_value 9.2
+                    tech_fit 8.7
+                }
+            }
+
+            app app_card_authorization "Card Authorization & Settlement Engine" {
+                description "Low-latency payment authorization engine processing Visa and Mastercard card-present and card-not-present transaction streams"
+                owner "Card Processing Operations"
+                version "6.2.0"
+                status "Active"
+                tier "Tier-1"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability Critical
+                }
+
+                component comp_auth_rules_engine "Real-Time Authorization Rules Engine" {
+                    technology "Go / gRPC"
+                    api_type "gRPC"
+                    attr repo "git://github.com/digibank/card-auth-engine"
+                }
+
+                lifecycle {
+                    phase Plan start "2021-09-01" end "2022-04-30"
+                    phase Build start "2022-05-01" end "2022-12-31"
+                    phase Run start "2023-01-01"
+                }
+                score {
+                    business_value 9.8
+                    tech_fit 9.1
+                }
+            }
+
+            app app_card_rewards "Rewards & Loyalty Engine" {
+                description "Calculates and distributes cash-back points and loyalty partner rewards for cardholder transactions"
+                owner "VP Credit Card Products"
+                version "3.4.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability Critical
+                }
+            }
+
+            app app_card_disputes "Dispute & Chargeback Management System" {
+                description "Manages cardholder dispute intake, chargeback lifecycle tracking, and network representment workflows"
+                owner "Card Operations Analyst Team"
+                version "2.0.0"
+                status "Active"
+                internet_facing false
+                security {
+                    confidentiality High
+                    integrity Critical
+                    availability Critical
+                }
+            }
+
+            lifecycle {
+                phase Run start "2022-04-01"
+            }
+            score {
+                business_value 9.1
+                tech_fit 8.4
+            }
+        }
+    }
+
+    data_object data_card_transaction "Card Transaction Record" {
+        description "Authorization, settlement, and rewards accrual records for every card transaction"
+        owner "Card Processing Operations"
+        classification Confidential
+        pii false
+        attr source_of_truth "Card Authorization & Settlement Engine"
+        attr retention "7 years"
+        attr format "Database Log"
+        security {
+            confidentiality High
+            integrity Critical
+            availability Critical
+        }
+    }
+}
+
+// Credit Card Application Relationships
+system_credit_card realizes cap_credit_card_services "Credit card capability" { description "Provides end-to-end credit card issuing, authorization, and dispute lifecycle" }
+system_credit_card depends_on system_payments "Payment network clearing" { description "Settles and clears card authorizations through the payment hub" }
+system_credit_card depends_on system_core_banking "Card settlement posting" { description "Posts card balance payments and customer account debits to core banking" }
+
+app_card_issuance serves cardholder "Card application intake" { description "Provides mobile and web application intake for card applicants" }
+app_card_issuance realizes cap_card_application_processing "App processing" { description "Handles credit card application intake and decisioning" }
+app_card_issuance realizes cap_card_provisioning "Card provisioning" { description "Issues physical and virtual cards and provisions them to mobile wallets" }
+app_card_authorization realizes cap_card_auth_settlement "Auth settlement" { description "Performs real-time transaction authorization and downstream settlement" }
+app_card_rewards realizes cap_rewards_loyalty "Rewards loyalty" { description "Calculates and administers rewards points and loyalty tier benefits" }
+app_card_disputes realizes cap_card_disputes "Dispute workflow" { description "Manages the dispute and chargeback investigation workflow" }
+
+app_card_authorization writes data_card_transaction "Record outcome" {
+    cardinality OneToMany
+    description "Records every authorization decision and settlement outcome"
+}
+app_card_rewards reads data_card_transaction "Rewards calculation" { description "Reads settled transactions to calculate rewards accrual" }
+app_card_disputes reads data_card_transaction "Dispute investigation" { description "Reads disputed transaction details to support investigation" }
+app_card_issuance reads data_customer_record "Identity verification" { description "Verifies identity and pulls credit decisioning inputs from the KYC profile" }
+app_card_authorization flows_to app_card_rewards "Publish settlement" {
+    tags "Event Stream"
+    description "Publishes settled transactions for rewards calculation"
+}
+app_card_authorization triggers app_card_disputes "Dispute case" {
+    cardinality OneToMany
+    description "Customer-flagged transactions open a dispute case"
+}
+

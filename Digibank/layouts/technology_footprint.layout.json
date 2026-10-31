@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "view_id": "technology_footprint",
+  "revision": "sha256:5ac8920f361a824ec3a432774ceede5cad0bb45e8c119d8e54b722fd53f8207c",
+  "updated_at_utc": "2026-10-28T08:15:24.766236Z",
+  "nodes": {
+    "inf_aws_eks": {
+      "x": 20,
+      "y": 163,
+      "width": 340,
+      "height": 96
+    },
+    "env_aws_prod": {
+      "x": 1077,
+      "y": 1827,
+      "width": 380,
+      "height": 279
+    },
+    "inf_ibm_z16": {
+      "x": 3921,
+      "y": 1597,
+      "width": 280,
+      "height": 96
+    },
+    "env_saas_vendor": {
+      "x": 40,
+      "y": 3424,
+      "width": 280,
+      "height": 96
+    },
+    "inf_staging_eks": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "env_staging": {
+      "x": 2980,
+      "y": 1591,
+      "width": 428,
+      "height": 180
+    },
+    "inf_dev_sandbox_compute": {
+      "x": 20,
+      "y": 64,
+      "width": 324,
+      "height": 96
+    },
+    "env_dev_sandbox": {
+      "x": 1273,
+      "y": 3700,
+      "width": 372,
+      "height": 180
+    },
+    "app_card_issuance": {
+      "x": 20,
+      "y": 180,
+      "width": 280,
+      "height": 96
+    },
+    "app_card_authorization": {
+      "x": 20,
+      "y": 64,
+      "width": 340,
+      "height": 96
+    },
+    "app_card_rewards": {
+      "x": 20,
+      "y": 297,
+      "width": 280,
+      "height": 96
+    },
+    "app_card_disputes": {
+      "x": 484,
+      "y": 80,
+      "width": 340,
+      "height": 96
+    },
+    "system_credit_card": {
+      "x": 2461,
+      "y": 1879,
+      "width": 844,
+      "height": 413
+    },
+    "app_ledger_service": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "app_deposit_accounts": {
+      "x": 20,
+      "y": 180,
+      "width": 280,
+      "height": 96
+    },
+    "system_core_banking": {
+      "x": 4869,
+      "y": 4246,
+      "width": 320,
+      "height": 296
+    },
+    "system_core_banking_cloud": {
+      "x": 5440,
+      "y": 4296,
+      "width": 300,
+      "height": 96
+    },
+    "app_instant_pay": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "system_payments": {
+      "x": 3874,
+      "y": 1733,
+      "width": 320,
+      "height": 180
+    },
+    "app_aml_monitor": {
+      "x": 120,
+      "y": 264,
+      "width": 280,
+      "height": 96
+    },
+    "app_sanctions_screening": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "app_sar_filing": {
+      "x": 432,
+      "y": 64,
+      "width": 340,
+      "height": 96
+    },
+    "system_compliance": {
+      "x": 2470,
+      "y": 357,
+      "width": 840,
+      "height": 412
+    },
+    "app_mobile_banking": {
+      "x": 3884,
+      "y": 2728,
+      "width": 280,
+      "height": 96
+    },
+    "agent_support_bot": {
+      "x": 2461,
+      "y": 3726,
+      "width": 280,
+      "height": 96
+    },
+    "agent_fraud_detective": {
+      "x": 3641,
+      "y": 528,
+      "width": 340,
+      "height": 96
+    },
+    "app_mortgage_origination": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "app_underwriting_engine": {
+      "x": 20,
+      "y": 180,
+      "width": 292,
+      "height": 96
+    },
+    "app_mortgage_servicing": {
+      "x": 471,
+      "y": 196,
+      "width": 280,
+      "height": 96
+    },
+    "system_mortgage": {
+      "x": 858,
+      "y": 4256,
+      "width": 771,
+      "height": 312
+    },
+    "app_gl_reporting": {
+      "x": 20,
+      "y": 64,
+      "width": 340,
+      "height": 96
+    },
+    "app_apar": {
+      "x": 20,
+      "y": 180,
+      "width": 340,
+      "height": 96
+    },
+    "system_finance_erp": {
+      "x": 853,
+      "y": 1491,
+      "width": 444,
+      "height": 296
+    },
+    "app_nostro_recon": {
+      "x": 20,
+      "y": 64,
+      "width": 340,
+      "height": 96
+    },
+    "app_exception_mgmt": {
+      "x": 20,
+      "y": 180,
+      "width": 340,
+      "height": 96
+    },
+    "system_reconciliation": {
+      "x": 2614,
+      "y": 2400,
+      "width": 428,
+      "height": 296
+    },
+    "app_employee_onboarding_sys": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "app_payroll": {
+      "x": 20,
+      "y": 180,
+      "width": 292,
+      "height": 96
+    },
+    "system_hris": {
+      "x": 853,
+      "y": 2691,
+      "width": 396,
+      "height": 296
+    },
+    "app_reg_filings": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "app_policy_mgmt": {
+      "x": 20,
+      "y": 180,
+      "width": 340,
+      "height": 96
+    },
+    "system_regulatory_reporting": {
+      "x": 2461,
+      "y": 803,
+      "width": 380,
+      "height": 296
+    },
+    "app_consent_mgmt": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "app_dsr_mgmt": {
+      "x": 20,
+      "y": 180,
+      "width": 340,
+      "height": 96
+    },
+    "system_privacy_management": {
+      "x": 853,
+      "y": 3920,
+      "width": 476,
+      "height": 296
+    },
+    "app_campaign_manager": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 96
+    },
+    "app_ad_tech": {
+      "x": 20,
+      "y": 180,
+      "width": 280,
+      "height": 96
+    },
+    "system_marketing_cloud": {
+      "x": 1008,
+      "y": 3027,
+      "width": 372,
+      "height": 296
+    },
+    "app_segmentation": {
+      "x": 20,
+      "y": 64,
+      "width": 340,
+      "height": 96
+    },
+    "app_attribution": {
+      "x": 20,
+      "y": 180,
+      "width": 308,
+      "height": 96
+    },
+    "system_cdp": {
+      "x": 2553,
+      "y": 2736,
+      "width": 380,
+      "height": 296
+    },
+    "app_cms": {
+      "x": 20,
+      "y": 64,
+      "width": 340,
+      "height": 96
+    },
+    "app_social_media": {
+      "x": 20,
+      "y": 180,
+      "width": 284,
+      "height": 96
+    },
+    "system_brand_cms": {
+      "x": 853,
+      "y": 40,
+      "width": 404,
+      "height": 296
+    },
+    "app_business_account_mgmt": {
+      "x": 20,
+      "y": 64,
+      "width": 340,
+      "height": 96
+    },
+    "app_cash_management": {
+      "x": 96,
+      "y": 240,
+      "width": 324,
+      "height": 96
+    },
+    "app_trade_finance": {
+      "x": 576,
+      "y": 288,
+      "width": 308,
+      "height": 96
+    },
+    "system_corporate_banking": {
+      "x": 2576,
+      "y": 1139,
+      "width": 912,
+      "height": 412
+    },
+    "app_ivr": {
+      "x": 20,
+      "y": 64,
+      "width": 324,
+      "height": 96
+    },
+    "app_ticketing": {
+      "x": 489,
+      "y": 80,
+      "width": 280,
+      "height": 96
+    },
+    "app_knowledge_base": {
+      "x": 20,
+      "y": 181,
+      "width": 308,
+      "height": 96
+    },
+    "system_contact_center": {
+      "x": 853,
+      "y": 3363,
+      "width": 789,
+      "height": 297
+    }
+  },
+  "edges": {
+    "env_saas_vendor-hosts-app_gl_reporting": {
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
+      "label_offset": {
+        "x": -123,
+        "y": -406,
+        "width": null,
+        "height": null
+      }
+    }
+  }
+}

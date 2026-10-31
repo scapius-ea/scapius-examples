@@ -1,0 +1,56 @@
+// application/shadow_it.ea
+//
+// Deliberately NOT nested inside any layer{} or group{} block, and not
+// linked to the rest of the estate via `composed_of`. These two entities
+// exist to give the "Orphan Entities" dashboard widget (workspace home
+// dashboard, Tier 7 — Relationship Health) a real, non-zero signal:
+// undocumented tooling that shows up in day-to-day use but was never
+// formally onboarded into the governed architecture. Note that other
+// relationship verbs (e.g. `targets`) are still legal on an orphan — only
+// the absence of a `composed_of` parent and a layer/group ancestor makes
+// it an orphan, per the widget's derivation rule.
+
+app app_shadow_expense_tracker "Shadow IT: Personal Expense Tracker Integration" {
+    description "An unsanctioned third-party expense-tracking integration adopted informally by a Finance sub-team, connected directly to corporate card feeds outside official architecture governance"
+    owner "Unknown / Unmanaged"
+    version "1.0.0"
+    status "Active"
+    internet_facing true
+    attr vendor "Unknown SaaS Vendor"
+    attr discovered_via "Cloud Access Security Broker scan"
+    security {
+        confidentiality Low
+        integrity Low
+        availability Low
+    }
+}
+
+data_object data_shadow_marketing_export "Untracked Marketing Spreadsheet Export"  {
+    description "Recurring manual export of customer campaign engagement data to a shared spreadsheet, discovered outside any governed data pipeline"
+    owner "Unknown / Unmanaged"
+    classification Confidential
+    pii true
+    attr discovered_via "Data loss prevention scan"
+    security {
+        confidentiality Low
+        integrity Low
+        availability Low
+    }
+}
+
+// A vulnerability CAN still target an orphan — discovery of shadow IT is
+// frequently how vulnerabilities in it are found in the first place.
+vulnerability vuln_shadow_hardcoded_creds "Hardcoded Service Credentials in Shadow IT Container Image" {
+    description "Container image for the unsanctioned expense tracker integration bundles a static, hardcoded API key with full read/write scope"
+    owner "Security Operations Center"
+    cvss_score 9.8
+    cve_id "CVE-2025-55021"
+}
+
+vuln_shadow_hardcoded_creds targets app_shadow_expense_tracker "Credential exposure" {
+    cardinality OneToOne
+    description "Full-scope credentials baked into the image would allow an attacker to pivot into corporate card feed data"
+}
+app_shadow_expense_tracker reads data_shadow_marketing_export "Cross-reference spend" {
+    description "Cross-references cardholder spend against marketing export data for expense categorization, discovered during the same CASB sweep"
+}

@@ -1,0 +1,78 @@
+layer "Business Architecture" {
+    actor treasury_operator "Treasury Operations Specialist" {
+        description "Performs daily reconciliation and manages settlement exceptions"
+        owner "Head of Treasury Operations"
+        role "Treasury Operator"
+        is_external false
+        attr location "HQ"
+        attr department "Treasury Operations"
+        tags ["internal"]
+    }
+
+    actor finance_analyst "Finance & Reporting Analyst" {
+        description "Prepares statutory financial statements and manages the general ledger"
+        owner "VP Finance Operations"
+        role "Finance Analyst"
+        is_external false
+        attr location "HQ"
+        attr department "Finance"
+        tags ["internal"]
+    }
+
+    actor hr_admin "HR Administrator" {
+        description "Manages employee onboarding, records, and payroll administration"
+        owner "Chief People Officer"
+        role "HR Admin"
+        is_external false
+        attr location "HQ"
+        attr department "People & Culture"
+        tags ["internal"]
+    }
+
+    process proc_reconciliation "Daily Ledger Reconciliation" {
+        description "Automated end-of-day matching of nostro/vostro statements against the internal ledger, with manual exception review"
+        owner "Head of Treasury Operations"
+        criticality "Business-Critical"
+        risk "Low"
+        automation_level "High"
+        attr duration "45 minutes"
+        sla "2 hours"
+    }
+
+    process proc_payroll_run "Monthly Payroll Run" {
+        description "Calculation, approval, and disbursement of employee salaries and benefits"
+        owner "Chief People Officer"
+        criticality "Business-Critical"
+        risk "Medium"
+        automation_level "High"
+        attr duration "3 hours"
+    }
+
+    process proc_employee_onboarding_internal "Internal Employee Onboarding" {
+        description "Provisioning of accounts, equipment, and orientation for new hires"
+        owner "Chief People Officer"
+        criticality "Standard"
+        risk "Low"
+        automation_level "Medium"
+        attr duration "5 days"
+    }
+}
+
+// Back Office Relationships
+treasury_operator triggers proc_reconciliation "Daily recon" {
+    cardinality OneToMany
+    description "Initiates and reviews the daily reconciliation run"
+}
+finance_analyst serves treasury_operator "Ledger extracts" { description "Provides ledger extracts and resolves accounting exceptions" }
+hr_admin triggers proc_payroll_run "Payroll cycle" {
+    cardinality OneToMany
+    description "Runs and approves the monthly payroll cycle"
+}
+hr_admin triggers proc_employee_onboarding_internal "New hire onboarding" {
+    cardinality OneToMany
+    description "Kicks off onboarding for each new hire"
+}
+
+proc_reconciliation realizes cap_nostro_reconciliation "Recon capability" { description "Executes the automated nostro/vostro matching capability" }
+proc_payroll_run realizes cap_payroll_administration "Payroll capability" { description "Executes the payroll administration capability" }
+proc_employee_onboarding_internal realizes cap_employee_onboarding "Onboarding capability" { description "Executes the internal employee onboarding capability" }

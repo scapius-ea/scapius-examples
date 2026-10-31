@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "view_id": "corporate_banking_landscape",
+  "revision": "sha256:c9a78e96a32d826aef6fcbfbe159267e712a8e341ec44d95643c5ae18f5cd8fc",
+  "updated_at_utc": "2026-10-31T05:36:47.467063Z",
+  "nodes": {
+    "appCluster": {
+      "x": 40,
+      "y": 40,
+      "width": 995,
+      "height": 980
+    },
+    "cap_business_account_onboarding": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 149
+    },
+    "cap_cash_management_treasury": {
+      "x": 24,
+      "y": 245,
+      "width": 280,
+      "height": 149
+    },
+    "cap_business_account_services": {
+      "x": 29,
+      "y": 64,
+      "width": 324,
+      "height": 414
+    },
+    "cap_commercial_underwriting": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 149
+    },
+    "cap_trade_finance_processing": {
+      "x": 24,
+      "y": 245,
+      "width": 280,
+      "height": 149
+    },
+    "cap_commercial_lending_trade": {
+      "x": 29,
+      "y": 514,
+      "width": 324,
+      "height": 414
+    },
+    "cap_corporate_banking": {
+      "x": 1369,
+      "y": 726,
+      "width": 373,
+      "height": 948
+    },
+    "corporate_relationship_manager": {
+      "x": 1417,
+      "y": 246,
+      "width": 280,
+      "height": 154
+    },
+    "corporate_treasury_client": {
+      "x": 1982,
+      "y": 476,
+      "width": 280,
+      "height": 154
+    },
+    "comp_ledger_api": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 149
+    },
+    "comp_ledger_db": {
+      "x": 24,
+      "y": 245,
+      "width": 280,
+      "height": 149
+    },
+    "app_ledger_service": {
+      "x": 24,
+      "y": 64,
+      "width": 324,
+      "height": 414
+    },
+    "comp_account_ledger_adapter": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 149
+    },
+    "app_deposit_accounts": {
+      "x": 24,
+      "y": 514,
+      "width": 324,
+      "height": 233
+    },
+    "system_core_banking": {
+      "x": 603,
+      "y": 189,
+      "width": 368,
+      "height": 767
+    },
+    "app_business_account_mgmt": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "app_cash_management": {
+      "x": 24,
+      "y": 249,
+      "width": 280,
+      "height": 156
+    },
+    "app_trade_finance": {
+      "x": 24,
+      "y": 437,
+      "width": 280,
+      "height": 153
+    },
+    "system_corporate_banking": {
+      "x": 24,
+      "y": 52,
+      "width": 324,
+      "height": 610
+    }
+  },
+  "edges": {}
+}

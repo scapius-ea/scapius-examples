@@ -1,0 +1,317 @@
+views {
+    landscape strategy_view "Strategic Alignment" {
+        description "Strategic goals, KPIs, and architectural influence drivers for the 2026-2028 transformation roadmap."
+        tags ["Strategy", "Goals", "KPIs"]
+        include where layer == "Strategy Layer"
+        auto_layout TopToBottom
+        text noteId """
+                Core banking platform modernization and AI-first customer support are the two primary strategic pillars supporting doubling the active customer base by 2028.
+            """ {
+                anchor goal_double_customers
+            }
+    }
+
+    capability_map capability_map_view "Neo Bank Capability Map" {
+        description "Comprehensive business capability map organized across 10 strategic domains and 75 capabilities."
+        tags ["Business Architecture", "Capabilities"]
+        include where layer == "Business Architecture"
+        auto_layout TopToBottom
+    }
+
+    landscape customer_onboarding_context "Customer Onboarding Context" {
+        description "End-to-end customer onboarding journey across actors, digital channels, AI agents, core deposit services, and strategic KPIs."
+        tags ["Customer Experience", "KYC", "Onboarding", "Journey"]
+        include customer
+        include proc_onboarding
+        include cap_onboarding
+        include app_mobile_banking
+        include agent_support_bot
+        include app_deposit_accounts
+        include goal_reduce_onboarding
+        include kpi_onboarding_time
+        auto_layout TopToBottom
+        text onboardingNote """
+            Frictionless mobile onboarding backed by conversational AI reduces registration time to under 5 minutes.
+        """ {
+            anchor proc_onboarding
+        }
+    }
+
+    container core_banking_systems "Core & Payment Systems" {
+        description "Subsystems, containerized microservices, messaging queues, and databases powering transaction ledgering and instant payments."
+        tags ["Core Banking", "Payments", "Containers"]
+        include system_core_banking
+        include app_ledger_service
+        include comp_ledger_api
+        include comp_ledger_db
+        include system_payments
+        include app_instant_pay
+        include comp_payment_router
+        include comp_settlement_queue
+        include data_ledger_tx
+        auto_layout LeftToRight
+    }
+
+    integration integration_view "System & Agent Integration Landscape" {
+        description "API, gRPC, and event stream integration topology connecting digital channels, instant payment rails, AML monitoring, and AI review agents."
+        tags ["Integration", "APIs", "Event Streams", "AI Agents"]
+        include app_mobile_banking
+        include app_instant_pay
+        include app_ledger_service
+        include app_aml_monitor
+        include agent_support_bot
+        include agent_fraud_detective
+        exclude component
+        auto_layout LeftToRight
+    }
+
+    threat_model threat_model_view "DigiBank Threat Model" {
+        description "STRIDE threat model mapping threats, vulnerabilities, and mitigating security controls to applications and infrastructure assets."
+        tags ["Security", "Threat Model", "STRIDE"]
+        include app_mobile_banking
+        include app_instant_pay
+        include app_ledger_service
+        include comp_ledger_db
+        include app_aml_monitor
+        include agent_fraud_detective
+        include app_cms
+        include app_card_issuance
+        include app_card_authorization
+        include app_mortgage_origination
+        include customer
+        include compliance_officer
+        include data_customer_record
+        include data_ledger_tx
+        include data_card_transaction
+        include inf_aws_eks
+        include tb_public_internet
+        include tb_internal_corp_network
+        include tb_pci_secure_enclave
+        include control_waf
+        include control_mfa
+        include control_encryption_at_rest
+        include control_siem_monitoring
+        include control_dlp
+        include control_paw
+        include control_card_tokenization
+        include threat_credential_stuffing
+        include threat_insider_fraud
+        include threat_ddos
+        include threat_ledger_tampering
+        include threat_api_data_leakage
+        include threat_agent_privilege_escalation
+        include threat_card_not_present_fraud
+        include vuln_outdated_tls
+        include vuln_unpatched_dependency
+        include vuln_verbose_errors
+        include vuln_missing_rate_limiting
+        include vuln_mortgage_file_upload
+        auto_layout LeftToRight
+    }
+
+    risk_heatmap risk_heatmap_view "Enterprise Risk Heatmap" {
+        description "Residual vs inherent risk distribution across operational, fraud, regulatory, and third-party risk scenarios."
+        tags ["Risk Management", "Heatmap", "Inherent vs Residual"]
+        include risk_data_breach
+        include risk_payment_fraud
+        include risk_vendor_concentration
+        include risk_regulatory_penalty
+        include risk_card_fraud_loss
+        include threat_credential_stuffing
+        include threat_insider_fraud
+        include threat_ddos
+        include threat_ledger_tampering
+        include threat_api_data_leakage
+        include threat_agent_privilege_escalation
+        include threat_card_not_present_fraud
+        auto_layout TopToBottom
+    }
+
+    compliance_matrix compliance_matrix_view "Regulatory Compliance Matrix" {
+        description "Regulatory and policy compliance coverage across core banking systems, SaaS enclaves, and data assets."
+        tags ["Governance", "Compliance", "PCI-DSS", "SOX", "ISO27001"]
+        include standard_pci_dss
+        include standard_iso_27001
+        include standard_sox
+        include standard_internal_secure_coding
+        include policy_data_privacy
+        include policy_access_control
+        include policy_third_party_risk
+        include policy_cloud_security_baseline
+        include system_core_banking
+        include system_core_banking_cloud
+        include system_payments
+        include system_compliance
+        include system_regulatory_reporting
+        include system_privacy_management
+        include system_credit_card
+        include system_mortgage
+        include system_contact_center
+        include system_finance_erp
+        include app_sanctions_screening
+        include app_sar_filing
+        include app_reg_filings
+        include app_consent_mgmt
+        include app_dsr_mgmt
+        include data_customer_record
+        include data_corporate_account
+        include data_mortgage_application
+        include data_employee_record
+        auto_layout TopToBottom
+    }
+
+    data_flow data_flow_view "Customer & Ledger Data Flow" {
+        description "Data lifecycle showing customer KYC profiles, payment transactions, ledger persistence, AML telemetry, and protective controls."
+        tags ["Data Architecture", "PII", "Data Flow"]
+        include customer
+        include data_customer_record
+        include data_ledger_tx
+        include app_mobile_banking
+        include app_instant_pay
+        include app_ledger_service
+        include app_aml_monitor
+        include agent_fraud_detective
+        auto_layout LeftToRight
+    }
+
+    attack_surface attack_surface_view "Internet-Facing Attack Surface" {
+        description "External attack surface analyzing public-facing applications, trust boundaries, protective controls, threats, and vulnerabilities."
+        tags ["Security", "Attack Surface", "Perimeter"]
+        include tb_public_internet
+        include app_mobile_banking
+        include app_instant_pay
+        include app_cms
+        include app_card_issuance
+        include app_mortgage_origination
+        include control_waf
+        include control_mfa
+        include control_dlp
+        include control_card_tokenization
+        include threat_credential_stuffing
+        include threat_ddos
+        include threat_api_data_leakage
+        include threat_card_not_present_fraud
+        include vuln_missing_rate_limiting
+        include vuln_verbose_errors
+        include vuln_mortgage_file_upload
+        exclude component
+        auto_layout TopToBottom
+    }
+
+    landscape enterprise_support_functions "Enterprise Support Functions" {
+        description "Integrated mesh of back-office, financial ERP, reconciliation, HR, marketing technology, and regulatory systems."
+        tags ["Support Functions", "Finance", "HR", "Marketing", "Landscape"]
+        include system_finance_erp
+        include system_reconciliation
+        include system_hris
+        include system_marketing_cloud
+        include system_cdp
+        include system_brand_cms
+        include system_regulatory_reporting
+        include system_privacy_management
+        include system_contact_center
+        auto_layout LeftToRight
+    }
+
+    landscape credit_card_landscape "Credit Card Services" {
+        description "Credit card ecosystem covering issuance, real-time authorization, rewards, disputes, and payment network integration."
+        tags ["Products", "Credit Cards", "Landscape"]
+        include system_credit_card
+        include app_card_issuance
+        include app_card_authorization
+        include app_card_rewards
+        include app_card_disputes
+        include cap_credit_card_services
+        include cardholder
+        include system_payments
+        include system_core_banking
+        auto_layout LeftToRight
+    }
+
+    landscape mortgage_landscape "Home Lending & Mortgage" {
+        description "Mortgage and home lending ecosystem spanning digital application intake, underwriting, and loan servicing."
+        tags ["Products", "Mortgage", "Lending", "Landscape"]
+        include system_mortgage
+        include app_mortgage_origination
+        include app_underwriting_engine
+        include app_mortgage_servicing
+        include cap_home_lending
+        include customer
+        include system_core_banking
+        auto_layout LeftToRight
+    }
+
+    landscape corporate_banking_landscape "Corporate & Commercial Banking" {
+        description "Corporate and commercial banking architecture covering KYB onboarding, treasury cash management, trade finance, and core ledger posting."
+        tags ["Products", "Corporate Banking", "Treasury", "Landscape"]
+        cluster appCluster "Corporate Banking Applications" {
+            description "Applications supporting corporate banking, treasury, and trade finance services."
+            include system_corporate_banking
+            include app_business_account_mgmt
+            include app_cash_management
+            include app_trade_finance
+            include system_core_banking
+        }
+        include cap_corporate_banking
+        include corporate_treasury_client
+        include corporate_relationship_manager
+        
+        auto_layout LeftToRight
+    }
+
+    landscape technology_footprint "Current Technology Footprint" {
+        description "Live hosting footprint across AWS production and vendor-hosted SaaS enclaves."
+        tags ["Technology Architecture", "Infrastructure", "Cloud"]
+        include where layer == "Technology Architecture"
+        include_verb hosts
+        exclude env_on_prem_mainframe
+        auto_layout LeftToRight
+    }    
+}
+
+group "System Views" {
+    views {
+        dashboard enterprise_dashboard "Neo Bank Operations Dashboard" {
+            description "Executive KPI, lifecycle phase, financial cost, and tech fit scorecards across the entire governed architecture estate."
+            tags ["Executive", "Dashboard", "Health", "Operations"]
+            include *
+            exclude where layer == "Governance & Policy"
+            auto_layout TopToBottom
+        }
+
+        value_stream_map customer_onboarding_value_stream "Customer Onboarding Value Stream" {
+            description "End-to-end customer onboarding value stream mapping stages to enabling business capabilities and systems."
+            tags ["Value Stream", "Onboarding", "Customer Experience"]
+            include vs_customer_onboarding
+            auto_layout LeftToRight
+        }
+
+        value_stream_map fraud_resolution_value_stream "Fraud Resolution Value Stream" {
+            description "Stage progression from real-time ML anomaly detection through AI investigation to case remediation."
+            tags ["Value Stream", "Fraud", "Security"]
+            include vs_fraud_resolution
+            auto_layout TopToBottom
+        }
+    }
+ }
+
+ group "New Views"{
+    views {
+        lifecycle_roadmap payments_modernization_roadmap "Payments Modernization Roadmap" {
+            description "Multi-year transition from legacy mainframe to cloud payments core"
+            include system_core_banking
+            include system_core_banking_cloud
+            include system_payments
+            include app_instant_pay
+            include app_ledger_service
+            include app_shadow_expense_tracker
+            include_verb migrates_to
+        }
+
+        portfolio_matrix core_app_portfolio "Application Portfolio Matrix" {
+            description "TIME disposition analysis across retail banking applications"
+            include app
+            include system
+        }
+    }
+ }
