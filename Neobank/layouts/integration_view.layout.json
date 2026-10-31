@@ -1,56 +1,56 @@
 {
   "schema_version": 1,
   "view_id": "integration_view",
-  "revision": "sha256:430dfed2e515801dae862277a9ef57cd2629b51a03355247f819265447cee37d",
-  "updated_at_utc": "2026-10-23T09:56:11.210691Z",
+  "revision": "sha256:957a403c1b3031e0d82541e5593bc2927972770091c9c8c3361531e2eef95cf9",
+  "updated_at_utc": "2026-10-31T05:49:37.578479Z",
   "nodes": {
     "customer": {
-      "x": 1032,
-      "y": 48,
+      "x": 1432,
+      "y": 122,
       "width": 280,
       "height": 125
     },
     "app_mobile_banking": {
-      "x": 20,
+      "x": 24,
       "y": 64,
       "width": 280,
       "height": 160
     },
     "system_core_banking": {
-      "x": 40.00000000000003,
-      "y": -43.62028575010497,
-      "width": 320,
+      "x": 40,
+      "y": 40,
+      "width": 324,
       "height": 244
     },
     "agent_support_bot": {
-      "x": 598.3987321406184,
-      "y": -96,
+      "x": 661,
+      "y": 173,
       "width": 280,
       "height": 126
     },
     "agent_fraud_detective": {
-      "x": 576,
-      "y": 552,
+      "x": 661,
+      "y": 409,
       "width": 280,
       "height": 126
     },
     "compliance_officer": {
-      "x": 576,
-      "y": 260,
+      "x": 1432,
+      "y": 410,
       "width": 280,
       "height": 125
     },
     "app_aml_monitor": {
-      "x": 20,
-      "y": 72,
+      "x": 24,
+      "y": 64,
       "width": 280,
       "height": 160
     },
     "system_payments": {
       "x": 40,
-      "y": 260,
-      "width": 321,
-      "height": 260
+      "y": 328,
+      "width": 324,
+      "height": 244
     }
   },
   "edges": {

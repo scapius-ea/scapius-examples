@@ -30,13 +30,6 @@ workspace neo_bank "Neo Bank Enterprise Architecture" {
             stroke_width "1px"
             curve_type "smooth_step"
             arrow "diamond"
-            label {
-                color "#8a57a5"
-                fill "#8a57a500"
-                stroke "#2b0f3a"
-                stroke_style "dashed"
-                stroke_width "0px"
-            }
         }
     }
 
@@ -143,6 +136,25 @@ workspace neo_bank "Neo Bank Enterprise Architecture" {
             exclude component
             exclude app_auth_api
             exclude app_instant_pay
+
+            auto_layout LeftToRight
+        }
+
+        portfolio_matrix core_app_portfolio "Application Portfolio Matrix" {
+            description "TIME disposition analysis across retail banking applications"
+            include app
+            include system
+        }
+
+        data_flow payment_processing_flow "Payment Processing Flow" {
+            description "Payment processing flow showing the movement of transactions from mobile banking to core banking and AML monitoring."
+            tags ["Payments", "Transaction Flow", "AML", "Monitoring"]
+
+            include app_mobile_banking
+            include system_core_banking
+            include app_aml_monitor
+            include data_ledger_tx
+            include app_instant_pay
 
             auto_layout LeftToRight
         }

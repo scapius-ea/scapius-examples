@@ -1,38 +1,38 @@
 {
   "schema_version": 1,
   "view_id": "technology_footprint",
-  "revision": "sha256:5d7d2ab5639e47a9281917dab2c431ac085f5fe4a92713b5e69f01a3d1b9e0ca",
-  "updated_at_utc": "2026-10-23T10:00:58.15868Z",
+  "revision": "sha256:741dbea12f914d6212c714bf78bdd693a6526257cb9ac0adaa1f5744b794f378",
+  "updated_at_utc": "2026-10-31T05:49:27.496617Z",
   "nodes": {
     "inf_aws_eks": {
-      "x": 48.82720775886463,
+      "x": 24,
       "y": 64,
       "width": 280,
       "height": 148
     },
     "env_aws_prod": {
-      "x": 280,
-      "y": 48,
-      "width": 378,
-      "height": 260
+      "x": 741,
+      "y": 141,
+      "width": 324,
+      "height": 232
     },
     "inf_ibm_z16": {
-      "x": 979.8305084745764,
-      "y": 102.94915254237287,
+      "x": 40,
+      "y": 78,
       "width": 280,
       "height": 148
     },
     "app_mobile_banking": {
-      "x": 42.769680348873806,
-      "y": 75.04500292226771,
+      "x": 24,
+      "y": 64,
       "width": 280,
       "height": 160
     },
     "system_core_banking": {
-      "x": 285.55665292846766,
-      "y": 384.8608367678831,
-      "width": 360,
-      "height": 263
+      "x": 1458,
+      "y": 40,
+      "width": 324,
+      "height": 244
     }
   },
   "edges": {

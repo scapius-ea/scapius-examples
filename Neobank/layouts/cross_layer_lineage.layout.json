@@ -1,60 +1,60 @@
 {
   "schema_version": 1,
   "view_id": "cross_layer_lineage",
-  "revision": "sha256:4058eee102dfe88306f5ad4c422f2d4e265d7da82a69df07464ad911d8463e5a",
-  "updated_at_utc": "2026-10-24T05:44:40.71726Z",
+  "revision": "sha256:23460a0234f4598bbcfe1e8641acd3bca75225f680844a2269a9975c88189a56",
+  "updated_at_utc": "2026-10-31T05:49:18.536222Z",
   "nodes": {
     "inf_aws_eks": {
-      "x": 48,
+      "x": 24,
       "y": 64,
       "width": 280,
       "height": 147
     },
     "env_aws_prod": {
-      "x": 912,
-      "y": 388.00000000000006,
-      "width": 360,
-      "height": 260
+      "x": 801,
+      "y": 40,
+      "width": 324,
+      "height": 231
     },
     "cap_identity_verification": {
-      "x": 72,
-      "y": 72,
+      "x": 24,
+      "y": 64,
       "width": 280,
       "height": 122
     },
     "cap_digital_onboarding": {
-      "x": 72,
-      "y": 72,
-      "width": 372,
-      "height": 214
+      "x": 24,
+      "y": 64,
+      "width": 324,
+      "height": 206
     },
     "cap_customer_service": {
-      "x": 242.9272426121504,
-      "y": 782.1189750399822,
-      "width": 528,
-      "height": 384
+      "x": 449,
+      "y": 815,
+      "width": 368,
+      "height": 290
     },
     "proc_onboarding": {
-      "x": -219.18644067796612,
-      "y": 448.6414472159727,
+      "x": 372,
+      "y": 126,
       "width": 280,
       "height": 149
     },
     "app_mobile_banking": {
       "x": 24,
-      "y": 72,
+      "y": 64,
       "width": 280,
       "height": 160
     },
     "system_core_banking": {
-      "x": 338.4788204692641,
-      "y": 376,
+      "x": 658,
+      "y": 421,
       "width": 324,
-      "height": 260
+      "height": 244
     },
     "goal_double_customers": {
-      "x": -332,
-      "y": 905.8199767751731,
+      "x": 497,
+      "y": 1254,
       "width": 280,
       "height": 125
     }
@@ -83,12 +83,35 @@
       }
     },
     "proc_onboarding-realizes-cap_digital_onboarding": {
-      "start_point": null,
-      "end_point": null,
-      "anchors": null,
+      "start_point": {
+        "x": -80,
+        "y": 598,
+        "width": null,
+        "height": null
+      },
+      "end_point": {
+        "x": 388,
+        "y": 854,
+        "width": null,
+        "height": null
+      },
+      "anchors": [
+        {
+          "x": -80,
+          "y": 714,
+          "width": null,
+          "height": null
+        },
+        {
+          "x": 232,
+          "y": 715,
+          "width": null,
+          "height": null
+        }
+      ],
       "label_offset": {
-        "x": 8,
-        "y": -24,
+        "x": -15,
+        "y": -11,
         "width": null,
         "height": null
       }

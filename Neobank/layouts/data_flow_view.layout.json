@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "view_id": "data_flow_view",
-  "revision": "sha256:2313772bb47ec29e96d986c6751528d026589dbe446d5cd4e2097d8324341365",
-  "updated_at_utc": "2026-10-13T09:36:09.568344Z",
+  "revision": "sha256:115e2678b24fa09e558c19f386a8e5b87a38c01874ce4498fe1c095916b0994b",
+  "updated_at_utc": "2026-10-31T05:49:07.657084Z",
   "nodes": {
     "app_mobile_banking": {
       "x": 20,
@@ -11,16 +11,16 @@
       "height": 160
     },
     "system_core_banking": {
-      "x": 1084.7983870967741,
-      "y": 338.5080645161291,
+      "x": 720,
+      "y": 338.19374492489186,
       "width": 320,
       "height": 244
     },
     "data_ledger_tx": {
-      "x": 1104.7983870967741,
-      "y": 144,
+      "x": 1102.7312986222464,
+      "y": 83.83105292603439,
       "width": 280,
-      "height": 112
+      "height": 175
     },
     "app_instant_pay": {
       "x": 20,
@@ -47,36 +47,19 @@
       "end_point": null,
       "anchors": null,
       "label_offset": {
-        "x": -174,
-        "y": 3,
+        "x": 264,
+        "y": -18,
         "width": null,
         "height": null
       }
     },
     "app_instant_pay-flows_to-system_core_banking": {
-      "start_point": {
-        "x": 879,
-        "y": 5,
-        "width": null,
-        "height": null
-      },
-      "end_point": {
-        "x": 1085,
-        "y": 471,
-        "width": null,
-        "height": null
-      },
-      "anchors": [
-        {
-          "x": 883,
-          "y": 462,
-          "width": null,
-          "height": null
-        }
-      ],
+      "start_point": null,
+      "end_point": null,
+      "anchors": null,
       "label_offset": {
-        "x": 29,
-        "y": 39,
+        "x": 89,
+        "y": 96,
         "width": null,
         "height": null
       }
@@ -86,8 +69,8 @@
       "end_point": null,
       "anchors": null,
       "label_offset": {
-        "x": -43,
-        "y": 53,
+        "x": -62,
+        "y": 42,
         "width": null,
         "height": null
       }
@@ -97,8 +80,8 @@
       "end_point": null,
       "anchors": null,
       "label_offset": {
-        "x": 106,
-        "y": 15,
+        "x": 100,
+        "y": 30,
         "width": null,
         "height": null
       }

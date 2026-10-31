@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "view_id": "payment_processing_landscape",
+  "revision": "sha256:b13eca1d31944fc9213fd6864801bfdacad0228aba312afa01381ffa0f4658e5",
+  "updated_at_utc": "2026-10-28T08:18:21.964675Z",
+  "nodes": {
+    "app_mobile_banking": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 155
+    },
+    "system_core_banking": {
+      "x": 430,
+      "y": 160,
+      "width": 320,
+      "height": 239
+    },
+    "app_aml_monitor": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 155
+    },
+    "system_payments": {
+      "x": 50,
+      "y": 330,
+      "width": 320,
+      "height": 239
+    }
+  },
+  "edges": {}
+}
