@@ -1,0 +1,154 @@
+layer "Business Architecture" {
+
+    // External and Internal Actors
+    actor act_insured_driver "Connected Vehicle Driver" {
+        description "Individual policyholder operating a telematics-monitored vehicle enrolled in usage-based insurance"
+        owner "Customer Experience"
+        tags ["Policyholder", "CarInsurance", "Telematics", "External"]
+        role "Insured Driver"
+        is_external true
+        attr authentication_mechanism "Passkeys (WebAuthn)"
+        attr active_user_base "1,250,000"
+        attr primary_interface "Aura Mobile App"
+    }
+
+    actor act_health_member "Enrolled Health Plan Member" {
+        description "Individual or family subscriber covered under Aura digital health benefits"
+        owner "Customer Experience"
+        tags ["Policyholder", "HealthInsurance", "Member", "External"]
+        role "Health Plan Member"
+        is_external true
+        attr authentication_mechanism "Biometric MFA"
+        attr active_user_base "680,000"
+        attr primary_interface "Aura Member Portal"
+    }
+
+    actor act_life_policyholder "Life Insurance Policy Owner" {
+        description "Insured policyholder holding accelerated term or whole life coverage"
+        owner "Customer Experience"
+        tags ["Policyholder", "LifeInsurance", "External"]
+        role "Life Policyholder"
+        is_external true
+        attr authentication_mechanism "OIDC Passwordless"
+        attr active_user_base "420,000"
+        attr primary_interface "Aura Web Portal"
+    }
+
+    actor act_broker_partner "Independent Insurance Broker / Producer" {
+        description "Licensed independent insurance agent submitting multi-line applications and managing commercial books"
+        owner "Agency Operations"
+        tags ["Broker", "Distribution", "Partner", "External"]
+        role "Independent Broker"
+        is_external true
+        attr authentication_mechanism "Okta SAML Federation"
+        attr partner_agencies "4,800"
+        attr primary_interface "Aura Agency Portal"
+    }
+
+    actor act_medical_provider "Healthcare Clinic / Hospital Billing Staff" {
+        description "In-network healthcare provider submitting EDI 270/278/837 transactions and clinical encounter data"
+        owner "Provider Network Operations"
+        tags ["Provider", "Healthcare", "External"]
+        role "Medical Billing Specialist"
+        is_external true
+        attr integration_standard "EDI X12 and FHIR API"
+        attr network_size "85,000 clinics"
+        attr primary_interface "Provider FHIR Gateway"
+    }
+
+    actor act_claims_adjuster "Specialized Claims Adjuster" {
+        description "Licensed internal adjuster handling contested claims, complex bodily injury, and high-value losses"
+        owner "Claims Operations"
+        tags ["Internal", "Claims", "Adjuster"]
+        role "Claims Specialist"
+        is_external false
+        attr privilege_level "Level 3 Settlement Authority"
+        attr primary_interface "Dynamics 365 Claims Workspace"
+    }
+
+    actor act_medical_director "Chief Medical Director & Physician" {
+        description "Licensed medical physician reviewing contested clinical pre-authorizations and complex utilization decisions"
+        owner "Medical Operations"
+        tags ["Internal", "Clinical", "Physician"]
+        role "Medical Director"
+        is_external false
+        attr professional_credential "MD Board Certified"
+        attr primary_interface "Clinical Decision Dashboard"
+    }
+
+    actor act_underwriting_specialist "Senior Commercial Underwriter" {
+        description "Risk underwriting specialist evaluating non-standard hazards, high-limit life submissions, and commercial fleets"
+        owner "Underwriting Operations"
+        tags ["Internal", "Underwriting", "Risk"]
+        role "Senior Underwriter"
+        is_external false
+        attr binding_authority "$5,000,000"
+        attr primary_interface "Underwriting Workbench"
+    }
+
+    // Core Business Processes
+    process proc_instant_car_fnol "Instant Crash Detection & Touchless FNOL" {
+        description "Automated ingestion of violent deceleration telemetry, G-force validation, photo upload, and micro-claim triage"
+        owner "Head of Auto Claims"
+        tags ["Claims", "Telematics", "Auto", "Process"]
+        automation_level "High"
+        attr target_cycle_time "4 minutes"
+        attr stp_eligibility_rate "78%"
+        attr annual_volume "240,000 claims/year"
+        attr regulatory_sla "Immediate Acknowledgment"
+    }
+
+    process proc_clinical_preauthorization "Automated Clinical Pre-Authorization Review" {
+        description "Evaluation of elective procedure medical necessity using FHIR clinical guides and physician copilot triage"
+        owner "Chief Medical Officer"
+        tags ["Clinical", "PreAuth", "Health", "Process"]
+        automation_level "Partial"
+        attr target_cycle_time "15 minutes"
+        attr stp_eligibility_rate "62%"
+        attr annual_volume "180,000 requests/year"
+        attr regulatory_sla "72 hours (urgent CMS)"
+    }
+
+    process proc_accelerated_life_underwriting "Instant Zero-Exam Life Underwriting" {
+        description "Continuous automated underwriting pulling prescription history, FHIR health records, and MIB risk scores"
+        owner "Head of Life Underwriting"
+        tags ["Life", "Underwriting", "Automation", "Process"]
+        automation_level "High"
+        attr target_cycle_time "5 minutes"
+        attr stp_eligibility_rate "70%"
+        attr annual_volume "95,000 policies/year"
+        attr regulatory_sla "Instant Digital Binding"
+    }
+
+    process proc_claims_subrogation "Automated Multi-Carrier Subrogation" {
+        description "Inter-carrier liability dispute negotiation, automated demand package generation, and arbitration filing"
+        owner "Head of Recovery"
+        tags ["Subrogation", "Recovery", "Process"]
+        automation_level "Partial"
+        attr target_cycle_time "14 days"
+        attr recovery_rate "74.5%"
+        attr annual_volume "45,000 claims/year"
+    }
+
+    process proc_actuarial_reserving "Monthly Stochastic Loss Reserving & Solvency II" {
+        description "Aggregation of enterprise loss triangles, incurred-but-not-reported (IBNR) calculation, and IFRS 17 posting"
+        owner "Chief Actuary"
+        tags ["Actuarial", "IFRS17", "SolvencyII", "Process"]
+        automation_level "Partial"
+        attr target_cycle_time "36 hours"
+        attr computational_runtime "Databricks Distributed Cluster"
+        attr reporting_frequency "Monthly Statutory"
+    }
+
+    // Process to Capability Realization
+    proc_instant_car_fnol realizes cap_instant_fnol_intake "Delivers mobile crash intake"
+    proc_clinical_preauthorization realizes cap_clinical_preauthorization "Delivers clinical pre-authorization"
+    proc_accelerated_life_underwriting realizes cap_accelerated_life_uw "Underpins instant life underwriting"
+    proc_claims_subrogation realizes cap_subrogation_salvage "Drives subrogation recovery"
+    proc_actuarial_reserving realizes cap_actuarial_reserving "Powers solvency reserving"
+
+    // Actor Triggers
+    act_insured_driver triggers proc_instant_car_fnol "Submits collision damage photos and confirms impact"
+    act_medical_provider triggers proc_clinical_preauthorization "Submits electronic EDI 278 pre-authorization request"
+    act_life_policyholder triggers proc_accelerated_life_underwriting "Completes instant digital life application"
+}

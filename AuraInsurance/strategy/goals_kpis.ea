@@ -1,0 +1,110 @@
+layer "Strategy Layer" {
+
+    goal goal_claims_stp_dominance "Achieve 70%+ Autonomous Claims STP" {
+        description "Drive touchless straight-through processing for minor auto collision and outpatient health claims under $2,500 using AI agents and instant payment rails"
+        owner "Chief Claims Officer"
+        tags ["Digital Strategy", "Claims", "Automation", "AI"]
+        priority "Critical"
+        attr target_date "2027-06-30"
+        attr executive_sponsor "Chief Claims Officer"
+        attr board_mandate "Board Resolution 2026-Q2-Automated-Claims"
+        attr funding_status "Fully Funded"
+    }
+
+    goal goal_telematics_loss_ratio "Reduce Motor Combined Operating Ratio Below 92%" {
+        description "Leverage real-time connected vehicle telematics and behavioral scoring to lower accident frequency and optimize dynamic monthly premiums"
+        owner "Chief Underwriting Officer - Auto"
+        tags ["Underwriting", "Telematics", "Loss Ratio", "Profitability"]
+        priority "High"
+        attr target_date "2027-12-31"
+        attr executive_sponsor "Chief Underwriting Officer"
+        attr target_loss_ratio "64.5%"
+    }
+
+    goal goal_zero_exam_life_expansion "Scale Zero-Exam Life Underwriting to $1.5M" {
+        description "Expand automated instant-decision term life underwriting to coverage limits of $1,500,000 using real-time EHR, prescription history, and biometric data"
+        owner "Chief Underwriting Officer - Life"
+        tags ["Life Insurance", "Accelerated Underwriting", "EHR", "Growth"]
+        priority "High"
+        attr target_date "2027-03-31"
+        attr executive_sponsor "Head of Life Products"
+        attr risk_tolerance "Standard Plus Actuarial Bands"
+    }
+
+    goal goal_retire_legacy_broker_sftp "Decommission Deprecated Broker SFTP Batch Gateway" {
+        description "Retire legacy file-based broker commission batch transfer server in favor of real-time REST API and event streaming integration"
+        owner "VP of Enterprise Architecture"
+        tags ["Modernization", "Technical Debt", "Decommissioning"]
+        priority "High"
+        attr target_date "2027-01-15"
+        attr retirement_phase "Phase Retire"
+        attr legacy_cost_savings "$140,000/year"
+    }
+
+    // Strategic KPIs
+    kpi kpi_overall_combined_ratio "Enterprise Combined Operating Ratio" {
+        description "Total insurance operating expenses and incurred claims losses divided by net earned premiums"
+        owner "Chief Financial Officer"
+        tags ["Finance", "Profitability", "Underwriting"]
+        target_value 92.5
+        current_value 95.1
+        unit "%"
+        trend "Down"
+        attr reporting_frequency "Monthly"
+        attr benchmark_industry_average "98.5%"
+        attr formula "(Incurred Losses + Underwriting Expenses) / Net Earned Premium"
+    }
+
+    kpi kpi_claims_stp_rate "Claims Straight-Through Processing Rate" {
+        description "Percentage of total eligible claims adjudicated and disbursed without manual adjuster intervention"
+        owner "VP of Claims Automation"
+        tags ["Claims", "Operations", "AI", "STP"]
+        target_value 72.0
+        current_value 58.4
+        unit "%"
+        trend "Up"
+        attr reporting_frequency "Weekly"
+        attr threshold_limit "$2,500"
+    }
+
+    kpi kpi_fnol_to_payout_speed "First Notice of Loss to Payout Cycle Time" {
+        description "Average elapsed hours from initial customer FNOL submission to funds posted in customer account"
+        owner "Head of Customer Experience"
+        tags ["Customer Experience", "Claims", "Cycle Time"]
+        target_value 4.0
+        current_value 12.5
+        unit "hours"
+        trend "Down"
+        attr measurement_interval "Rolling 30 Days"
+        attr customer_nps_impact "+18 Points"
+    }
+
+    kpi kpi_life_quote_to_bind_time "Accelerated Life Quote-to-Bind Elapsed Time" {
+        description "Average minutes required for an applicant to complete electronic health questionnaire, verify EHR, and bind policy"
+        owner "Head of Digital Life Distribution"
+        tags ["Life Insurance", "Digital Journey", "Conversion"]
+        target_value 5.0
+        current_value 8.2
+        unit "minutes"
+        trend "Down"
+        attr conversion_rate_target "34.0%"
+    }
+
+    kpi kpi_health_preauth_turnaround "Clinical Pre-Authorization Turnaround Time" {
+        description "Average minutes to evaluate and return decision on medical procedure pre-authorization requests from provider network"
+        owner "Chief Medical Officer"
+        tags ["Health Insurance", "Clinical", "Provider Relations"]
+        target_value 15.0
+        current_value 42.0
+        unit "minutes"
+        trend "Down"
+        attr compliance_standard "CMS Interoperability Rule"
+    }
+
+    // Relationship statements
+    kpi_claims_stp_rate influences goal_claims_stp_dominance "Direct operational driver of straight-through volume"
+    kpi_fnol_to_payout_speed influences goal_claims_stp_dominance "Compressing cycle time accelerates touchless settlement"
+    kpi_overall_combined_ratio influences goal_telematics_loss_ratio "Lower combined ratio validates telematics underwriting effectiveness"
+    kpi_life_quote_to_bind_time influences goal_zero_exam_life_expansion "Accelerated time-to-bind maximizes digital customer acquisition"
+    kpi_health_preauth_turnaround influences goal_claims_stp_dominance "Rapid automated pre-authorization unblocks clinical claim processing"
+}

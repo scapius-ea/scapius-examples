@@ -1,0 +1,342 @@
+layer "Business Architecture" {
+
+    // 1.0 Customer Engagement & Market Distribution
+    capability cap_customer_engagement "Customer Engagement & Market Distribution" {
+        description "Capabilities delivering digital customer journeys, agency portals, and real-time interaction channels"
+        owner "Chief Marketing Officer"
+        tags ["Distribution", "Engagement", "Marketing"]
+        number "1.0"
+        maturity "Optimizing"
+        score { business_value 9.2 tech_fit 9.0 }
+        lifecycle { phase Run start "2024-01-01" }
+        attr strategic_classification "Core Differentiator"
+        attr business_domain "Distribution"
+
+        capability cap_crm_customer360 "Customer 360 & Relationship Management" {
+            description "Consolidated view of customer policies, claims, interactions, and financial standing across all lines"
+            owner "Head of CRM"
+            tags ["CRM", "Customer360"]
+            number "1.1"
+            maturity "Optimizing"
+            score { business_value 9.1 tech_fit 9.0 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Core Operational"
+        }
+
+        capability cap_cep_realtime_events "Complex Event Processing & Signal Detection" {
+            description "Real-time analysis and correlation of streaming IoT, telemetry, and transactional event patterns"
+            owner "Head of Event Streaming"
+            tags ["CEP", "Streaming", "Real-Time"]
+            number "1.2"
+            maturity "Optimizing"
+            score { business_value 9.6 tech_fit 9.5 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Core Differentiator"
+        }
+
+        capability cap_omnichannel_contact "Omnichannel Contact Center & Telephony" {
+            description "Cloud telephony, conversational voice IVR, and omnichannel routing for customer inquiries"
+            owner "Head of Contact Center"
+            tags ["ContactCenter", "CCaaS", "Voice"]
+            number "1.3"
+            maturity "Defined"
+            score { business_value 8.5 tech_fit 8.4 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Operational Support"
+        }
+
+        capability cap_cdp_marketing "Personalized Marketing & Cross-Line Bundling" {
+            description "Algorithmic propensity-to-buy calculation and multi-product insurance bundling promotions"
+            owner "Head of Growth Marketing"
+            tags ["CDP", "Marketing", "Personalization"]
+            number "1.4"
+            maturity "Managed"
+            score { business_value 8.4 tech_fit 8.2 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Growth Enabler"
+        }
+
+        capability cap_broker_distribution "Broker Portal & Agency Distribution" {
+            description "Digital distribution network management, broker licensing, and agency policy submission workflows"
+            owner "VP of Agency Sales"
+            tags ["Brokers", "Agency", "Distribution"]
+            number "1.5"
+            maturity "Defined"
+            score { business_value 8.8 tech_fit 8.6 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Commercial Distribution"
+        }
+
+        capability cap_comparative_rating "Comparative Rater & Aggregator Quoting" {
+            description "Headless REST API feeds delivering dynamic real-time quote generation to insurance aggregators"
+            owner "Head of Digital Partnerships"
+            tags ["Aggregators", "APIs", "ComparativeRating"]
+            number "1.6"
+            maturity "Optimizing"
+            score { business_value 8.9 tech_fit 9.1 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Digital Acquisition"
+        }
+    }
+
+    // 2.0 Product Engineering & Risk Underwriting
+    capability cap_product_underwriting "Product Engineering & Risk Underwriting" {
+        description "Actuarial product design, telematics behavioral scoring, and automated underwriting engines"
+        owner "Chief Underwriting Officer"
+        tags ["Underwriting", "Product", "Risk"]
+        number "2.0"
+        maturity "Optimizing"
+        score { business_value 9.6 tech_fit 9.4 }
+        lifecycle { phase Run start "2024-01-01" }
+        attr strategic_classification "Core Differentiator"
+        attr business_domain "Underwriting"
+
+        capability cap_car_telematics_rating "Connected Car UBI & Telematics Rating" {
+            description "Continuous vehicle kinematics analysis and dynamic monthly usage-based premium calculation"
+            owner "Head of Connected Car Underwriting"
+            tags ["Auto", "Telematics", "UBI"]
+            number "2.1"
+            maturity "Optimizing"
+            score { business_value 9.5 tech_fit 9.5 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Proprietary Core"
+        }
+
+        capability cap_health_benefit_design "Health Plan Engineering & Provider Networks" {
+            description "HMO/PPO plan structure design, clinical copay scheduling, and provider fee tier management"
+            owner "Head of Health Products"
+            tags ["Health", "Benefits", "Providers"]
+            number "2.2"
+            maturity "Defined"
+            score { business_value 8.7 tech_fit 8.5 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Core Operational"
+        }
+
+        capability cap_accelerated_life_uw "Accelerated Life Underwriting & EHR Risk" {
+            description "Instant algorithmic life risk assessment synthesizing electronic medical records and Rx histories"
+            owner "Head of Life Underwriting"
+            tags ["Life", "Underwriting", "EHR"]
+            number "2.3"
+            maturity "Optimizing"
+            score { business_value 9.3 tech_fit 9.2 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Core Differentiator"
+        }
+    }
+
+    // 3.0 Claims Management & Operations
+    capability cap_claims_operations "Claims Management & Operations" {
+        description "End-to-end multi-line claim intake, machine vision damage appraisal, clinical adjudication, and settlement"
+        owner "Chief Claims Officer"
+        tags ["Claims", "Adjudication", "Settlement"]
+        number "3.0"
+        maturity "Optimizing"
+        score { business_value 9.8 tech_fit 9.5 }
+        lifecycle { phase Run start "2024-01-01" }
+        attr strategic_classification "Core Differentiator"
+        attr business_domain "Claims"
+
+        capability cap_instant_fnol_intake "Instant Multimodal FNOL Intake" {
+            description "Mobile app and voice bot intake of crash details, medical encounters, or death claim notices"
+            owner "Head of Claims Intake"
+            tags ["FNOL", "Intake", "Omnichannel"]
+            number "3.1"
+            maturity "Optimizing"
+            score { business_value 9.4 tech_fit 9.2 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Customer Experience"
+        }
+
+        capability cap_vision_damage_assessment "Computer Vision Damage Appraisal" {
+            description "Deep learning visual analysis of auto collision photographs to identify damaged parts and repair costs"
+            owner "Head of AI Claims Tech"
+            tags ["ComputerVision", "AutoClaims", "AI"]
+            number "3.2"
+            maturity "Optimizing"
+            score { business_value 9.5 tech_fit 9.3 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Proprietary Core"
+        }
+
+        capability cap_health_claims_adjudication "Health Claims Adjudication (ICD-10/CPT)" {
+            description "Algorithmic validation of clinical diagnostic and procedure codes against deductible accumulators"
+            owner "Director of Health Claims"
+            tags ["HealthClaims", "ICD10", "CPT"]
+            number "3.3"
+            maturity "Optimizing"
+            score { business_value 9.3 tech_fit 9.2 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Core Operational"
+        }
+
+        capability cap_clinical_preauthorization "Clinical Pre-Authorization & Utilization" {
+            description "Automated and physician-assisted evaluation of elective surgeries and high-cost medical therapies"
+            owner "Chief Medical Officer"
+            tags ["PreAuth", "UtilizationReview", "Clinical"]
+            number "3.4"
+            maturity "Defined"
+            score { business_value 9.0 tech_fit 8.9 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Clinical Governance"
+        }
+
+        capability cap_life_death_settlement "Life Claims & Beneficiary Settlement" {
+            description "Automated death benefit adjudication, Social Security Death Index matching, and digital payout"
+            owner "Director of Life Claims"
+            tags ["LifeClaims", "Beneficiary", "Settlement"]
+            number "3.5"
+            maturity "Defined"
+            score { business_value 8.9 tech_fit 8.8 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Core Operational"
+        }
+
+        capability cap_subrogation_salvage "Subrogation & Vehicle Salvage" {
+            description "Automated multi-carrier liability recovery and auction house salvage dispatch for total loss vehicles"
+            owner "Head of Recovery Operations"
+            tags ["Subrogation", "Salvage", "Recovery"]
+            number "3.6"
+            maturity "Managed"
+            score { business_value 8.2 tech_fit 7.9 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Loss Mitigation"
+        }
+
+        capability cap_fraud_detection "Fraud Ring & Anomaly Detection" {
+            description "Graph neural network analysis of suspicious claims patterns, staged accidents, and provider fraud"
+            owner "Head of Special Investigations Unit"
+            tags ["Fraud", "AnomalyDetection", "SIU"]
+            number "3.7"
+            maturity "Optimizing"
+            score { business_value 9.6 tech_fit 9.4 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Loss Mitigation"
+        }
+    }
+
+    // 4.0 Policy Lifecycle, Billing & Reinsurance
+    capability cap_shared_operations "Policy Lifecycle, Billing & Reinsurance" {
+        description "Central transactional backbone managing immutable policy contracts, premium billing, and reinsurance"
+        owner "Chief Operating Officer"
+        tags ["PolicyCore", "Billing", "Reinsurance"]
+        number "4.0"
+        maturity "Optimizing"
+        score { business_value 9.3 tech_fit 9.1 }
+        lifecycle { phase Run start "2024-01-01" }
+        attr strategic_classification "Core Operational"
+        attr business_domain "Shared Core"
+
+        capability cap_policy_administration "Policy Inception, Endorsements & Renewals" {
+            description "Event-sourced policy record management, mid-term adjustments, and automated annual renewals"
+            owner "Head of Policy Operations"
+            tags ["PolicyAdmin", "PAS", "Renewals"]
+            number "4.1"
+            maturity "Optimizing"
+            score { business_value 9.4 tech_fit 9.3 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Core Operational"
+        }
+
+        capability cap_billing_collections "Premium Billing & Multi-Channel Payments" {
+            description "Direct policyholder recurring subscription billing, card tokenization, and agency premium collection"
+            owner "Head of Billing Operations"
+            tags ["Billing", "Payments", "Collections"]
+            number "4.2"
+            maturity "Optimizing"
+            score { business_value 9.2 tech_fit 9.2 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Financial Operations"
+        }
+
+        capability cap_instant_disbursement "Real-Time Payout & Settlement Disbursement" {
+            description "Instant sub-second claim payment execution via RTP, FedNow, and direct push-to-card rails"
+            owner "Treasurer"
+            tags ["Disbursement", "RTP", "FedNow"]
+            number "4.3"
+            maturity "Optimizing"
+            score { business_value 9.5 tech_fit 9.6 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Core Differentiator"
+        }
+
+        capability cap_reinsurance_mgmt "Treaty & Facultative Reinsurance Administration" {
+            description "Ceded and assumed reinsurance accounting, risk excess attachment calculation, and recoverables tracking"
+            owner "Head of Ceded Reinsurance"
+            tags ["Reinsurance", "RiskTransfer", "Ceded"]
+            number "4.4"
+            maturity "Defined"
+            score { business_value 8.6 tech_fit 8.3 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Capital Management"
+        }
+    }
+
+    // 5.0 Finance, Actuarial & Corporate Management
+    capability cap_corporate_actuarial "Finance, Actuarial & Corporate Management" {
+        description "Statutory accounting, Solvency II capital modeling, IFRS 17 liability valuation, and enterprise data analytics"
+        owner "Chief Financial Officer"
+        tags ["Finance", "Actuarial", "Compliance", "ERP"]
+        number "5.0"
+        maturity "Optimizing"
+        score { business_value 9.4 tech_fit 8.8 }
+        lifecycle { phase Run start "2024-01-01" }
+        attr strategic_classification "Corporate Governance"
+        attr business_domain "Corporate"
+
+        capability cap_general_ledger_statutory "Financial Accounting & Statutory Reporting (IFRS 17)" {
+            description "Dual-ledger financial reporting compliant with US GAAP, statutory insurance accounting, and IFRS 17"
+            owner "Corporate Controller"
+            tags ["GeneralLedger", "IFRS17", "SAP"]
+            number "5.1"
+            maturity "Defined"
+            score { business_value 9.2 tech_fit 8.4 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Regulatory Compliance"
+        }
+
+        capability cap_actuarial_reserving "Actuarial Reserving & Solvency II Modeling" {
+            description "Stochastic modeling of loss reserves, Best Estimate Liabilities (BEL), and Solvency Capital Requirement (SCR)"
+            owner "Chief Actuary"
+            tags ["Actuarial", "SolvencyII", "Reserves"]
+            number "5.2"
+            maturity "Optimizing"
+            score { business_value 9.5 tech_fit 8.5 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Capital Management"
+        }
+
+        capability cap_human_capital_management "Human Capital & Workforce Management" {
+            description "Enterprise employee lifecycle, talent management, executive compensation, and payroll"
+            owner "Chief People Officer"
+            tags ["HCM", "Workforce", "HR"]
+            number "5.3"
+            maturity "Defined"
+            score { business_value 8.1 tech_fit 8.0 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Corporate Support"
+        }
+
+        capability cap_master_data_mgmt "Master Data Management (Customer/Vehicle/Provider)" {
+            description "Enterprise master data resolution for Policyholder 360, Connected Vehicle VINs, and Provider Registries"
+            owner "Chief Data Officer"
+            tags ["MDM", "DataGovernance", "MasterData"]
+            number "5.4"
+            maturity "Optimizing"
+            score { business_value 9.1 tech_fit 9.0 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Enterprise Data"
+        }
+
+        capability cap_enterprise_bi_analytics "Enterprise Analytics & Data Lakehouse" {
+            description "Scalable analytics lakehouse powering actuarial loss triangles, underwriting BI, and executive scorecards"
+            owner "Head of Enterprise Analytics"
+            tags ["Lakehouse", "BI", "Analytics", "PowerBI"]
+            number "5.5"
+            maturity "Optimizing"
+            score { business_value 9.4 tech_fit 9.3 }
+            lifecycle { phase Run start "2024-01-01" }
+            attr strategic_classification "Data Intelligence"
+        }
+    }
+}

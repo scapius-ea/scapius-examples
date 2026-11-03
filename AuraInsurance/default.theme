@@ -1,0 +1,344 @@
+theme "default" {
+    // ==========================================================
+    // Aura Insurance — Default Theme
+    // Centralized entity shapes, layer hues, and relationship styles.
+    // ==========================================================
+
+    // ----------------------------------------------------------
+    // Strategy Layer
+    // ----------------------------------------------------------
+
+    style capability {
+        shape "rounded_rectangle"
+        css_class "capability-node"
+        fill "#ede9fe"
+        stroke "#a78bfa"
+        stroke_width "1.5px"
+        color "#4c1d95"
+    }
+
+    style goal {
+        shape "chevron"
+        css_class "goal-node"
+        fill "#e0f2fe"
+        stroke "#0284c7"
+        stroke_width "1.5px"
+        color "#0369a1"
+    }
+
+    style kpi {
+        shape "circle"
+        css_class "kpi-node"
+        fill "#fef3c7"
+        stroke "#f59e0b"
+        stroke_width "1.5px"
+        color "#78350f"
+    }
+
+    // ----------------------------------------------------------
+    // Business Architecture
+    // ----------------------------------------------------------
+
+    style actor {
+        shape "actor"
+        css_class "actor-node text-center"
+        fill "#ffedd5"
+        stroke "#fb923c"
+        stroke_width "2px"
+        color "#7c2d12"
+    }
+
+    style process {
+        shape "chevron"
+        css_class "process-node"
+        fill "#fef3c7"
+        stroke "#f59e0b"
+        stroke_width "1.5px"
+        color "#78350f"
+    }
+
+    style value_stream {
+        shape "chevron"
+        css_class "value-stream-node"
+        fill "#fae8ff"
+        stroke "#d946ef"
+        stroke_width "2px"
+        color "#86198f"
+    }
+
+    // ----------------------------------------------------------
+    // Application Architecture
+    // ----------------------------------------------------------
+
+    style system {
+        shape "rounded_rectangle"
+        css_class "system-node card shadow-sm border-primary"
+        fill "#dbeafe"
+        stroke "#60a5fa"
+        stroke_width "2.5px"
+        color "#1e3a8a"
+    }
+
+    style app {
+        shape "pill"
+        css_class "app-node card border-secondary text-primary"
+        fill "#e0edfe"
+        stroke "#3b82f6"
+        stroke_width "2px"
+        color "#1e40af"
+    }
+
+    style agent {
+        shape "hexagon"
+        css_class "agent-node card border-success bg-success-subtle text-success"
+        fill "#dcfce7"
+        stroke "#22c55e"
+        stroke_width "2px"
+        color "#15803d"
+    }
+
+    style data_object {
+        shape "octagon"
+        css_class "data-object-node bg-purple-subtle border-purple text-purple-emphasis"
+        fill "#f3e8ff"
+        stroke "#a855f7"
+        stroke_width "1.5px"
+        color "#6b21a8"
+    }
+
+    // ----------------------------------------------------------
+    // Technology Architecture
+    // ----------------------------------------------------------
+
+    style infrastructure {
+        shape "rounded_rectangle"
+        css_class "infrastructure-node"
+        fill "#d1fae5"
+        stroke "#34d399"
+        stroke_width "1.5px"
+        color "#065f46"
+    }
+
+    style environment {
+        shape "rounded_rectangle"
+        css_class "environment-node"
+        fill "#dcfce7"
+        stroke "#6ee7b7"
+        stroke_width "2.5px"
+        stroke_style "dashed"
+        color "#065f46"
+    }
+
+    // ----------------------------------------------------------
+    // Security Architecture
+    // ----------------------------------------------------------
+
+    style threat {
+        shape "triangle"
+        css_class "threat-node bg-danger-subtle border-danger text-danger-emphasis"
+        fill "#fee2e2"
+        stroke "#ef4444"
+        stroke_width "2px"
+        color "#991b1b"
+    }
+
+    style vulnerability {
+        shape "diamond"
+        css_class "vulnerability-node bg-rose-subtle border-rose text-rose-emphasis"
+        fill "#ffe4e6"
+        stroke "#f43f5e"
+        stroke_width "1.5px"
+        color "#881337"
+    }
+
+    style control {
+        shape "shield"
+        css_class "control-node bg-emerald-subtle border-emerald text-emerald-emphasis"
+        fill "#d1fae5"
+        stroke "#10b981"
+        stroke_width "1.5px"
+        color "#047857"
+    }
+
+    style trust_boundary {
+        shape "dashed_rectangle"
+        css_class "trust-boundary-node"
+        fill "transparent"
+        stroke "#14b8a6"
+        stroke_width "2px"
+        stroke_style "dashed"
+        color "#0f766e"
+    }
+
+    // ----------------------------------------------------------
+    // Governance & Policy
+    // ----------------------------------------------------------
+
+    style policy {
+        shape "document"
+        css_class "policy-node bg-slate-subtle border-slate text-slate-emphasis"
+        fill "#f1f5f9"
+        stroke "#64748b"
+        stroke_width "1.5px"
+        color "#1e293b"
+    }
+
+    style standard {
+        shape "bookmark"
+        css_class "standard-node"
+        fill "#e0e7ff"
+        stroke "#6366f1"
+        stroke_width "1.5px"
+        color "#312e81"
+    }
+
+    // ----------------------------------------------------------
+    // Relationship (Verb) Styles
+    // ----------------------------------------------------------
+
+    style relationship {
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        color "#475569"
+    }
+
+    style realizes {
+        stroke "#34d399"
+        stroke_width "2px"
+        stroke_style "solid"
+        color "#065f46"
+    }
+
+    style serves {
+        stroke "#60a5fa"
+        stroke_width "2px"
+        stroke_style "solid"
+        color "#1e40af"
+    }
+
+    style hosts {
+        stroke "#94a3b8"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#475569"
+    }
+
+    style reads {
+        stroke "#7dd3fc"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#0369a1"
+    }
+
+    style writes {
+        stroke "#0ea5e9"
+        stroke_width "2px"
+        stroke_style "solid"
+        color "#075985"
+    }
+
+    style flows_to {
+        stroke "#fbbf24"
+        stroke_width "2px"
+        stroke_style "dashed"
+        color "#92400e"
+    }
+
+    style triggers {
+        stroke "#f87171"
+        stroke_width "2px"
+        stroke_style "dashed"
+        color "#991b1b"
+    }
+
+    style composed_of {
+        stroke "#cbd5e1"
+        stroke_width "1.5px"
+        stroke_style "solid"
+        color "#475569"
+    }
+
+    style influences {
+        stroke "#f472b6"
+        stroke_width "1.5px"
+        stroke_style "dotted"
+        color "#9d174d"
+    }
+
+    style depends_on {
+        stroke "#c084fc"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#6b21a8"
+    }
+
+    style governed_by {
+        stroke "#a5b4fc"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#3730a3"
+    }
+
+    style mitigates {
+        stroke "#2dd4bf"
+        stroke_width "2px"
+        stroke_style "solid"
+        color "#115e59"
+    }
+
+    style protects {
+        stroke "#5eead4"
+        stroke_width "1.5px"
+        stroke_style "dashed"
+        color "#115e59"
+    }
+
+    // ----------------------------------------------------------
+    // Layer Background Styles
+    // ----------------------------------------------------------
+
+    style layer {
+        fill "#f8fafcaa"
+        stroke "#cbd5e1"
+        stroke_width "1px"
+        stroke_style "solid"
+        color "#334155"
+    }
+
+    style "Strategy Layer" {
+        fill "#ede9fe99"
+        stroke "#a78bfa"
+        color "#4c1d95"
+    }
+
+    style "Business Architecture" {
+        fill "#ffedd599"
+        stroke "#fb923c"
+        color "#7c2d12"
+    }
+
+    style "Application Architecture" {
+        fill "#dbeafe99"
+        stroke "#60a5fa"
+        color "#1e3a8a"
+    }
+
+    style "Technology Architecture" {
+        fill "#d1fae599"
+        stroke "#34d399"
+        color "#065f46"
+    }
+
+    style "Security Architecture" {
+        fill "#fee2e299"
+        stroke "#f87171"
+        color "#7f1d1d"
+    }
+
+    style "Governance & Policy" {
+        fill "#e0e7ff99"
+        stroke "#818cf8"
+        color "#312e81"
+    }
+}

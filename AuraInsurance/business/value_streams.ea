@@ -1,0 +1,120 @@
+layer "Business Architecture" {
+
+    value_stream vs_connected_car_claims "Touchless Connected Car Claim Settlement Stream" {
+        description "End-to-end customer journey from vehicular crash detection to instantaneous RTP settlement and vehicle repair"
+        owner "VP of Claims Automation"
+        tags ["ValueStream", "CarInsurance", "Claims", "STP"]
+
+        stage stage_car_crash_detection "1. IoT Crash Detection & Verification" {
+            description "Telematics sensor telemetry identifies rapid deceleration (>3g) and verifies vehicle location"
+            order 1
+            attr lead_time "Under 10 seconds"
+            attr exit_criteria "Impact Confirmed by Driver Prompt"
+        }
+
+        stage stage_car_instant_fnol "2. Mobile Multimodal FNOL Intake" {
+            description "Driver captures collision photos and verifies involved passengers via Aura mobile app"
+            order 2
+            attr lead_time "3 minutes"
+            attr exit_criteria "Photos and GPS Logged"
+        }
+
+        stage stage_car_vision_damage "3. Computer Vision Damage & Cost Appraisal" {
+            description "AI vision models inspect bumper, fender, and glass damage to estimate part repair vs replacement"
+            order 3
+            attr lead_time "45 seconds"
+            attr exit_criteria "Cost Estimate Generated"
+        }
+
+        stage stage_car_fraud_check "4. Real-Time Fraud & Anomaly Screening" {
+            description "Graph algorithms evaluate syndicate history, staged accident probability, and prior loss claims"
+            order 4
+            attr lead_time "15 seconds"
+            attr exit_criteria "Fraud Score Below Threshold"
+        }
+
+        stage stage_car_instant_payout "5. Real-Time Settlement & Repair Dispatch" {
+            description "Autonomous approval triggers FedNow/RTP direct deposit and schedules certified body shop towing"
+            order 5
+            attr lead_time "Under 60 seconds"
+            attr exit_criteria "Funds Transferred and Receipt Issued"
+        }
+    }
+
+    value_stream vs_health_clinical_claim "Digital Health Encounter-to-Payment Stream" {
+        description "Automated clinical provider encounter adjudication from eligibility check through fee-schedule settlement"
+        owner "Director of Health Claims"
+        tags ["ValueStream", "HealthInsurance", "Claims", "Clinical"]
+
+        stage stage_health_intake "1. Electronic Encounter Ingestion" {
+            description "Receipt of EDI 837 claim transaction from in-network provider billing clearinghouse"
+            order 1
+            attr lead_time "Instantaneous"
+            attr exit_criteria "X12 Envelope Valid"
+        }
+
+        stage stage_health_eligibility "2. Member Eligibility & Accumulator Verification" {
+            description "Real-time lookup of active deductible, out-of-pocket maximum, and co-insurance tier"
+            order 2
+            attr lead_time "3 seconds"
+            attr exit_criteria "Eligibility Confirmed"
+        }
+
+        stage stage_health_adjudication "3. Algorithmic ICD-10 / CPT Rule Evaluation" {
+            description "Automated engine checks procedure codes, medical necessity bundling, and contract fee schedule"
+            order 3
+            attr lead_time "10 seconds"
+            attr exit_criteria "Allowed Amount Determined"
+        }
+
+        stage stage_health_settlement "4. Provider Direct Settlement & EOB Issuance" {
+            description "ACH payment generation to provider and electronic Explanation of Benefits (EOB) sent to member app"
+            order 4
+            attr lead_time "24 hours"
+            attr exit_criteria "Payment Cleared and EOB Delivered"
+        }
+    }
+
+    value_stream vs_accelerated_life_issuance "Frictionless Accelerated Life Issuance Stream" {
+        description "Digital customer application to active policy binding with zero in-person medical examination"
+        owner "Head of Life Distribution"
+        tags ["ValueStream", "LifeInsurance", "Underwriting", "QuoteToBind"]
+
+        stage stage_life_app_intake "1. Mobile Application & Identity Verification" {
+            description "Customer provides coverage limit, lifestyle inputs, and grants electronic health record consent"
+            order 1
+            attr lead_time "3 minutes"
+            attr exit_criteria "Identity and Consent Verified"
+        }
+
+        stage stage_life_ehr_pull "2. Automated FHIR EHR & Rx History Retrieval" {
+            description "Secure ingestion of clinical diagnostic summaries, laboratory tests, and pharmacy prescription feeds"
+            order 2
+            attr lead_time "45 seconds"
+            attr exit_criteria "EHR Payload Structured"
+        }
+
+        stage stage_life_risk_decision "3. Predictive Mortality Rating & Instant Binding" {
+            description "Risk engine assigns actuarial rate class, binds policy contract, and issues policy document vault"
+            order 3
+            attr lead_time "60 seconds"
+            attr exit_criteria "Policy Bound and First Premium Paid"
+        }
+    }
+
+    // Value Stream Realizations
+    proc_instant_car_fnol realizes vs_connected_car_claims "Delivers touchless collision FNOL intake stage"
+    agent_auto_claims_stp_adjuster realizes stage_car_instant_payout "Approves touchless claim settlement"
+
+    proc_clinical_preauthorization realizes vs_health_clinical_claim "Evaluates automated clinical rules"
+    agent_clinical_preauth_reviewer realizes stage_health_adjudication "Assists clinical review of contested claims"
+
+    proc_accelerated_life_underwriting realizes vs_accelerated_life_issuance "Executes instant digital life underwriting"
+    agent_life_risk_assessor realizes stage_life_risk_decision "Assesses applicant mortality risk"
+
+    // Application support for value stream processes
+    app_auto_claims_engine serves proc_instant_car_fnol "Powers automated collision intake and scoring"
+    app_instant_disbursement_gateway serves proc_instant_car_fnol "Provides instant payout rail for settled claims"
+    app_health_claims_adjudicator serves proc_clinical_preauthorization "Supplies ICD-10 medical necessity adjudication"
+    app_life_underwriting_engine serves proc_accelerated_life_underwriting "Executes predictive mortality scoring"
+}

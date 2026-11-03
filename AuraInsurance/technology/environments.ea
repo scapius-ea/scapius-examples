@@ -1,0 +1,274 @@
+layer "Technology Architecture" {
+
+    // ==========================================
+    // 1. Primary Cloud Region: Microsoft Azure
+    // ==========================================
+    environment env_azure_prod_eastus2 "Microsoft Azure US East 2 (Primary Production)" {
+        description "Primary enterprise cloud production environment hosting Kubernetes microservices, event streams, and polyglot databases"
+        owner "Director of Cloud Infrastructure"
+        tags ["Cloud", "Azure", "Primary", "Production", "Multi-AZ"]
+        provider "Azure"
+        region "eastus2"
+        env_type "Production"
+        is_production true
+        attr primary_availability_zones "AZ1, AZ2, AZ3"
+        attr network_topology "Hub-and-Spoke Virtual WAN"
+        attr compliance_attestation "SOC 1/2/3, ISO 27001, HIPAA BAA, PCI DSS v4"
+
+        infrastructure inf_aks_core_cluster "Azure Kubernetes Service (Core Microservices Cluster)" {
+            description "Multi-AZ autoscaling Kubernetes cluster running in-house Go, Java, Python, and .NET microservices"
+            owner "Lead Platform Engineer"
+            tags ["AKS", "Kubernetes", "Compute", "Cloud-Native"]
+            provider "Azure"
+            time "Invest"
+            cost { amount 720000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            attr kubernetes_version "1.30.2"
+            attr node_pool_type "Ubuntu 22.04 Containerd"
+            attr auto_scaling_range "12 to 150 nodes"
+            attr container_cni "Azure CNI powered by Cilium"
+
+            relationships {
+                this hosts app_aura_mobile "Runs mobile backend-for-frontend (BFF) pods"
+                this hosts app_member_portal_web "Runs Next.js SSR frontend web pods"
+                this hosts app_provider_partner_gateway "Runs healthcare FHIR ingress gateway pods"
+                this hosts app_cep_stream_engine "Runs distributed Apache Flink streaming workers"
+                this hosts app_cdp_personalization_service "Runs customer bundling and propensity models"
+                this hosts app_producer_commission_engine "Runs agency commission payout workers"
+                this hosts app_telematics_stream_ingestor "Runs high-velocity telematics ingestion pods"
+                this hosts app_ubi_rating_service "Runs dynamic behavioral pricing workers"
+                this hosts app_auto_claims_engine "Runs auto collision orchestration pods"
+                this hosts app_health_claims_adjudicator "Runs HIPAA-compliant ICD-10 adjudication pods"
+                this hosts app_clinical_preauth_service "Runs FHIR clinical decision support pods"
+                this hosts app_wearables_wellness_service "Runs member biometric ingestion workers"
+                this hosts app_life_underwriting_engine "Runs accelerated life risk evaluation pods"
+                this hosts app_beneficiary_management_service "Runs beneficiary portal backend pods"
+                this hosts app_instant_disbursement_gateway "Runs sub-second RTP disbursement pods"
+            }
+        }
+
+        infrastructure inf_event_hubs_dedicated "Azure Event Hubs Dedicated Cluster" {
+            description "Enterprise multi-AZ Kafka-compatible streaming cluster handling 100k+ events/sec across domain topics"
+            owner "Lead Streaming Engineer"
+            tags ["EventHubs", "Kafka", "Streaming", "Messaging"]
+            provider "Azure"
+            time "Invest"
+            cost { amount 380000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            attr dedicated_capacity_units "4 CU"
+            attr availability_zones "Zone-Redundant Enabled"
+            attr capture_destination "ADLS Gen2 Delta Storage"
+
+            relationships {
+                this hosts system_aura_event_mesh "Hosts enterprise Kafka event streaming bus"
+            }
+        }
+
+        infrastructure inf_cosmos_db_global "Azure Cosmos DB Multi-Region Account" {
+            description "Globally distributed multi-model NoSQL database providing single-digit millisecond latency for sessions and dossiers"
+            owner "Lead Database Engineer"
+            tags ["CosmosDB", "NoSQL", "Database", "LowLatency"]
+            provider "Azure"
+            time "Invest"
+            cost { amount 490000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            attr api_model "SQL Core and Gremlin Graph"
+            attr consistency_level "Session Consistency"
+            attr continuous_backup "30 Days Point-in-Time Restore"
+        }
+
+        infrastructure inf_azure_postgres_hyperscale "Azure Database for PostgreSQL Hyperscale" {
+            description "Managed PostgreSQL relational database cluster powering immutable event-sourced policy ledgers"
+            owner "Principal Data Architect"
+            tags ["PostgreSQL", "Hyperscale", "Relational", "ACID"]
+            provider "Azure"
+            time "Invest"
+            cost { amount 340000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            attr engine_version "PostgreSQL 16"
+            attr high_availability "Zone-Redundant HA"
+            attr storage_auto_grow true
+
+            relationships {
+                this hosts app_policy_ledger_service "Hosts immutable master policy ledger database"
+            }
+        }
+
+        infrastructure inf_azure_openai_hub "Azure OpenAI Cognitive Service Cluster" {
+            description "Dedicated enterprise generative AI deployment running GPT-4o, GPT-4o Vision, and text embeddings with private endpoints"
+            owner "Head of Enterprise AI"
+            tags ["AzureOpenAI", "Cognitive", "LLM", "AI"]
+            provider "Azure"
+            time "Invest"
+            cost { amount 310000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            attr data_residency "Customer Data Never Leaves Region"
+            attr hipaa_baa_signed true
+            attr content_filtering "Strict Safety Filters Active"
+
+            relationships {
+                this hosts agent_auto_claims_stp_adjuster "Provides inference runtime for autonomous adjuster"
+                this hosts agent_vision_damage_estimator "Provides multimodal computer vision inference"
+                this hosts agent_contact_center_voice_bot "Provides natural language understanding for voice bot"
+            }
+        }
+    }
+
+    // ==========================================
+    // 2. Secondary DR Cloud Region: Microsoft Azure
+    // ==========================================
+    environment env_azure_dr_centralus "Microsoft Azure US Central (Disaster Recovery Standby)" {
+        description "Warm standby disaster recovery region configured for automatic geo-failover within 15 minutes RTO"
+        owner "Director of Cloud Infrastructure"
+        tags ["Cloud", "Azure", "DR", "Standby", "GeoRedundancy"]
+        provider "Azure"
+        region "centralus"
+        env_type "Staging"
+        is_production false
+        attr failover_pairing "Azure Paired Region (East US 2 / Central US)"
+        attr rto_target "15 minutes"
+        attr rpo_target "0 seconds"
+
+        infrastructure inf_aks_dr_cluster "Azure Kubernetes Service (DR Warm Standby Cluster)" {
+            description "Standby Kubernetes cluster provisioned with minimum node capacity, autoscaling upon regional failover"
+            owner "Lead Platform Engineer"
+            tags ["AKS", "Kubernetes", "DR", "Standby"]
+            provider "Azure"
+            time "Tolerate"
+            cost { amount 280000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            attr kubernetes_version "1.30.2"
+            attr standby_node_count 8
+        }
+    }
+
+    // ==========================================
+    // 3. Commercial Vendor SaaS Cloud Environments
+    // ==========================================
+    environment env_saas_microsoft_d365 "Microsoft Dynamics 365 SaaS Cloud" {
+        description "Managed commercial SaaS tenant for Dynamics 365 Customer Engagement and Power BI analytics"
+        owner "Head of CRM Platforms"
+        tags ["Vendor-SaaS", "Microsoft", "Dynamics365", "PowerBI"]
+        provider "Microsoft"
+        region "us-east"
+        env_type "Production"
+        is_production true
+        attr saas_tier "Enterprise Cloud Tier"
+        attr sla_guarantee "99.9%"
+
+        infrastructure inf_dynamics_saas_platform "Dynamics 365 Managed Cloud Platform" {
+            description "Multi-tenant managed cloud infrastructure hosting Aura CRM Customer 360"
+            owner "Microsoft Cloud Operations"
+            tags ["SaaS-Infra", "Microsoft"]
+            provider "Microsoft"
+            time "Invest"
+            cost { amount 280000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+
+            relationships {
+                this hosts app_crm_dynamics365 "Hosts Dynamics 365 CRM application"
+                this hosts app_enterprise_powerbi "Hosts Power BI executive reporting workspace"
+            }
+        }
+    }
+
+    environment env_saas_sap_cloud "SAP S/4HANA Public Cloud Platform" {
+        description "Managed cloud infrastructure running SAP S/4HANA financial general ledger and statutory accounting"
+        owner "Corporate Controller"
+        tags ["Vendor-SaaS", "SAP", "ERP", "Finance"]
+        provider "SAP"
+        region "us-east-1"
+        env_type "Production"
+        is_production true
+        attr cloud_edition "SAP S/4HANA Cloud Public Edition"
+
+        infrastructure inf_sap_cloud_infra "SAP Managed HANA Cloud Infrastructure" {
+            description "High-memory SAP HANA in-memory database and application cluster"
+            owner "SAP Infrastructure Operations"
+            tags ["SaaS-Infra", "SAP", "HANA"]
+            provider "SAP"
+            time "Tolerate"
+            cost { amount 350000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+
+            relationships {
+                this hosts app_sap_s4hana_cloud "Hosts SAP S/4HANA Cloud ERP"
+            }
+        }
+    }
+
+    environment env_saas_moodys_analytics "Moody's Analytics Actuarial Cloud" {
+        description "Dedicated commercial actuarial modeling cloud executing Solvency II and IFRS 17 stochastic runs"
+        owner "Chief Actuary"
+        tags ["Vendor-SaaS", "Moodys", "Actuarial", "HPC"]
+        provider "Moodys"
+        region "us-east"
+        env_type "Production"
+        is_production true
+        attr compute_grid "High Performance Actuarial Grid"
+
+        infrastructure inf_moodys_axis_cluster "Moody's AXIS Cloud Compute Grid" {
+            description "High-performance cluster executing parallelized Monte Carlo simulations for reserves"
+            owner "Moody's Cloud Operations"
+            tags ["SaaS-Infra", "Moodys", "Actuarial"]
+            provider "Moodys"
+            time "Tolerate"
+            cost { amount 220000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+
+            relationships {
+                this hosts app_moodys_axis_actuarial "Hosts Moody's AXIS Actuarial software"
+            }
+        }
+    }
+
+    environment env_saas_stripe_network "Stripe Payments Global Cloud Network" {
+        description "Level 1 PCI-DSS certified global payments infrastructure managing tokenized card processing and recurring ACH"
+        owner "Head of Payment Systems"
+        tags ["Vendor-SaaS", "Stripe", "PCI-DSS", "Payments"]
+        provider "Stripe"
+        region "global"
+        env_type "Production"
+        is_production true
+        attr pci_compliance_level "Level 1 PCI DSS v4.0"
+
+        infrastructure inf_stripe_vault_infrastructure "Stripe Level 1 PCI Vault & Processing Infrastructure" {
+            description "Hardware Security Module (HSM) backed cardholder data environment vaulting customer credit cards"
+            owner "Stripe Security Operations"
+            tags ["SaaS-Infra", "Stripe", "HSM", "PCI"]
+            provider "Stripe"
+            time "Invest"
+            cost { amount 260000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+
+            relationships {
+                this hosts app_stripe_payments_platform "Hosts Stripe Payments platform"
+            }
+        }
+    }
+
+    environment env_saas_databricks_managed "Databricks Lakehouse Cloud Platform" {
+        description "Managed Apache Spark analytics lakehouse running on Azure Data Lake Storage Gen2 for actuarial feature engineering"
+        owner "Lead Data Architect"
+        tags ["Vendor-SaaS", "Databricks", "Lakehouse", "DeltaLake"]
+        provider "Databricks"
+        region "eastus2"
+        env_type "Production"
+        is_production true
+        attr spark_runtime "Databricks Runtime 14.3 LTS"
+
+        infrastructure inf_databricks_runtime "Databricks Serverless Compute Engine" {
+            description "Serverless autoscaling Spark worker clusters reading Parquet telematics and claim reserves"
+            owner "Databricks Operations"
+            tags ["SaaS-Infra", "Databricks", "Spark"]
+            provider "Databricks"
+            time "Invest"
+            cost { amount 420000 unit year }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+
+            relationships {
+                this hosts app_databricks_lakehouse "Hosts Databricks Lakehouse platform"
+            }
+        }
+    }
+}

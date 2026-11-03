@@ -1,0 +1,135 @@
+layer "Application Architecture" {
+
+    data_object data_telematics_stream "Connected Vehicle Kinematics Stream" {
+        description "High-velocity IoT telemetry containing GPS coordinates, speed, 3-axis accelerometer readings, and braking metrics"
+        owner "Lead Telematics Engineer"
+        tags ["Telematics", "IoT", "Streaming", "Car-Insurance"]
+        classification "Internal"
+        pii false
+        phi false
+        security { confidentiality "High" integrity "Critical" availability "Critical" }
+        attr storage_format "Kafka Avro and ADLS Gen2 Parquet"
+        attr encryption_standard "AES-256-GCM at Rest and TLS 1.3 in Transit"
+        attr data_retention_period "3 years for actuarial modeling"
+        attr sampling_frequency "10 Hz"
+
+        relationships {
+            app_telematics_stream_ingestor writes this "Persists incoming vehicle kinematics"
+            app_ubi_rating_service reads this "Analyzes driving risk parameters"
+            app_cep_stream_engine reads this "Correlates collision impact telemetry"
+        }
+    }
+
+    data_object data_car_claim_file "Auto Collision Claim Dossier" {
+        description "Comprehensive claim dossier containing incident photos, driver statements, police accident reports, and repair estimates"
+        owner "Head of Auto Claims Tech"
+        tags ["Claims", "Auto", "Photos", "Damage"]
+        classification "Confidential"
+        pii true
+        phi false
+        security { confidentiality "Critical" integrity "Critical" availability "High" }
+        attr storage_format "Cosmos DB JSON and Blob Storage"
+        attr encryption_standard "Azure Key Vault Managed HSM Key"
+        attr data_retention_period "7 years post-claim closure"
+        attr image_metadata_validation "EXIF Tamper Verification Active"
+
+        relationships {
+            app_auto_claims_engine writes this "Creates and updates accident claim files"
+            app_auto_claims_engine reads this "Retrieves dossiers for adjuster review"
+        }
+    }
+
+    data_object data_member_health_record "Electronic Health & Clinical Encounter Record" {
+        description "HIPAA-protected electronic health records, diagnostic ICD-10 codes, procedure CPT codes, and clinical physician notes"
+        owner "Chief Medical Officer"
+        tags ["Health", "PHI", "HIPAA", "Clinical", "EHR"]
+        classification "Restricted"
+        pii true
+        phi true
+        security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+        attr storage_format "HL7 FHIR JSON in Cosmos DB"
+        attr encryption_standard "FIPS 140-2 Level 3 HSM Envelope Encryption"
+        attr data_retention_period "10 years statutory HIPAA"
+        attr hipaa_audit_logging "Strict Immutable Access Log"
+
+        relationships {
+            app_provider_partner_gateway writes this "Ingests clinical encounter payloads"
+            app_health_claims_adjudicator reads this "Validates procedure medical necessity"
+            app_clinical_preauth_service reads this "Extracts clinical rationale for pre-authorization"
+        }
+    }
+
+    data_object data_life_underwriting_profile "Life Underwriting Risk Profile" {
+        description "Comprehensive applicant risk summary synthesizing MIB records, prescription history, lab results, and mortality score"
+        owner "Head of Life Underwriting"
+        tags ["Life", "Underwriting", "EHR", "PHI", "RiskProfile"]
+        classification "Restricted"
+        pii true
+        phi true
+        security { confidentiality "Critical" integrity "Critical" availability "High" }
+        attr storage_format "Encrypted Document in Cosmos DB"
+        attr encryption_standard "Azure Dedicated KMS Key"
+        attr data_retention_period "Lifetime of Policy plus 10 years"
+
+        relationships {
+            app_life_underwriting_engine writes this "Persists evaluated mortality risk score"
+            app_life_underwriting_engine reads this "Evaluates instant-decision underwriting rules"
+        }
+    }
+
+    data_object data_policyholder_identity "Policyholder Master Identity & KYC Profile" {
+        description "Authoritative customer identity records including Social Security Numbers, driver's licenses, and biometrics"
+        owner "Head of Customer Identity"
+        tags ["PII", "Identity", "KYC", "Customer360"]
+        classification "Restricted"
+        pii true
+        phi false
+        security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+        attr storage_format "Cosmos DB and Semarchy MDM Golden Record"
+        attr encryption_standard "Field-Level AES-256 Encryption"
+        attr data_retention_period "Active Customer plus 7 years"
+
+        relationships {
+            app_aura_mobile writes this "Enrolls digital identity and biometric credentials"
+            app_semarchy_xdm_mdm writes this "Merges cross-line golden customer records"
+            app_crm_dynamics365 reads this "Presents customer profile to servicing agents"
+        }
+    }
+
+    data_object data_pci_payment_tokens "Tokenized Payment Credentials & Bank Accounts" {
+        description "Tokenized credit card references, tokenized routing/account numbers, and instant payout debit card tokens"
+        owner "Head of Payment Systems"
+        tags ["PCI-DSS", "Payments", "Tokens", "Financial"]
+        classification "Restricted"
+        pii true
+        phi false
+        security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+        attr storage_format "Stripe PCI Vault Token"
+        attr encryption_standard "PCI-DSS v4 Validated HSM"
+        attr pci_scope "Cardholder Data Environment Exempt"
+
+        relationships {
+            app_stripe_payments_platform writes this "Generates tokenized customer card identifiers"
+            app_instant_disbursement_gateway reads this "Routes push-to-debit claim settlements"
+        }
+    }
+
+    data_object data_statutory_general_ledger "Enterprise Financial Ledger & Reserving Balance" {
+        description "Statutory dual ledger records containing earned premiums, incurred loss reserves, reinsurance recoverables, and IFRS 17 balances"
+        owner "Corporate Controller"
+        tags ["Finance", "GeneralLedger", "IFRS17", "SAP", "Statutory"]
+        classification "Confidential"
+        pii false
+        phi false
+        security { confidentiality "Critical" integrity "Critical" availability "High" }
+        attr storage_format "SAP HANA In-Memory Columnar"
+        attr encryption_standard "Transparent Data Encryption (TDE)"
+        attr audit_framework "SOX Section 404"
+
+        relationships {
+            app_policy_ledger_service writes this "Posts daily earned premium journals"
+            app_sap_s4hana_cloud writes this "Maintains authoritative corporate balance sheet"
+            app_moodys_axis_actuarial reads this "Extracts loss exposure for reserve valuation"
+        }
+    }
+}

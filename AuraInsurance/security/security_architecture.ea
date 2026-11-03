@@ -1,0 +1,317 @@
+layer "Security Architecture" {
+
+    // ==========================================
+    // 1. STRIDE Threat Model
+    // ==========================================
+    threat threat_telematics_spoofing "Vehicle Telematics GPS & Kinematics Spoofing" {
+        description "Adversaries injecting simulated GPS trails or manipulated accelerometer readings to fraudulently lower UBI premiums"
+        category "Spoofing"
+        likelihood "High"
+        impact "High"
+        risk_rating "High"
+        mitigation_status "Mitigated"
+        attr threat_actor "Fraudulent Insured or Modded OBD Device"
+        attr attack_vector "Bluetooth and Cellular Packet Injection"
+
+        relationships {
+            this targets app_telematics_stream_ingestor "Injects fraudulent telemetry into ingestion endpoint"
+            this targets data_telematics_stream "Corrupts vehicle kinematics stream"
+        }
+    }
+
+    threat threat_photo_metadata_tampering "Collision Damage Photo AI-Generation & Tampering" {
+        description "Submission of deepfake accident damage photos or edited EXIF timestamps to claim pre-existing damage"
+        category "Tampering"
+        likelihood "High"
+        impact "Critical"
+        risk_rating "Critical"
+        mitigation_status "Mitigated"
+        attr threat_actor "Organized Insurance Fraud Ring"
+        attr attack_vector "Generative AI Image Synthesis"
+
+        relationships {
+            this targets app_auto_claims_engine "Submits fraudulent photo evidence"
+            this targets data_car_claim_file "Injects forged visual damage artifacts"
+        }
+    }
+
+    threat threat_nonrepudiation_claim_denial "Disputed Electronic Beneficiary Consent & Payout" {
+        description "Claimant repudiating digital authorization of life insurance beneficiary settlement to initiate duplicate claims"
+        category "Repudiation"
+        likelihood "Medium"
+        impact "Medium"
+        risk_rating "Medium"
+        mitigation_status "Mitigated"
+        attr threat_actor "Disputed Beneficiary Claimant"
+
+        relationships {
+            this targets app_beneficiary_management_service "Contests digital settlement transaction"
+        }
+    }
+
+    threat threat_phi_exfiltration "Unauthorized Member Clinical PHI Exfiltration" {
+        description "Targeted extraction of protected health information, medical diagnoses, and prescription histories"
+        category "Info Disclosure"
+        likelihood "Medium"
+        impact "Critical"
+        risk_rating "Critical"
+        mitigation_status "Mitigated"
+        attr threat_actor "External Cyber Espionage Group"
+        attr regulatory_exposure "HIPAA Tier 4 Civil Penalties"
+
+        relationships {
+            this targets data_member_health_record "Attempts exfiltration of patient EHR data"
+            this targets app_health_claims_adjudicator "Attacks clinical claims database"
+        }
+    }
+
+    threat threat_apim_volumetric_ddos "Volumetric DDoS Attack on API Ingress During Storm Event" {
+        description "Coordinated distributed denial of service targeting quote and FNOL endpoints during severe regional weather events"
+        category "DoS"
+        likelihood "Critical"
+        impact "High"
+        risk_rating "Critical"
+        mitigation_status "Open"
+        attr threat_actor "Botnet Operator"
+        attr estimated_volume "800 Gbps SYN and HTTPS Flood"
+
+        relationships {
+            this targets app_aura_mobile "Disrupts customer mobile app connectivity"
+            this targets app_provider_partner_gateway "Denies clinic claim submission APIs"
+        }
+    }
+
+    threat threat_adjuster_limit_bypass "Adjuster Settlement Authority Limit Privilege Escalation" {
+        description "Insider claims adjuster exploiting token claims to settle claims exceeding their assigned $50k signing authority"
+        category "Privilege Escalation"
+        likelihood "Low"
+        impact "Critical"
+        risk_rating "High"
+        mitigation_status "Accepted"
+        attr threat_actor "Rogue Internal Employee"
+
+        relationships {
+            this targets app_instant_disbursement_gateway "Attempts unauthorized high-value wire release"
+        }
+    }
+
+    // ==========================================
+    // 2. Known CVE Vulnerabilities
+    // ==========================================
+    vulnerability vuln_aks_ingress_cve "HTTP/2 Rapid Reset Vulnerability in Ingress Proxy" {
+        description "Denial of service via stream cancellation abuse in edge HTTP/2 reverse proxies"
+        cve_id "CVE-2023-44487"
+        cvss_score 9.1
+        attr remediation_sla "Immediate Mitigation"
+        attr patch_status "WAF Mitigation Rule Applied"
+
+        relationships {
+            this targets app_provider_partner_gateway "Impacts public-facing edge ingress"
+        }
+    }
+
+    vulnerability vuln_kafka_client_deser "Snappy-Java Deserialization Flaw in Event Consumer" {
+        description "Unchecked chunk length in Snappy framing leading to potential denial of service or remote code execution"
+        cve_id "CVE-2023-34455"
+        cvss_score 7.8
+        attr remediation_sla "14 days"
+        attr patch_version "Snappy Java 1.1.10.1"
+
+        relationships {
+            this targets app_telematics_stream_ingestor "Affects Kafka consumer libraries"
+        }
+    }
+
+    vulnerability vuln_openssl_sidechannel "OpenSSL TLS Handshake Side-Channel Vulnerability" {
+        description "Timing side-channel vulnerability in RSA key exchange during TLS session resumption"
+        cve_id "CVE-2024-2511"
+        cvss_score 4.3
+        attr remediation_sla "30 days"
+        attr patch_status "Patch Scheduled in Sprint"
+
+        relationships {
+            this targets app_member_portal_web "Affects web server TLS libraries"
+        }
+    }
+
+    // ==========================================
+    // 3. Security Controls & Defense-in-Depth
+    // ==========================================
+    control control_azure_front_door_waf "Azure Front Door & Premium Managed WAF" {
+        description "Global edge reverse proxy with Layer 7 Web Application Firewall inspecting incoming HTTPS requests and scrubbing DDoS"
+        owner "Head of Cyber Defense"
+        tags ["WAF", "DDoS", "Perimeter", "AzureFrontDoor"]
+        control_type "Preventive"
+        control_category "Network Security"
+        implementation_status "Implemented"
+        effectiveness "High"
+        attr framework "PCI-DSS"
+        attr ddos_protection "Azure DDoS Protection Network Enabled"
+        attr rule_sets "DefaultRuleSet 2.1, BotProtection 1.0"
+
+        relationships {
+            this protects app_aura_mobile "Filters malicious HTTP traffic and bot floods" {
+                mechanism "Monitoring"
+            }
+            this protects app_member_portal_web "Provides edge TLS termination and WAF filtering" {
+                mechanism "Monitoring"
+            }
+            this protects app_provider_partner_gateway "Inspects incoming healthcare API transactions" {
+                mechanism "Monitoring"
+            }
+            this mitigates threat_apim_volumetric_ddos "Scrubs volumetric DDoS floods at Azure edge PoPs"
+        }
+    }
+
+    control control_azure_keyvault_hsm "Azure Key Vault Managed HSM & Envelope Encryption" {
+        description "FIPS 140-2 Level 3 validated Hardware Security Module managing customer-managed encryption keys (CMEK) for PHI and financial ledgers"
+        owner "Lead Cryptographic Engineer"
+        tags ["Cryptography", "HSM", "KeyVault", "CMEK", "HIPAA"]
+        control_type "Preventive"
+        control_category "Cryptography"
+        implementation_status "Implemented"
+        effectiveness "High"
+        attr framework "HIPAA"
+        attr key_algorithm "RSA 4096 and AES 256"
+        attr automatic_key_rotation "Annual Automated"
+
+        relationships {
+            this protects data_member_health_record "Provides field-level envelope encryption for clinical PHI"
+            this protects data_life_underwriting_profile "Encrypts life risk profiles at rest"
+            this protects data_statutory_general_ledger "Enforces transparent database encryption"
+            this mitigates threat_phi_exfiltration "Prevents plaintext data exposure during exfiltration"
+        }
+    }
+
+    control control_hardware_pki_signature "Vehicle Telematics Cryptographic PKI Signing" {
+        description "Hardware-backed cryptographic signature verification for OBD-II and connected vehicle kinematic packets"
+        owner "Lead IoT Security Architect"
+        tags ["IoT", "PKI", "Cryptography", "Telematics"]
+        control_type "Preventive"
+        control_category "Cryptography"
+        implementation_status "Implemented"
+        effectiveness "High"
+        attr framework "ISO-21434"
+        attr signature_algorithm "ECDSA secp256r1"
+
+        relationships {
+            this protects data_telematics_stream "Verifies authenticity of incoming sensor telemetry"
+            this mitigates threat_telematics_spoofing "Rejects unsigned or tampered kinematics packets"
+        }
+    }
+
+    control control_cryptographic_photo_watermark "C2PA Cryptographic Photo Provenance & AI Watermarking" {
+        description "Coalition for Content Provenance and Authenticity (C2PA) cryptographic manifest verification detecting AI generation"
+        owner "Head of AI Claims Tech"
+        tags ["C2PA", "AI-Verification", "DamagePhotos", "AntiFraud"]
+        control_type "Preventive"
+        control_category "Data Protection"
+        implementation_status "Implemented"
+        effectiveness "High"
+        attr framework "NIST-AI-RMF"
+        attr provenance_standard "C2PA Specification v1.3"
+
+        relationships {
+            this protects app_auto_claims_engine "Guarantees authenticity of uploaded damage photographs" {
+                mechanism "Monitoring"
+            }
+            this mitigates threat_photo_metadata_tampering "Flags synthetic or manipulated collision images"
+        }
+    }
+
+    control control_ai_prompt_shield "Azure OpenAI Prompt Shield & Safety Filters" {
+        description "Automated LLM guardrail screening user inputs and clinical notes for indirect prompt injection and jailbreak attempts"
+        owner "AI Ethics & Governance Lead"
+        tags ["AIGovernance", "PromptShield", "LLMSecurity", "AzureOpenAI"]
+        control_type "Preventive"
+        control_category "Application Security"
+        implementation_status "Implemented"
+        effectiveness "High"
+        attr framework "NAIC AI"
+        attr defense_mechanism "Jailbreak and Indirect Injection Detection"
+
+        relationships {
+            this protects agent_auto_claims_stp_adjuster "Prevents prompt injection in claim justifications" {
+                mechanism "Monitoring"
+            }
+            this protects agent_clinical_preauth_reviewer "Guards clinical evaluation prompts" {
+                mechanism "Monitoring"
+            }
+        }
+    }
+
+    control control_entra_pam_just_in_time "Microsoft Entra Privileged Identity Management (PIM)" {
+        description "Just-in-time time-bound role activation requiring dual approval for claim disbursements exceeding standard limits"
+        owner "Director of IAM"
+        tags ["IAM", "PIM", "EntraID", "ZeroTrust"]
+        control_type "Preventive"
+        control_category "Identity & Access Management"
+        implementation_status "Implemented"
+        effectiveness "High"
+        attr framework "SOC2"
+        attr activation_maximum_duration "4 hours"
+        attr required_approvals "Manager and Risk Officer Dual Signoff"
+
+        relationships {
+            this protects app_instant_disbursement_gateway "Enforces dual-signoff for wire payouts"
+            this mitigates threat_adjuster_limit_bypass "Prevents unauthorized settlement limit elevation"
+        }
+    }
+
+    // ==========================================
+    // 4. Zero Trust Enclaves & Boundaries
+    // ==========================================
+    trust_boundary tb_edge_dmz "Azure Front Door Edge DMZ Perimeter" {
+        description "Edge network perimeter managed by Azure Front Door providing DDoS scrubbing and WAF packet inspection"
+        boundary_type "DMZ"
+        trust_level "Medium"
+        attr zone_type "Edge Inspection Zone"
+        attr inspection_policy "OWASP Top 10 Strict"
+
+        relationships {
+            this encloses app_aura_mobile "Inspects mobile ingress traffic"
+            this encloses app_member_portal_web "Inspects web browser traffic"
+            this encloses app_provider_partner_gateway "Enforces mutual TLS for clinics"
+        }
+    }
+
+    trust_boundary tb_aks_microservices_mesh "AKS Zero Trust Microservices Mesh Enclave" {
+        description "Internal Kubernetes service mesh enforcing strict mTLS cryptographic encryption and SPIFFE/SPIRE pod identities"
+        boundary_type "Cloud"
+        trust_level "High"
+        attr zone_type "Zero Trust Application Mesh"
+        attr mtls_enforcement "STRICT"
+
+        relationships {
+            this encloses inf_aks_core_cluster "Enforces container-to-container mTLS"
+            this encloses app_auto_claims_engine "Isolates claims orchestration microservice"
+            this encloses app_instant_disbursement_gateway "Protects financial disbursement pods"
+        }
+    }
+
+    trust_boundary tb_hipaa_phi_enclave "HIPAA Protected Health Information (PHI) Secure Enclave" {
+        description "Cryptographically isolated Azure subscription and dedicated virtual network for electronic health records"
+        boundary_type "Zone"
+        trust_level "High"
+        attr zone_type "HIPAA PHI Enclave"
+        attr audit_surveillance "Continuous Privileged Session Recording"
+
+        relationships {
+            this encloses app_health_claims_adjudicator "Encloses medical diagnostic rules engine"
+            this encloses app_clinical_preauth_service "Isolates clinical decision support microservice"
+        }
+    }
+
+    trust_boundary tb_pci_token_vault "Stripe PCI Cardholder Data Environment Subnet" {
+        description "Dedicated PCI-DSS compliant enclave isolating tokenized payment instruments from core enterprise networks"
+        boundary_type "Network"
+        trust_level "High"
+        attr zone_type "Cardholder Data Environment"
+        attr pci_scope "Isolated Token Proxy"
+
+        relationships {
+            this encloses inf_stripe_vault_infrastructure "Wraps around payment card HSM vault"
+            this encloses app_stripe_payments_platform "Encloses tokenized payment processor"
+        }
+    }
+}

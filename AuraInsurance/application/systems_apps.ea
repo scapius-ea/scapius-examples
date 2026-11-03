@@ -1,0 +1,761 @@
+layer "Application Architecture" {
+
+    // ==========================================
+    // 1. Omnichannel Channels & Front Door
+    // ==========================================
+    app app_aura_mobile "Aura Insurance Mobile App" {
+        description "Flagship cross-platform mobile application providing real-time drive scoring, digital health cards, and touchless claim FNOL"
+        owner "Head of Mobile Engineering"
+        tags ["Cloud-Native", "Mobile", "React-Native", "Channels", "Car-Insurance", "Health-Insurance", "Life-Insurance"]
+        tier "Tier-1"
+        status "Active"
+        time "Invest"
+        internet_facing true
+        cost { amount 420000 unit year }
+        score { business_value 9.6 tech_fit 9.3 }
+        security { confidentiality "High" integrity "Critical" availability "Critical" }
+        lifecycle { phase Run start "2024-01-15" }
+        attr delivery_model "In-House Cloud-Native"
+        attr vendor_name "Internal Mobile Team"
+        attr runtime_framework "React Native 0.74"
+        attr client_platforms "iOS and Android"
+        attr active_monthly_users "1,850,000"
+        attr app_store_rating "4.8 Stars"
+
+        relationships {
+            this serves act_insured_driver "Provides mobile crash intake and driving telemetry"
+            this serves act_health_member "Displays digital insurance card and deductible progress"
+            this serves act_life_policyholder "Delivers instant quote-to-bind experience"
+            this realizes cap_crm_customer360 "Delivers self-service customer interaction channel"
+            this realizes cap_instant_fnol_intake "Captures collision photos and sensor timestamps"
+        }
+    }
+
+    app app_member_portal_web "Aura Member Web Portal" {
+        description "Next.js web application for desktop policy servicing, document downloads, and billing management"
+        owner "Head of Web Engineering"
+        tags ["Cloud-Native", "Web", "NextJS", "Channels", "Customer-Portal"]
+        tier "Tier-1"
+        status "Active"
+        time "Invest"
+        internet_facing true
+        cost { amount 310000 unit year }
+        score { business_value 8.9 tech_fit 9.0 }
+        security { confidentiality "High" integrity "Critical" availability "High" }
+        lifecycle { phase Run start "2024-03-01" }
+        attr delivery_model "In-House Cloud-Native"
+        attr vendor_name "Internal Web Team"
+        attr runtime_framework "Next.js 14 SSR"
+        attr accessibility_standard "WCAG 2.1 AA"
+
+        relationships {
+            this serves act_health_member "Enables claims lookup and provider directory search"
+            this serves act_life_policyholder "Enables beneficiary updates and annual statements"
+            this realizes cap_crm_customer360 "Provides web customer servicing"
+        }
+    }
+
+    app app_provider_partner_gateway "Healthcare Provider & Partner API Gateway" {
+        description "Public-facing FHIR and EDI clearinghouse gateway on Azure API Management for in-network medical clinics"
+        owner "Director of Partner APIs"
+        tags ["Cloud-Native", "APIM", "FHIR", "EDI", "Healthcare-Gateway"]
+        tier "Tier-1"
+        status "Active"
+        time "Invest"
+        internet_facing true
+        cost { amount 260000 unit year }
+        score { business_value 9.2 tech_fit 9.1 }
+        security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+        lifecycle { phase Run start "2024-06-01" }
+        attr delivery_model "In-House Cloud-Native"
+        attr vendor_name "Internal API Team"
+        attr api_standards "HL7 FHIR Release 4, EDI X12 005010"
+        attr rate_limiting "10,000 req/min"
+
+        relationships {
+            this serves act_medical_provider "Receives EDI 270/278/837 transaction sets"
+            this realizes cap_health_benefit_design "Exposes provider network interfaces"
+        }
+    }
+
+    // ==========================================
+    // 2. Customer Engagement & CEP Systems
+    // ==========================================
+    system system_customer_engagement "Customer Engagement & CEP Ecosystem" {
+        description "Integrated suite uniting commercial SaaS CRM, contact center telephony, and custom streaming CEP"
+        owner "Chief Customer Officer"
+        tags ["CRM", "Engagement", "CEP", "ContactCenter"]
+        criticality "Mission-Critical"
+        status "Active"
+        tier "Tier-1"
+        time "Invest"
+        cost { amount 1450000 unit year }
+        score { business_value 9.4 tech_fit 9.2 }
+        security { confidentiality "Medium" integrity "Medium" availability "Medium" }
+        lifecycle { phase Run start "2023-11-01" }
+        attr disaster_recovery_strategy "Multi-Region Active-Active"
+        attr compliance_scope "SOC 2 Type II, HIPAA, GDPR"
+
+        app app_crm_dynamics365 "Microsoft Dynamics 365 Customer Engagement" {
+            description "Commercial SaaS Customer 360 platform maintaining unified customer records, omnichannel cases, and interactions"
+            owner "Head of CRM Platforms"
+            tags ["Vendor-SaaS", "Microsoft", "Dynamics365", "CRM", "Customer360"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 580000 unit year }
+            score { business_value 9.2 tech_fit 9.0 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2023-11-01" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Microsoft"
+            attr cloud_tenant "Azure US Commercial"
+            attr rto "30 minutes"
+            attr rpo "5 minutes"
+
+            relationships {
+                this realizes cap_crm_customer360 "Underpins central customer 360 record"
+                this serves act_claims_adjuster "Provides claims dossier and contact history"
+            }
+        }
+
+        app app_omnichannel_ccaas_genesys "Genesys Cloud CX Contact Center" {
+            description "Commercial cloud telephony and CCaaS routing incoming support calls and integrating with conversational IVR"
+            owner "Head of Contact Center Tech"
+            tags ["Vendor-SaaS", "Genesys", "CCaaS", "Telephony", "ContactCenter"]
+            tier "Tier-2"
+            status "Active"
+            time "Invest"
+            cost { amount 310000 unit year }
+            score { business_value 8.7 tech_fit 8.6 }
+            security { confidentiality "High" integrity "High" availability "High" }
+            lifecycle { phase Run start "2024-02-15" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Genesys"
+            attr telephony_protocol "WebRTC and SIP"
+
+            relationships {
+                this realizes cap_omnichannel_contact "Delivers cloud contact center telephony"
+            }
+        }
+
+        app app_cep_stream_engine "Aura Complex Event Processing (CEP) Engine" {
+            description "Real-time stateful event stream processor built on Apache Flink analyzing telematics kinematics and fraud bursts"
+            owner "Head of Streaming Architecture"
+            tags ["Cloud-Native", "Azure-AKS", "Apache-Flink", "CEP", "Streaming"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 340000 unit year }
+            score { business_value 9.7 tech_fit 9.6 }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            lifecycle { phase Run start "2024-04-01" }
+            attr delivery_model "In-House Cloud-Native"
+            attr vendor_name "Internal Data Engineering"
+            attr stream_engine "Apache Flink 1.19"
+            attr latency_sla "Under 20 milliseconds"
+
+            relationships {
+                this realizes cap_cep_realtime_events "Executes real-time complex event patterns"
+            }
+        }
+
+        app app_cdp_personalization_service "Customer Data Platform & Bundling Engine" {
+            description "Proprietary algorithmic service evaluating multi-line cross-sell propensities (e.g. bundling auto with life)"
+            owner "Head of Growth Technology"
+            tags ["Cloud-Native", "Azure-AKS", "CDP", "Marketing", "Personalization"]
+            tier "Tier-2"
+            status "Active"
+            time "Invest"
+            cost { amount 220000 unit year }
+            score { business_value 8.5 tech_fit 8.4 }
+            security { confidentiality "High" integrity "High" availability "High" }
+            lifecycle { phase Run start "2024-05-10" }
+            attr delivery_model "In-House Cloud-Native"
+            attr vendor_name "Internal Growth Engineering"
+            attr ml_framework "Scikit-Learn and LightGBM"
+
+            relationships {
+                this realizes cap_cdp_marketing "Calculates personalized bundle discounts"
+            }
+        }
+    }
+
+    // ==========================================
+    // 3. Distribution & Broker Ecosystem
+    // ==========================================
+    system system_broker_distribution "Broker & Partner Distribution Platform" {
+        description "Agency portal, comparative rater aggregation engine, and broker commission ledger"
+        owner "VP of Distribution Technology"
+        tags ["Distribution", "Brokers", "Aggregators", "Commissions"]
+        criticality "Business-Critical"
+        status "Active"
+        tier "Tier-1"
+        time "Invest"
+        cost { amount 920000 unit year }
+        score { business_value 9.1 tech_fit 8.9 }
+        security { confidentiality "Medium" integrity "Medium" availability "Medium" }
+        lifecycle { phase Run start "2023-10-01" }
+        attr primary_partner_agencies "4,800"
+
+        app app_agency_management_applied "Applied Systems Digital Agency Portal" {
+            description "Commercial SaaS portal allowing independent brokers to manage client books, run commercial quotes, and bind policies"
+            owner "Director of Agency Systems"
+            tags ["Vendor-SaaS", "Applied-Systems", "Broker-Portal", "Distribution"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            internet_facing true
+            cost { amount 380000 unit year }
+            score { business_value 9.0 tech_fit 8.8 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2023-10-01" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Applied Systems"
+            attr supported_lines "Commercial Auto, Group Health, Life"
+
+            relationships {
+                this serves act_broker_partner "Enables digital quote submission and binding"
+                this realizes cap_broker_distribution "Powers broker agency network"
+            }
+        }
+
+        app app_comparative_rater_gateway "EZLynx Comparative Rater Gateway" {
+            description "Managed SaaS integration engine connecting Aura rating services with digital aggregators (Policygenius, Insurify)"
+            owner "Head of Aggregator Partnerships"
+            tags ["Vendor-SaaS", "EZLynx", "Aggregators", "Quoting", "APIs"]
+            tier "Tier-2"
+            status "Active"
+            time "Invest"
+            internet_facing true
+            cost { amount 290000 unit year }
+            score { business_value 8.9 tech_fit 9.0 }
+            security { confidentiality "High" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2024-01-20" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "EZLynx"
+            attr peak_tps "450 quotes/sec"
+
+            relationships {
+                this realizes cap_comparative_rating "Feeds aggregator quoting engines"
+            }
+        }
+
+        app app_producer_commission_engine "Producer Commission Calculation Service" {
+            description "Custom cloud-native microservice calculating tiered broker commission splits and generating ACH payouts"
+            owner "Head of Agency Compensation"
+            tags ["Cloud-Native", "Azure-AKS", "Commissions", "Microservice"]
+            tier "Tier-2"
+            status "Active"
+            time "Invest"
+            cost { amount 190000 unit year }
+            score { business_value 8.6 tech_fit 8.7 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2024-04-15" }
+            attr delivery_model "In-House Cloud-Native"
+            attr vendor_name "Internal Finance Engineering"
+            attr payout_cadence "Monthly Batched"
+
+            relationships {
+                this realizes cap_broker_distribution "Automates commission compensation"
+            }
+        }
+
+        app app_legacy_broker_sftp_v1 "Legacy Broker SFTP Batch Gateway" {
+            description "Early on-premises batch file transfer server used for legacy broker book synchronization, scheduled for imminent retirement"
+            owner "IT Operations"
+            tags ["Legacy", "Batch", "SFTP", "Retiring", "Technical-Debt"]
+            tier "Tier-3"
+            status "Deprecated"
+            time "Eliminate"
+            internet_facing false
+            cost { amount 140000 unit year }
+            score { business_value 2.9 tech_fit 2.1 }
+            security { confidentiality "Medium" integrity "Medium" availability "Medium" }
+            lifecycle { phase Retire start "2027-01-15" }
+            attr delivery_model "In-House Legacy"
+            attr decommissioning_ticket "MIG-9842"
+            attr replacement_target "Comparative Rater Gateway"
+
+            relationships {
+                this realizes cap_broker_distribution "Legacy batch file sync"
+            }
+        }
+    }
+
+    // ==========================================
+    // 4. Core Insurance Product Engines (Azure AKS)
+    // ==========================================
+    system system_core_insurance_engines "Aura Multi-Line Core Insurance Platform" {
+        description "Proprietary in-house cloud-native microservices fleet running on Azure Kubernetes Service (AKS)"
+        owner "Chief Technology Officer"
+        tags ["Cloud-Native", "Azure-AKS", "CorePlatform", "Microservices"]
+        criticality "Mission-Critical"
+        status "Active"
+        tier "Tier-1"
+        time "Invest"
+        cost { amount 3120000 unit year }
+        score { business_value 9.8 tech_fit 9.6 }
+        security { confidentiality "Medium" integrity "Medium" availability "Medium" }
+        lifecycle { phase Run start "2024-01-01" }
+        attr orchestration_platform "Azure Kubernetes Service 1.30"
+        attr service_mesh "Istio Ambient mTLS"
+
+        // Connected Car Microservices
+        app app_telematics_stream_ingestor "Telematics Ingestion Microservice" {
+            description "Ultra-low-latency Go microservice ingesting vehicle kinematics, accelerometer telemetry, and OBD-II streams from Kafka"
+            owner "Lead Telematics Engineer"
+            tags ["Cloud-Native", "Azure-AKS", "Go", "Telematics", "IoT", "Car-Insurance"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 380000 unit year }
+            score { business_value 9.6 tech_fit 9.6 }
+            security { confidentiality "High" integrity "Critical" availability "Critical" }
+            lifecycle { phase Run start "2024-01-10" }
+            attr delivery_model "In-House Cloud-Native"
+            attr runtime_language "Go 1.22"
+            attr throughput_metric "120,000 kinematic packets/sec"
+
+            relationships {
+                this realizes cap_car_telematics_rating "Ingests raw vehicle kinematics"
+            }
+        }
+
+        app app_ubi_rating_service "Dynamic UBI Rating & Scoring Service" {
+            description "Algorithmic engine calculating monthly personalized auto premiums based on braking, cornering, speeding, and night driving"
+            owner "Lead Actuarial Engineer"
+            tags ["Cloud-Native", "Azure-AKS", "Python", "UBI", "Rating", "Car-Insurance"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 290000 unit year }
+            score { business_value 9.5 tech_fit 9.4 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2024-02-01" }
+            attr delivery_model "In-House Cloud-Native"
+            attr runtime_language "Python 3.12 (FastAPI)"
+            attr rating_interval "Rolling 30-Day Window"
+
+            relationships {
+                this realizes cap_car_telematics_rating "Calculates dynamic behavioral insurance premiums"
+            }
+        }
+
+        app app_auto_claims_engine "Auto Collision Claims Orchestrator" {
+            description "End-to-end orchestration microservice managing accident intake, damage appraisal verification, and repair shop dispatch"
+            owner "Head of Auto Claims Tech"
+            tags ["Cloud-Native", "Azure-AKS", "Node", "Claims", "Auto", "STP"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 480000 unit year }
+            score { business_value 9.8 tech_fit 9.5 }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            lifecycle { phase Run start "2024-01-15" }
+            attr delivery_model "In-House Cloud-Native"
+            attr runtime_language "TypeScript Node.js 20"
+            attr stp_decision_time "Under 45 seconds"
+
+            relationships {
+                this realizes cap_instant_fnol_intake "Orchestrates crash claim intake"
+                this realizes cap_vision_damage_assessment "Coordinates computer vision damage assessment"
+                this realizes cap_subrogation_salvage "Triggers automated subrogation workflow"
+            }
+        }
+
+        // Digital Health Microservices
+        app app_health_claims_adjudicator "Health Claims Adjudication Engine" {
+            description "High-performance Java Quarkus microservice evaluating ICD-10 diagnostic codes, CPT procedure codes, and deductible accumulators"
+            owner "Lead Health Claims Architect"
+            tags ["Cloud-Native", "Azure-AKS", "Java", "Quarkus", "Health-Insurance", "HIPAA", "Claims"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 520000 unit year }
+            score { business_value 9.7 tech_fit 9.6 }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            lifecycle { phase Run start "2024-02-15" }
+            attr delivery_model "In-House Cloud-Native"
+            attr runtime_language "Java 21 (Quarkus)"
+            attr rules_engine "Drools Cloud Engine"
+            attr compliance_framework "HIPAA Security Rule"
+
+            relationships {
+                this realizes cap_health_claims_adjudication "Adjudicates ICD-10 diagnostic and CPT procedure claims"
+            }
+        }
+
+        app app_clinical_preauth_service "Clinical Pre-Authorization Microservice" {
+            description "FHIR-compliant clinical decision support microservice evaluating procedure medical necessity and physician triage"
+            owner "Director of Medical Tech"
+            tags ["Cloud-Native", "Azure-AKS", "FHIR", "Health-Insurance", "PreAuth", "Clinical"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 340000 unit year }
+            score { business_value 9.3 tech_fit 9.1 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2024-03-10" }
+            attr delivery_model "In-House Cloud-Native"
+            attr runtime_language "Java 21 (Spring Boot)"
+            attr fhir_version "R4"
+
+            relationships {
+                this realizes cap_clinical_preauthorization "Executes clinical pre-authorizations"
+                this serves act_medical_director "Presents clinical summaries and pre-auth cases"
+            }
+        }
+
+        app app_wearables_wellness_service "Wearables & Member Wellness Ingestor" {
+            description "Event-driven service ingesting Apple Health and Garmin physical activity metrics to award wellness premium discounts"
+            owner "Lead Wellness Engineer"
+            tags ["Cloud-Native", "Azure-AKS", "Wearables", "Health-Insurance", "Wellness", "IoT"]
+            tier "Tier-2"
+            status "Active"
+            time "Invest"
+            cost { amount 180000 unit year }
+            score { business_value 8.7 tech_fit 8.8 }
+            security { confidentiality "Critical" integrity "High" availability "High" }
+            lifecycle { phase Run start "2024-05-01" }
+            attr delivery_model "In-House Cloud-Native"
+            attr runtime_language "Python 3.12"
+            attr privacy_mode "Anonymized Biometrics Aggregator"
+
+            relationships {
+                this realizes cap_health_benefit_design "Powers member wellness incentive discounts"
+            }
+        }
+
+        // Modern Life Microservices
+        app app_life_underwriting_engine "Accelerated Life Underwriting Service" {
+            description "Predictive risk assessment microservice parsing prescription histories, laboratory results, and mortality indices"
+            owner "Lead Life Actuarial Architect"
+            tags ["Cloud-Native", "Azure-AKS", "Python", "Life-Insurance", "Underwriting", "EHR"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 440000 unit year }
+            score { business_value 9.6 tech_fit 9.4 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2024-03-01" }
+            attr delivery_model "In-House Cloud-Native"
+            attr runtime_language "Python 3.12"
+            attr decision_latency "Under 60 seconds"
+
+            relationships {
+                this realizes cap_accelerated_life_uw "Executes accelerated algorithmic life underwriting"
+                this serves act_underwriting_specialist "Refers non-standard complex risk profiles"
+            }
+        }
+
+        app app_beneficiary_management_service "Beneficiary Management & Life Claims Service" {
+            description "Secure portal service maintaining immutable beneficiary designations, trust documentation, and death benefit settlement"
+            owner "Head of Life Operations Tech"
+            tags ["Cloud-Native", "Azure-AKS", "C#", "Life-Insurance", "Beneficiary", "Claims"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 210000 unit year }
+            score { business_value 9.0 tech_fit 9.1 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2024-04-10" }
+            attr delivery_model "In-House Cloud-Native"
+            attr runtime_language "C# (.NET 8)"
+
+            relationships {
+                this realizes cap_life_death_settlement "Adjudicates digital death benefit disbursements"
+            }
+        }
+    }
+
+    // ==========================================
+    // 5. Shared Core, Billing & Reinsurance
+    // ==========================================
+    system system_shared_insurance_core "Aura Shared Insurance Core Platform" {
+        description "Immutable policy contract repository, recurring billing engine, and reinsurance administration"
+        owner "Chief Operating Officer"
+        tags ["PolicyLedger", "Billing", "Reinsurance", "SharedCore"]
+        criticality "Mission-Critical"
+        status "Active"
+        tier "Tier-1"
+        time "Invest"
+        cost { amount 1790000 unit year }
+        score { business_value 9.5 tech_fit 9.3 }
+        security { confidentiality "Medium" integrity "Medium" availability "Medium" }
+        lifecycle { phase Run start "2023-12-01" }
+
+        app app_policy_ledger_service "Event-Sourced Policy Ledger Microservice" {
+            description "Immutable policy contract database running on Azure PostgreSQL Hyperscale tracking all policy inceptions, endorsements, and cancellations"
+            owner "Lead Core Architect"
+            tags ["Cloud-Native", "Azure-AKS", "PostgreSQL", "PolicyCore", "Event-Sourcing"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 640000 unit year }
+            score { business_value 9.9 tech_fit 9.7 }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            lifecycle { phase Run start "2023-12-01" }
+            attr delivery_model "In-House Cloud-Native"
+            attr architecture_pattern "Event Sourcing and CQRS"
+            attr rto "15 minutes"
+            attr rpo "0 seconds"
+
+            relationships {
+                this realizes cap_policy_administration "Maintains immutable master policy ledger"
+            }
+        }
+
+        app app_stripe_payments_platform "Stripe Payments & PCI Card Vault" {
+            description "Commercial SaaS payment gateway managing Level 1 PCI-compliant credit card tokenization, recurring subscription debits, and ACH"
+            owner "Head of Payment Systems"
+            tags ["Vendor-SaaS", "Stripe", "PCI-DSS", "Payments", "Billing"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 480000 unit year }
+            score { business_value 9.5 tech_fit 9.4 }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            lifecycle { phase Run start "2024-01-05" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Stripe"
+            attr pci_dss_level "Level 1 Service Provider"
+
+            relationships {
+                this realizes cap_billing_collections "Underpins recurring digital premium collections"
+            }
+        }
+
+        app app_instant_disbursement_gateway "Real-Time Claims Payout Gateway" {
+            description "Proprietary disbursement microservice integrating with FedNow, The Clearing House RTP, and Visa Direct for sub-second claim payouts"
+            owner "Treasurer"
+            tags ["Cloud-Native", "Azure-AKS", "C#", "RTP", "FedNow", "Disbursements"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 350000 unit year }
+            score { business_value 9.7 tech_fit 9.6 }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            lifecycle { phase Run start "2024-02-20" }
+            attr delivery_model "In-House Cloud-Native"
+            attr runtime_language "C# (.NET 8)"
+            attr disbursement_settlement_speed "Sub-5 seconds"
+
+            relationships {
+                this realizes cap_instant_disbursement "Executes instant RTP push-to-card claim payouts"
+            }
+        }
+
+        app app_sapiens_reinsurance_saas "Sapiens Reinsurance Management Cloud" {
+            description "Commercial SaaS platform managing treaty, excess of loss, and facultative reinsurance accounting and claims recovery tracking"
+            owner "Head of Reinsurance Operations"
+            tags ["Vendor-SaaS", "Sapiens", "Reinsurance", "RiskTransfer"]
+            tier "Tier-2"
+            status "Active"
+            time "Tolerate"
+            cost { amount 320000 unit year }
+            score { business_value 8.6 tech_fit 8.2 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2023-09-01" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Sapiens"
+            attr accounting_treaties "Quotas, Surplus, Excess of Loss"
+
+            relationships {
+                this realizes cap_reinsurance_mgmt "Calculates reinsurance ceded liabilities and recoveries"
+            }
+        }
+    }
+
+    // ==========================================
+    // 6. Corporate Finance, Actuarial & HR
+    // ==========================================
+    system system_enterprise_corporate "Corporate Finance, Actuarial & HR Ecosystem" {
+        description "Commercial vendor SaaS platforms running financial general ledger, Solvency II actuarial models, and employee lifecycle"
+        owner "Chief Financial Officer"
+        tags ["ERP", "Finance", "Actuarial", "HR", "Corporate"]
+        criticality "Mission-Critical"
+        status "Active"
+        tier "Tier-1"
+        time "Tolerate"
+        cost { amount 1650000 unit year }
+        score { business_value 9.2 tech_fit 8.4 }
+        security { confidentiality "Medium" integrity "Medium" availability "Medium" }
+        lifecycle { phase Run start "2023-08-01" }
+
+        app app_sap_s4hana_cloud "SAP S/4HANA Cloud ERP & General Ledger" {
+            description "Commercial SaaS financial ERP maintaining US GAAP dual ledgers, accounts payable, accounts receivable, and statutory financial reporting"
+            owner "Corporate Controller"
+            tags ["Vendor-SaaS", "SAP", "ERP", "GeneralLedger", "Finance"]
+            tier "Tier-1"
+            status "Active"
+            time "Tolerate"
+            cost { amount 890000 unit year }
+            score { business_value 9.2 tech_fit 8.3 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2023-08-01" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "SAP"
+            attr integration_protocol "OData v4 REST"
+
+            relationships {
+                this realizes cap_general_ledger_statutory "Serves as authoritative general ledger"
+            }
+        }
+
+        app app_moodys_axis_actuarial "Moody's Analytics AXIS Actuarial Cloud" {
+            description "Commercial cloud actuarial modeling engine calculating Solvency II Solvency Capital Requirement (SCR) and IFRS 17 liability valuations"
+            owner "Chief Actuary"
+            tags ["Vendor-SaaS", "Moodys", "Actuarial", "IFRS17", "SolvencyII"]
+            tier "Tier-1"
+            status "Active"
+            time "Tolerate"
+            cost { amount 520000 unit year }
+            score { business_value 9.4 tech_fit 8.1 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2023-07-01" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Moody's Analytics"
+            attr valuation_models "Stochastic Monte Carlo, BEL, Risk Adjustment"
+
+            relationships {
+                this realizes cap_actuarial_reserving "Calculates IFRS 17 best estimate liabilities"
+            }
+        }
+
+        app app_workday_hcm "Workday Cloud Human Capital Management" {
+            description "Commercial SaaS solution for enterprise talent acquisition, payroll, employee benefits, and organizational hierarchy"
+            owner "Chief People Officer"
+            tags ["Vendor-SaaS", "Workday", "HCM", "HR", "Payroll"]
+            tier "Tier-2"
+            status "Active"
+            time "Tolerate"
+            cost { amount 240000 unit year }
+            score { business_value 8.4 tech_fit 8.5 }
+            security { confidentiality "Critical" integrity "High" availability "High" }
+            lifecycle { phase Run start "2023-06-01" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Workday"
+
+            relationships {
+                this realizes cap_human_capital_management "Maintains workforce and payroll records"
+            }
+        }
+    }
+
+    // ==========================================
+    // 7. Enterprise Data, MDM & Event Mesh
+    // ==========================================
+    system system_enterprise_data_platform "Aura Enterprise Data & Analytics Platform" {
+        description "Centralized real-time event streaming mesh, cloud data lakehouse, master data management, and BI reporting"
+        owner "Chief Data Officer"
+        tags ["DataPlatform", "EventMesh", "Databricks", "MDM", "PowerBI"]
+        criticality "Mission-Critical"
+        status "Active"
+        tier "Tier-1"
+        time "Invest"
+        cost { amount 1700000 unit year }
+        score { business_value 9.8 tech_fit 9.6 }
+        security { confidentiality "Medium" integrity "Medium" availability "Medium" }
+        lifecycle { phase Run start "2023-11-15" }
+
+        app system_aura_event_mesh "Aura Enterprise Event Mesh (Azure Event Hubs)" {
+            description "Mission-critical high-throughput event streaming backbone on Azure Event Hubs (Kafka protocol) running 50+ domain event streams"
+            owner "Head of Event Streaming"
+            tags ["Cloud-Native", "Azure", "Kafka", "EventHubs", "Streaming", "EventMesh"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 580000 unit year }
+            score { business_value 9.9 tech_fit 9.7 }
+            security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+            lifecycle { phase Run start "2023-11-15" }
+            attr delivery_model "In-House Cloud-Native"
+            attr streaming_protocol "Kafka 3.6 Binary Protocol"
+            attr retention_policy "90 Days Hot Storage"
+            attr topic_count "64 Active Domain Topics"
+
+            relationships {
+                this realizes cap_cep_realtime_events "Routes real-time enterprise event streams"
+            }
+        }
+
+        app app_databricks_lakehouse "Databricks Delta Lakehouse Platform" {
+            description "Distributed cloud lakehouse on Azure Data Lake Storage Gen2 powering actuarial loss triangles, telematics ML models, and analytics"
+            owner "Lead Data Architect"
+            tags ["Vendor-SaaS", "Databricks", "DeltaLake", "Lakehouse", "Analytics", "MachineLearning"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 510000 unit year }
+            score { business_value 9.6 tech_fit 9.5 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2024-01-15" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Databricks"
+            attr compute_engine "Spark 3.5 Serverless"
+            attr table_format "Delta Lake 3.1"
+
+            relationships {
+                this realizes cap_enterprise_bi_analytics "Executes distributed lakehouse analytics"
+            }
+        }
+
+        app app_semarchy_xdm_mdm "Semarchy xDM Master Data Management Cloud" {
+            description "Commercial multi-domain MDM platform maintaining authoritative master golden records for Customer 360, Vehicle VIN 360, and Providers"
+            owner "Head of Data Governance"
+            tags ["Vendor-SaaS", "Semarchy", "MDM", "MasterData", "DataGovernance"]
+            tier "Tier-1"
+            status "Active"
+            time "Invest"
+            cost { amount 420000 unit year }
+            score { business_value 9.3 tech_fit 9.1 }
+            security { confidentiality "Critical" integrity "Critical" availability "High" }
+            lifecycle { phase Run start "2024-02-01" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Semarchy"
+            attr master_domains "Party Customer, Vehicle VIN, Healthcare Provider"
+
+            relationships {
+                this realizes cap_master_data_mgmt "Resolves enterprise master golden records"
+            }
+        }
+
+        app app_enterprise_powerbi "Microsoft Power BI Enterprise Analytics" {
+            description "Self-service business intelligence reporting and executive dashboards for combined ratios, loss triangles, and compliance filings"
+            owner "Director of Business Intelligence"
+            tags ["Vendor-SaaS", "Microsoft", "PowerBI", "Analytics", "Dashboards"]
+            tier "Tier-2"
+            status "Active"
+            time "Tolerate"
+            cost { amount 190000 unit year }
+            score { business_value 8.8 tech_fit 8.9 }
+            security { confidentiality "High" integrity "High" availability "High" }
+            lifecycle { phase Run start "2023-12-01" }
+            attr delivery_model "Vendor SaaS"
+            attr vendor_name "Microsoft"
+
+            relationships {
+                this realizes cap_enterprise_bi_analytics "Visualizes executive KPI scorecards"
+            }
+        }
+    }
+
+    // Cross-Application Transaction Flows
+    app_aura_mobile flows_to app_auto_claims_engine "Submits collision damage photos and driver telematics"
+    app_telematics_stream_ingestor flows_to system_aura_event_mesh "Publishes raw kinematics stream (telematics.kinematics.v1)"
+    system_aura_event_mesh flows_to app_cep_stream_engine "Streams events for complex accident impact correlation"
+    app_auto_claims_engine flows_to app_instant_disbursement_gateway "Triggers sub-second claim settlement payout"
+    app_instant_disbursement_gateway flows_to app_policy_ledger_service "Posts claim settlement debit against policy reserves"
+    app_policy_ledger_service flows_to app_sap_s4hana_cloud "Transmits daily earned premium journals via OData API"
+    app_policy_ledger_service flows_to system_aura_event_mesh "Publishes PolicyBoundEvent and PolicyEndorsementEvent"
+    system_aura_event_mesh flows_to app_crm_dynamics365 "Synchronizes policyholder changes to Customer 360"
+    app_health_claims_adjudicator flows_to app_sap_s4hana_cloud "Posts aggregated medical provider disbursements"
+    app_policy_ledger_service flows_to app_moodys_axis_actuarial "Feeds active policy in-force records for monthly IFRS 17 valuation"
+    app_legacy_broker_sftp_v1 migrates_to app_comparative_rater_gateway "Decommissioning legacy batch file transfer in favor of REST API"
+    app_member_portal_web flows_to app_health_claims_adjudicator "Submits clinical claims and member inquiries"
+    app_member_portal_web flows_to app_life_underwriting_engine "Submits digital life insurance applications"
+    app_auto_claims_engine flows_to system_aura_event_mesh "Publishes ClaimSettledEvent and ClaimCreatedEvent"
+    app_life_underwriting_engine flows_to system_aura_event_mesh "Publishes LifePolicyIssuedEvent and UnderwritingDecisionEvent"
+    app_health_claims_adjudicator flows_to system_aura_event_mesh "Publishes HealthClaimAdjudicatedEvent"
+}

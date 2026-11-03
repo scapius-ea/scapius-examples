@@ -1,5 +1,10 @@
 workspace neo_bank "Neo Bank Enterprise Architecture" {
-
+    description "Enterprise architecture model for a modern digital bank with frictionless onboarding, instant payments, and AI-driven monitoring."
+    owner "Enterprise Architecture Guild"
+    icon "account_balance"
+    tags ["banking", "core", "digital", "retail"]
+    attr environment "production"
+    
     styles {
         theme "material"
 

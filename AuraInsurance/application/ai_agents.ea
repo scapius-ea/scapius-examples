@@ -1,0 +1,151 @@
+layer "Application Architecture" {
+
+    agent agent_auto_claims_stp_adjuster "Autonomous Auto Claims STP Adjuster" {
+        description "Fully autonomous AI settlement agent authorizing collision payouts under $2,500 based on vision repair estimates and fraud telemetry"
+        owner "VP of Claims Automation"
+        tags ["AI-Agent", "Autonomous", "Claims", "Auto", "STP", "Azure-OpenAI"]
+        model "gpt-4o"
+        time "Invest"
+        cost { amount 220000 unit year }
+        security { confidentiality "Critical" integrity "Critical" availability "Critical" }
+        ai_governance {
+            autonomy_level "Autonomous"
+            human_in_loop false
+        }
+        attr inference_endpoint "Azure OpenAI East US 2 Dedicated"
+        attr max_context_window "128k tokens"
+        attr settlement_limit_usd "2500"
+        attr hallucination_threshold "<0.01%"
+        attr prompt_shield_enabled true
+        attr audit_trail "Immutable Azure Blob Log"
+
+        relationships {
+            this realizes proc_instant_car_fnol "Executes autonomous micro-claim approval"
+            this reads data_car_claim_file "Evaluates damage photos and driver claim statements"
+            this flows_to app_instant_disbursement_gateway "Triggers payment release on auto-approval"
+        }
+    }
+
+    agent agent_vision_damage_estimator "Computer Vision Vehicle Damage Estimator" {
+        description "Multimodal computer vision agent identifying damaged vehicle components, crumple zones, and calculating repair vs replacement parts costs"
+        owner "Head of AI Claims Tech"
+        tags ["AI-Agent", "ComputerVision", "Multimodal", "Auto", "Claims", "Azure-OpenAI"]
+        model "gpt-4o-vision"
+        time "Invest"
+        cost { amount 180000 unit year }
+        security { confidentiality "High" integrity "Critical" availability "High" }
+        ai_governance {
+            autonomy_level "SemiAutonomous"
+            human_in_loop true
+        }
+        attr inference_endpoint "Azure Computer Vision and OpenAI"
+        attr image_resolution "4K High Fidelity"
+        attr parts_catalog_benchmark "Mitchell and CCC ONE Cloud"
+        attr confidence_threshold "94.5%"
+
+        relationships {
+            this realizes cap_vision_damage_assessment "Generates automated collision repair cost estimate"
+            this reads data_car_claim_file "Inspects uploaded vehicle photos"
+            this flows_to agent_auto_claims_stp_adjuster "Provides structured repair cost appraisal"
+        }
+    }
+
+    agent agent_clinical_preauth_reviewer "Clinical Pre-Authorization Copilot" {
+        description "Supervised clinical AI copilot cross-referencing physician clinical notes against evidence-based medical necessity guidelines"
+        owner "Chief Medical Officer"
+        tags ["AI-Agent", "Clinical", "PreAuth", "Health-Insurance", "HIPAA", "Copilot"]
+        model "claude-3-5-sonnet"
+        time "Invest"
+        cost { amount 195000 unit year }
+        security { confidentiality "Critical" integrity "Critical" availability "High" }
+        ai_governance {
+            autonomy_level "SemiAutonomous"
+            human_in_loop true
+        }
+        attr inference_endpoint "Azure Bedrock or Private Deployment"
+        attr clinical_guidelines "InterQual and MCG Care Guidelines"
+        attr human_override_latency "Under 60 seconds"
+        attr bias_monitoring_metric "Equalized Odds Demographic Parity"
+
+        relationships {
+            this realizes proc_clinical_preauthorization "Assists medical director in reviewing elective procedures"
+            this serves act_medical_director "Generates clinical recommendation with cited evidence"
+            this reads data_member_health_record "Extracts clinical diagnosis and procedure notes"
+        }
+    }
+
+    agent agent_life_risk_assessor "Accelerated Life Underwriting Risk Evaluator" {
+        description "Specialized LLM agent synthesizing electronic medical records, laboratory diagnostic ranges, and prescription histories for underwriters"
+        owner "Head of Life Underwriting"
+        tags ["AI-Agent", "Life-Insurance", "Underwriting", "EHR", "Risk", "Copilot"]
+        model "claude-3-5-sonnet"
+        time "Invest"
+        cost { amount 160000 unit year }
+        security { confidentiality "Critical" integrity "Critical" availability "High" }
+        ai_governance {
+            autonomy_level "Assisted"
+            human_in_loop true
+        }
+        attr inference_endpoint "Azure Private Enclave"
+        attr mortality_table_reference "2017 CSO Mortality Tables"
+        attr human_review_threshold "Flagged Adverse History"
+
+        relationships {
+            this realizes cap_accelerated_life_uw "Synthesizes multi-source EHR data into underwriting recommendation"
+            this serves act_underwriting_specialist "Presents unified health risk profile"
+            this reads data_life_underwriting_profile "Analyzes applicant diagnostic and medication profile"
+        }
+    }
+
+    agent agent_contact_center_voice_bot "Conversational FNOL & Servicing Voice Bot" {
+        description "Conversational AI voice assistant providing 24/7 spoken First Notice of Loss intake and roadside emergency dispatch"
+        owner "Head of Customer Experience Tech"
+        tags ["AI-Agent", "VoiceBot", "ContactCenter", "CCaaS", "ConversationalAI"]
+        model "gpt-4o"
+        time "Invest"
+        cost { amount 150000 unit year }
+        security { confidentiality "High" integrity "High" availability "Critical" }
+        ai_governance {
+            autonomy_level "SemiAutonomous"
+            human_in_loop true
+        }
+        attr speech_to_text_engine "Azure Neural Speech Services"
+        attr response_latency "Under 400 milliseconds"
+        attr escalation_trigger "Sentiment Distress or Injury Detected"
+
+        relationships {
+            this realizes cap_omnichannel_contact "Handles incoming first notice of loss voice calls"
+            this serves act_insured_driver "Transcribes spoken accident details and dispatches roadside assistance"
+            this flows_to app_auto_claims_engine "Publishes verified phone FNOL payload"
+        }
+    }
+
+    agent agent_fraud_anomaly_investigator "Claims Fraud Ring & Anomaly Investigator" {
+        description "Graph-analytics copilot identifying multi-party staged accident syndicates, suspicious billing spikes, and shared vehicle VINs"
+        owner "Head of Special Investigations Unit"
+        tags ["AI-Agent", "Fraud", "SIU", "GraphAnalytics", "Copilot"]
+        model "claude-3-5-sonnet"
+        time "Invest"
+        cost { amount 210000 unit year }
+        security { confidentiality "Critical" integrity "Critical" availability "High" }
+        ai_governance {
+            autonomy_level "Assisted"
+            human_in_loop true
+        }
+        attr graph_database "Azure Cosmos DB Gremlin Graph"
+        attr syndicate_detection_algorithm "Louvain Community Detection"
+
+        relationships {
+            this realizes cap_fraud_detection "Surfaces suspicious claims collusion patterns"
+            this serves act_claims_adjuster "Highlights staged accident probability scores"
+            this reads data_car_claim_file "Scans collision dossiers for recurring participants"
+        }
+    }
+
+    // Inter-system agent orchestration connections
+    agent_auto_claims_stp_adjuster serves app_auto_claims_engine "Adjudicates straight-through auto collision settlements"
+    agent_vision_damage_estimator flows_to app_auto_claims_engine "Supplies part replacement cost appraisal"
+    agent_clinical_preauth_reviewer serves app_clinical_preauth_service "Provides automated clinical guideline matching and rationale"
+    agent_life_risk_assessor serves app_life_underwriting_engine "Evaluates mortality risk models and accelerated underwriting classification"
+    agent_fraud_anomaly_investigator flows_to app_auto_claims_engine "Alerts claims engine to syndicate collusion patterns"
+}

@@ -1,0 +1,25 @@
+workspace aura_insurance "Aura Digital Insurance Enterprise Architecture" {
+    description "Cloud-native multi-line digital insurance enterprise architecture covering auto, health, and life products with AI-driven claims automation."
+    owner "Enterprise Architecture Office"
+    icon "shield"
+    tags ["insurance", "cloud-native", "ai-claims", "multi-line"]
+
+    // Root entry point: global branding, themes, and visual styles.
+    // View definitions are modularized inside views/views.ea.
+    // Visual theme rules are centralized in default.theme.
+
+    styles {
+        theme "material"
+
+        // Context-specific model overrides and conditional callouts
+        style * where risk == "Critical" {
+            css_class "border-danger bg-danger-subtle text-danger"
+            border_width "3px"
+        }
+
+        // Highlight Flagship Core Insurance Platform
+        style system_core_insurance_engines {
+            custom_css "outline: 3px dashed #0284c7; outline-offset: 4px;"
+        }
+    }
+}

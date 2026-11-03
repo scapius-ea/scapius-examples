@@ -1,0 +1,224 @@
+views {
+
+    // ========================================================
+    // 1. Omnichannel Context & Digital Front Door
+    // ========================================================
+    landscape enterprise_context "Enterprise Digital Insurance Context" {
+        description "End-to-end digital insurance landscape covering Connected Car, Digital Health, and Modern Life lines across channels, microservices, and SaaS backbones."
+        tags ["Enterprise", "Context", "Digital Insurance", "Multi-Line"]
+
+        include act_insured_driver
+        include act_health_member
+        include act_life_policyholder
+        include app_aura_mobile
+        include app_member_portal_web
+        include app_auto_claims_engine
+        include app_health_claims_adjudicator
+        include app_life_underwriting_engine
+        include system_aura_event_mesh
+        include app_crm_dynamics365
+        include app_sap_s4hana_cloud
+
+        auto_layout TopToBottom
+
+        text channelNote """
+            Omnichannel customer touchpoints (Mobile App, Web Portal) communicate via Azure API Management and stream high-velocity events into the enterprise Kafka mesh.
+        """ {
+            anchor app_aura_mobile
+        }
+    }
+
+    // ========================================================
+    // 2. Business Capability Map
+    // ========================================================
+    capability_map enterprise_capabilities "Enterprise Capability Map" {
+        description "Hierarchical multi-line insurance capability model covering Customer Engagement, Product & Underwriting, Claims Operations, Shared Core, and Corporate Actuarial."
+        tags ["Capabilities", "Business Architecture", "Insurance"]
+
+        include where kind == "Capability"
+        auto_layout LeftToRight
+    }
+
+    // ========================================================
+    // 3. Security Threat Model & Zero Trust Posture
+    // ========================================================
+    threat_model security_threat_posture "Threat Model & Zero Trust Posture" {
+        description "STRIDE threat matrix, vulnerabilities, security controls, and trust boundaries protecting member PHI, PII, and financial ledgers."
+        tags ["Security", "STRIDE", "Zero Trust", "HIPAA", "PCI-DSS"]
+
+        include where layer == "Security Architecture"
+        include app_aura_mobile
+        include app_auto_claims_engine
+        include app_health_claims_adjudicator
+        include app_instant_disbursement_gateway
+        include data_member_health_record
+
+        auto_layout LeftToRight
+    }
+
+    // ========================================================
+    // 4. Real-Time Claims Event Mesh Flow
+    // ========================================================
+    landscape claims_event_stream "Real-Time Claims Event Mesh Flow" {
+        description "Event-driven straight-through claims processing path from IoT crash telemetry through vision AI, autonomous settlement, and instant payment disbursement."
+        tags ["Event-Driven", "Claims", "Telematics", "STP", "AI"]
+
+        include app_telematics_stream_ingestor
+        include app_cep_stream_engine
+        include app_auto_claims_engine
+        include agent_auto_claims_stp_adjuster
+        include agent_vision_damage_estimator
+        include app_instant_disbursement_gateway
+        include system_aura_event_mesh
+
+        auto_layout LeftToRight
+    }
+
+    // ========================================================
+    // 5. Executive Strategic Lineage
+    // ========================================================
+    landscape strategic_lineage "Strategic Multi-Layer Lineage" {
+        description "End-to-end vertical traceability from executive growth goals down to operational capabilities, microservices, and Azure AKS compute."
+        tags ["Strategy", "Traceability", "Lineage", "Executive"]
+
+        include goal_claims_stp_dominance
+        include kpi_claims_stp_rate
+        include cap_instant_fnol_intake
+        include proc_instant_car_fnol
+        include app_auto_claims_engine
+        include agent_auto_claims_stp_adjuster
+        include inf_aks_core_cluster
+
+        auto_layout TopToBottom
+
+        text lineageNote """
+            Goal to achieve >70% Claims STP is directly supported by automated collision FNOL processes, the autonomous STP adjuster agent, and scalable AKS compute.
+        """ {
+            anchor goal_claims_stp_dominance
+        }
+    }
+
+    // ========================================================
+    // 6. Technology & Multi-Cloud Hosting Footprint
+    // ========================================================
+    landscape technology_footprint "Multi-Cloud & SaaS Hosting Footprint" {
+        description "Physical and cloud infrastructure hosting map showing Azure AKS primary, DR standby, and multi-vendor SaaS platforms."
+        tags ["Technology Architecture", "Infrastructure", "Azure", "SaaS"]
+
+        include where layer == "Technology Architecture"
+        include system_core_insurance_engines
+        include app_auto_claims_engine
+        include app_health_claims_adjudicator
+        include app_sap_s4hana_cloud
+        include app_databricks_lakehouse
+        include_verb hosts
+
+        auto_layout LeftToRight
+    }
+
+    // ========================================================
+    // 7. Sensitive Data Lifecycle & Protection Flow
+    // ========================================================
+    data_flow sensitive_data_protection "Sensitive Data Protection & Lineage Flow" {
+        description "Lineage of patient PHI, driver kinematics, and cardholder tokens across read/write operations and HSM encryption."
+        tags ["Data Architecture", "PHI", "PII", "HIPAA", "PCI-DSS"]
+
+        include data_member_health_record
+        include data_telematics_stream
+        include data_car_claim_file
+        include data_pci_payment_tokens
+        include app_health_claims_adjudicator
+        include app_auto_claims_engine
+        include app_telematics_stream_ingestor
+        include app_instant_disbursement_gateway
+
+        auto_layout LeftToRight
+    }
+
+    // ========================================================
+    // 8. Regulatory Compliance Governance Matrix
+    // ========================================================
+    compliance_matrix regulatory_compliance_matrix "Regulatory & Policy Compliance Matrix" {
+        description "Regulatory standards (HIPAA, PCI-DSS v4.0, IFRS 17, NAIC AI) and corporate policy governance across systems."
+        tags ["Governance", "Compliance", "Audit", "HIPAA", "PCI-DSS"]
+
+        include where layer == "Governance & Policy"
+        include app_health_claims_adjudicator
+        include app_clinical_preauth_service
+        include app_stripe_payments_platform
+        include app_sap_s4hana_cloud
+        include data_member_health_record
+        include system_core_insurance_engines
+        include_verb governed_by
+    }
+
+    // ========================================================
+    // 9. Connected Car Claims Value Stream Map
+    // ========================================================
+    value_stream_map touchless_car_claims_stream "Touchless Car Claims Value Stream" {
+        description "Five-stage customer journey from violent G-force crash verification to sub-second RTP payout."
+        tags ["ValueStream", "CarInsurance", "Claims", "STP"]
+
+        include vs_connected_car_claims
+        include proc_instant_car_fnol
+        include app_auto_claims_engine
+        include agent_auto_claims_stp_adjuster
+        include app_instant_disbursement_gateway
+
+        auto_layout LeftToRight
+    }
+
+    // ========================================================
+    // 10. Digital Health Encounter-to-Payment Value Stream Map
+    // ========================================================
+    value_stream_map health_clinical_claim_stream "Digital Health Encounter-to-Payment Stream" {
+        description "Automated clinical provider encounter adjudication from eligibility verification through fee-schedule settlement."
+        tags ["ValueStream", "HealthInsurance", "Claims", "Clinical"]
+
+        include vs_health_clinical_claim
+        include proc_clinical_preauthorization
+        include app_health_claims_adjudicator
+        include agent_clinical_preauth_reviewer
+
+        auto_layout LeftToRight
+    }
+
+    // ========================================================
+    // 11. Accelerated Life Insurance Issuance Value Stream Map
+    // ========================================================
+    value_stream_map accelerated_life_issuance_stream "Accelerated Life Issuance Stream" {
+        description "Digital customer application to active policy binding with zero in-person medical examination."
+        tags ["ValueStream", "LifeInsurance", "Underwriting", "QuoteToBind"]
+
+        include vs_accelerated_life_issuance
+        include proc_accelerated_life_underwriting
+        include app_life_underwriting_engine
+        include agent_life_risk_assessor
+
+        auto_layout LeftToRight
+    }
+
+    // ========================================================
+    // 12. AI Agent Fleet & Human-in-the-Loop Interaction Map
+    // ========================================================
+    landscape ai_agent_fleet_topology "AI Agent Fleet & Human-in-the-Loop Governance" {
+        description "Autonomous claims adjudicators and supervised clinical/underwriting copilots operating with human oversight."
+        tags ["AI", "AIGovernance", "Copilots", "HumanInTheLoop"]
+
+        include agent_auto_claims_stp_adjuster
+        include agent_vision_damage_estimator
+        include agent_clinical_preauth_reviewer
+        include agent_life_risk_assessor
+        include agent_contact_center_voice_bot
+        include agent_fraud_anomaly_investigator
+        include act_claims_adjuster
+        include act_medical_director
+        include act_underwriting_specialist
+        include act_insured_driver
+        include app_auto_claims_engine
+        include app_clinical_preauth_service
+        include app_life_underwriting_engine
+
+        auto_layout LeftToRight
+    }
+}

@@ -1,4 +1,9 @@
 workspace DigiBank "DigiBank Enterprise Architecture" {
+    description "Full-spectrum retail and commercial digital banking reference architecture spanning core ledger, payments, wealth, and AI governance."
+    owner "Chief Enterprise Architect"
+    icon "landmark"
+    tags ["banking", "reference-architecture", "payments", "ai-governance"]
+
     // Root layout, configurations, and global visual styles.
     // This file is the workspace entry point. Every other .ea file in this
     // project is a workspace fragment (a bare sequence of statements) that is
