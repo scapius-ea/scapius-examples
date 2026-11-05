@@ -27,7 +27,7 @@ theme "default" {
     }
 
     style kpi {
-        shape "circle"
+        shape "rectangle"
         css_class "kpi-node"
         fill "#fef3c7"
         stroke "#f59e0b"
@@ -40,7 +40,7 @@ theme "default" {
     // ----------------------------------------------------------
 
     style actor {
-        shape "actor"
+        shape "person"
         css_class "actor-node text-center"
         fill "#ffedd5"
         stroke "#fb923c"
@@ -80,7 +80,7 @@ theme "default" {
     }
 
     style app {
-        shape "pill"
+        shape "rounded_rectangle"
         css_class "app-node card border-secondary text-primary"
         fill "#e0edfe"
         stroke "#3b82f6"
@@ -134,7 +134,7 @@ theme "default" {
     // ----------------------------------------------------------
 
     style threat {
-        shape "triangle"
+        shape "shield"
         css_class "threat-node bg-danger-subtle border-danger text-danger-emphasis"
         fill "#fee2e2"
         stroke "#ef4444"
@@ -143,7 +143,7 @@ theme "default" {
     }
 
     style vulnerability {
-        shape "diamond"
+        shape "shield"
         css_class "vulnerability-node bg-rose-subtle border-rose text-rose-emphasis"
         fill "#ffe4e6"
         stroke "#f43f5e"
@@ -161,7 +161,7 @@ theme "default" {
     }
 
     style trust_boundary {
-        shape "dashed_rectangle"
+        shape "rounded_rectangle"
         css_class "trust-boundary-node"
         fill "transparent"
         stroke "#14b8a6"
@@ -184,7 +184,7 @@ theme "default" {
     }
 
     style standard {
-        shape "bookmark"
+        shape "rectangle"
         css_class "standard-node"
         fill "#e0e7ff"
         stroke "#6366f1"
