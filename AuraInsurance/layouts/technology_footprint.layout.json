@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "view_id": "technology_footprint",
+  "revision": "sha256:ca46bb9cf65036f913a2c076ed7e017554bd9278d190c483b1d2ad9d4af22c25",
+  "updated_at_utc": "2026-11-06T06:17:31.732974Z",
+  "nodes": {
+    "inf_aks_core_cluster": {
+      "x": 24,
+      "y": 434,
+      "width": 280,
+      "height": 153
+    },
+    "inf_event_hubs_dedicated": {
+      "x": 24,
+      "y": 249,
+      "width": 280,
+      "height": 153
+    },
+    "inf_cosmos_db_global": {
+      "x": 24,
+      "y": 619,
+      "width": 280,
+      "height": 153
+    },
+    "inf_azure_postgres_hyperscale": {
+      "x": 24,
+      "y": 804,
+      "width": 280,
+      "height": 153
+    },
+    "inf_azure_openai_hub": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "env_azure_prod_eastus2": {
+      "x": 40,
+      "y": 1775,
+      "width": 324,
+      "height": 977
+    },
+    "inf_aks_dr_cluster": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "env_azure_dr_centralus": {
+      "x": 68,
+      "y": 4020,
+      "width": 324,
+      "height": 237
+    },
+    "inf_dynamics_saas_platform": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "env_saas_microsoft_d365": {
+      "x": 90,
+      "y": 386,
+      "width": 324,
+      "height": 237
+    },
+    "inf_sap_cloud_infra": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "env_saas_sap_cloud": {
+      "x": 90,
+      "y": 4582,
+      "width": 324,
+      "height": 237
+    },
+    "inf_moodys_axis_cluster": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "env_saas_moodys_analytics": {
+      "x": 90,
+      "y": 4301,
+      "width": 324,
+      "height": 237
+    },
+    "inf_stripe_vault_infrastructure": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "env_saas_stripe_network": {
+      "x": 90,
+      "y": 3739,
+      "width": 324,
+      "height": 237
+    },
+    "inf_databricks_runtime": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "env_saas_databricks_managed": {
+      "x": 90,
+      "y": 42,
+      "width": 324,
+      "height": 237
+    },
+    "agent_auto_claims_stp_adjuster": {
+      "x": 1001,
+      "y": 903,
+      "width": 280,
+      "height": 154
+    },
+    "agent_vision_damage_estimator": {
+      "x": 979,
+      "y": 709,
+      "width": 280,
+      "height": 154
+    },
+    "agent_contact_center_voice_bot": {
+      "x": 979,
+      "y": 1097,
+      "width": 280,
+      "height": 154
+    },
+    "app_aura_mobile": {
+      "x": 979,
+      "y": 2295,
+      "width": 280,
+      "height": 159
+    },
+    "app_member_portal_web": {
+      "x": 979,
+      "y": 2849,
+      "width": 280,
+      "height": 159
+    },
+    "app_provider_partner_gateway": {
+      "x": 979,
+      "y": 2028,
+      "width": 280,
+      "height": 159
+    },
+    "app_crm_dynamics365": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "app_cep_stream_engine": {
+      "x": 24,
+      "y": 446,
+      "width": 280,
+      "height": 159
+    },
+    "app_cdp_personalization_service": {
+      "x": 24,
+      "y": 255,
+      "width": 280,
+      "height": 159
+    },
+    "system_customer_engagement": {
+      "x": 979,
+      "y": 1291,
+      "width": 324,
+      "height": 625
+    },
+    "app_producer_commission_engine": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_broker_distribution": {
+      "x": 979,
+      "y": 2494,
+      "width": 324,
+      "height": 243
+    },
+    "app_telematics_stream_ingestor": {
+      "x": 44,
+      "y": 446,
+      "width": 280,
+      "height": 159
+    },
+    "app_ubi_rating_service": {
+      "x": 44,
+      "y": 1019,
+      "width": 280,
+      "height": 159
+    },
+    "app_auto_claims_engine": {
+      "x": 44,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "app_health_claims_adjudicator": {
+      "x": 44,
+      "y": 637,
+      "width": 280,
+      "height": 159
+    },
+    "app_clinical_preauth_service": {
+      "x": 44,
+      "y": 255,
+      "width": 280,
+      "height": 159
+    },
+    "app_wearables_wellness_service": {
+      "x": 44,
+      "y": 828,
+      "width": 280,
+      "height": 159
+    },
+    "app_life_underwriting_engine": {
+      "x": 44,
+      "y": 1210,
+      "width": 280,
+      "height": 159
+    },
+    "app_beneficiary_management_service": {
+      "x": 44,
+      "y": 1401,
+      "width": 280,
+      "height": 159
+    },
+    "system_core_insurance_engines": {
+      "x": 1817,
+      "y": 2036,
+      "width": 344,
+      "height": 1580
+    },
+    "app_policy_ledger_service": {
+      "x": 24,
+      "y": 255,
+      "width": 280,
+      "height": 159
+    },
+    "app_stripe_payments_platform": {
+      "x": 24,
+      "y": 446,
+      "width": 280,
+      "height": 159
+    },
+    "app_instant_disbursement_gateway": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_shared_insurance_core": {
+      "x": 979,
+      "y": 3354,
+      "width": 324,
+      "height": 625
+    },
+    "app_sap_s4hana_cloud": {
+      "x": 24,
+      "y": 255,
+      "width": 280,
+      "height": 159
+    },
+    "app_moodys_axis_actuarial": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_enterprise_corporate": {
+      "x": 979,
+      "y": 4386,
+      "width": 324,
+      "height": 434
+    },
+    "system_aura_event_mesh": {
+      "x": 24,
+      "y": 446,
+      "width": 280,
+      "height": 159
+    },
+    "app_databricks_lakehouse": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "app_enterprise_powerbi": {
+      "x": 24,
+      "y": 255,
+      "width": 280,
+      "height": 159
+    },
+    "system_enterprise_data_platform": {
+      "x": 979,
+      "y": 40,
+      "width": 324,
+      "height": 625
+    }
+  },
+  "edges": {}
+}

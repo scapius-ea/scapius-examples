@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "view_id": "enterprise_context",
+  "revision": "sha256:bfa64e2424d821d1b0e3f98be3de34ef0483019977f018c64800701ae2f61e8e",
+  "updated_at_utc": "2026-11-06T06:17:15.375375Z",
+  "nodes": {
+    "act_insured_driver": {
+      "x": 260,
+      "y": 423,
+      "width": 280,
+      "height": 154
+    },
+    "act_health_member": {
+      "x": 1021,
+      "y": 423,
+      "width": 280,
+      "height": 154
+    },
+    "act_life_policyholder": {
+      "x": 1366,
+      "y": 423,
+      "width": 280,
+      "height": 154
+    },
+    "app_aura_mobile": {
+      "x": 659,
+      "y": 128,
+      "width": 280,
+      "height": 159
+    },
+    "app_member_portal_web": {
+      "x": 1558,
+      "y": 128,
+      "width": 280,
+      "height": 159
+    },
+    "app_crm_dynamics365": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_customer_engagement": {
+      "x": 1878,
+      "y": 40,
+      "width": 324,
+      "height": 243
+    },
+    "app_auto_claims_engine": {
+      "x": 336,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "app_health_claims_adjudicator": {
+      "x": 648,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "app_life_underwriting_engine": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_core_insurance_engines": {
+      "x": 2246,
+      "y": 40,
+      "width": 948,
+      "height": 243
+    },
+    "app_sap_s4hana_cloud": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_enterprise_corporate": {
+      "x": 3238,
+      "y": 40,
+      "width": 324,
+      "height": 243
+    },
+    "system_aura_event_mesh": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_enterprise_data_platform": {
+      "x": 3606,
+      "y": 40,
+      "width": 324,
+      "height": 243
+    },
+    "channelNote": {
+      "x": 969,
+      "y": 128,
+      "width": 340,
+      "height": 156
+    }
+  },
+  "edges": {}
+}

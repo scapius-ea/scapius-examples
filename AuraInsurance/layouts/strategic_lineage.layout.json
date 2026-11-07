@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "view_id": "strategic_lineage",
+  "revision": "sha256:6280a438daec1e7ed172313f52cd77ea7d382bf89ce2ddd869bae1dcb8deda29",
+  "updated_at_utc": "2026-11-06T06:17:24.603804Z",
+  "nodes": {
+    "inf_aks_core_cluster": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "env_azure_prod_eastus2": {
+      "x": 594,
+      "y": 40,
+      "width": 324,
+      "height": 237
+    },
+    "cap_instant_fnol_intake": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 153
+    },
+    "cap_claims_operations": {
+      "x": 855,
+      "y": 1112,
+      "width": 324,
+      "height": 237
+    },
+    "proc_instant_car_fnol": {
+      "x": 1078,
+      "y": 815,
+      "width": 280,
+      "height": 156
+    },
+    "agent_auto_claims_stp_adjuster": {
+      "x": 1109,
+      "y": 127,
+      "width": 280,
+      "height": 154
+    },
+    "app_auto_claims_engine": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_core_insurance_engines": {
+      "x": 800,
+      "y": 427,
+      "width": 324,
+      "height": 243
+    },
+    "goal_claims_stp_dominance": {
+      "x": 274,
+      "y": 427,
+      "width": 280,
+      "height": 156
+    },
+    "kpi_claims_stp_rate": {
+      "x": 274,
+      "y": 115,
+      "width": 280,
+      "height": 166
+    },
+    "lineageNote": {
+      "x": 584,
+      "y": 427,
+      "width": 340,
+      "height": 156
+    }
+  },
+  "edges": {}
+}

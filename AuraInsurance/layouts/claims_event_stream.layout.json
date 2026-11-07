@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "view_id": "claims_event_stream",
+  "revision": "sha256:2f73783f278d4a1fbf0f1bed3354db7b73343462b2d04cb019a68e32a5441ebf",
+  "updated_at_utc": "2026-11-06T06:17:20.702513Z",
+  "nodes": {
+    "agent_auto_claims_stp_adjuster": {
+      "x": 50,
+      "y": 160,
+      "width": 280,
+      "height": 154
+    },
+    "agent_vision_damage_estimator": {
+      "x": 430,
+      "y": 160,
+      "width": 280,
+      "height": 154
+    },
+    "app_cep_stream_engine": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_customer_engagement": {
+      "x": 50,
+      "y": 330,
+      "width": 320,
+      "height": 243
+    },
+    "app_telematics_stream_ingestor": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "app_auto_claims_engine": {
+      "x": 20,
+      "y": 243,
+      "width": 280,
+      "height": 159
+    },
+    "system_core_insurance_engines": {
+      "x": 50,
+      "y": 500,
+      "width": 320,
+      "height": 422
+    },
+    "app_instant_disbursement_gateway": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_shared_insurance_core": {
+      "x": 810,
+      "y": 500,
+      "width": 320,
+      "height": 243
+    },
+    "system_aura_event_mesh": {
+      "x": 20,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "system_enterprise_data_platform": {
+      "x": 430,
+      "y": 670,
+      "width": 320,
+      "height": 243
+    }
+  },
+  "edges": {}
+}

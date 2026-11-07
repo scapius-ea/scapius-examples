@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "view_id": "ai_agent_fleet_topology",
+  "revision": "sha256:8d40d4c537c0cb1f520c0ced549973b42106043d70db22324ac0712bc914c56a",
+  "updated_at_utc": "2026-11-06T06:17:41.120061Z",
+  "nodes": {
+    "act_insured_driver": {
+      "x": 970,
+      "y": 900,
+      "width": 280,
+      "height": 154
+    },
+    "act_claims_adjuster": {
+      "x": 970,
+      "y": 1094,
+      "width": 280,
+      "height": 154
+    },
+    "act_medical_director": {
+      "x": 1778,
+      "y": 126,
+      "width": 280,
+      "height": 154
+    },
+    "act_underwriting_specialist": {
+      "x": 1778,
+      "y": 691,
+      "width": 280,
+      "height": 154
+    },
+    "agent_auto_claims_stp_adjuster": {
+      "x": 40,
+      "y": 428,
+      "width": 280,
+      "height": 154
+    },
+    "agent_vision_damage_estimator": {
+      "x": 40,
+      "y": 234,
+      "width": 280,
+      "height": 154
+    },
+    "agent_clinical_preauth_reviewer": {
+      "x": 40,
+      "y": 40,
+      "width": 280,
+      "height": 154
+    },
+    "agent_life_risk_assessor": {
+      "x": 40,
+      "y": 691,
+      "width": 280,
+      "height": 154
+    },
+    "agent_contact_center_voice_bot": {
+      "x": 40,
+      "y": 900,
+      "width": 280,
+      "height": 154
+    },
+    "agent_fraud_anomaly_investigator": {
+      "x": 40,
+      "y": 1094,
+      "width": 280,
+      "height": 154
+    },
+    "app_auto_claims_engine": {
+      "x": 24,
+      "y": 255,
+      "width": 280,
+      "height": 159
+    },
+    "app_clinical_preauth_service": {
+      "x": 24,
+      "y": 64,
+      "width": 280,
+      "height": 159
+    },
+    "app_life_underwriting_engine": {
+      "x": 24,
+      "y": 446,
+      "width": 280,
+      "height": 159
+    },
+    "system_core_insurance_engines": {
+      "x": 983,
+      "y": 151,
+      "width": 324,
+      "height": 625
+    }
+  },
+  "edges": {}
+}
