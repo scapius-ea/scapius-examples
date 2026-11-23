@@ -60,16 +60,6 @@ theme dark "material-grayscale" {
         icon "user"
     }
 
-    style businessactor {
-        shape "person"
-        fill "#272a31"
-        stroke "#64748b"
-        stroke_width "1.5px"
-        color "#f8fafc"
-        font_weight "600"
-        icon "user"
-    }
-
     style person {
         shape "person"
         fill "#272a31"
@@ -81,16 +71,6 @@ theme dark "material-grayscale" {
     }
 
     style process {
-        shape "chevron"
-        fill "#1d2027"
-        stroke "#475569"
-        stroke_width "1px"
-        color "#e2e8f0"
-        font_weight "500"
-        icon "workflow"
-    }
-
-    style businessprocess {
         shape "chevron"
         fill "#1d2027"
         stroke "#475569"
@@ -154,26 +134,6 @@ theme dark "material-grayscale" {
         icon "layout-grid"
     }
 
-    style application {
-        shape "rounded_rectangle"
-        fill "#1d2027"
-        stroke "#475569"
-        stroke_width "1px"
-        color "#f1f5f9"
-        font_weight "500"
-        icon "layout-grid"
-    }
-
-    style applicationservice {
-        shape "rounded_rectangle"
-        fill "#1d2027"
-        stroke "#475569"
-        stroke_width "1px"
-        color "#f1f5f9"
-        font_weight "500"
-        icon "layout-grid"
-    }
-
     style component {
         shape "rounded_rectangle"
         fill "#22252c"
@@ -185,16 +145,6 @@ theme dark "material-grayscale" {
     }
 
     style data_object {
-        shape "cylinder"
-        fill "#1d2027"
-        stroke "#475569"
-        stroke_width "1px"
-        color "#f1f5f9"
-        font_weight "500"
-        icon "database"
-    }
-
-    style database {
         shape "cylinder"
         fill "#1d2027"
         stroke "#475569"
@@ -218,16 +168,6 @@ theme dark "material-grayscale" {
     // 5. Technology Architecture
     // ==============================================================================
     style infrastructure {
-        shape "rounded_rectangle"
-        fill "#22252c"
-        stroke "#475569"
-        stroke_width "1px"
-        color "#e2e8f0"
-        font_weight "500"
-        icon "hard-drive"
-    }
-
-    style node {
         shape "rounded_rectangle"
         fill "#22252c"
         stroke "#475569"

@@ -60,37 +60,7 @@ theme light "material-grayscale" {
         icon "user"
     }
 
-    style businessactor {
-        shape "person"
-        fill "#f8fafc"
-        stroke "#94a3b8"
-        stroke_width "1.5px"
-        color "#1e293b"
-        font_weight "600"
-        icon "user"
-    }
-
-    style person {
-        shape "person"
-        fill "#f8fafc"
-        stroke "#94a3b8"
-        stroke_width "1.5px"
-        color "#1e293b"
-        font_weight "600"
-        icon "user"
-    }
-
     style process {
-        shape "chevron"
-        fill "#ffffff"
-        stroke "#cbd5e1"
-        stroke_width "1px"
-        color "#334155"
-        font_weight "500"
-        icon "workflow"
-    }
-
-    style businessprocess {
         shape "chevron"
         fill "#ffffff"
         stroke "#cbd5e1"
@@ -154,26 +124,6 @@ theme light "material-grayscale" {
         icon "layout-grid"
     }
 
-    style application {
-        shape "rounded_rectangle"
-        fill "#ffffff"
-        stroke "#cbd5e1"
-        stroke_width "1px"
-        color "#1e293b"
-        font_weight "500"
-        icon "layout-grid"
-    }
-
-    style applicationservice {
-        shape "rounded_rectangle"
-        fill "#ffffff"
-        stroke "#cbd5e1"
-        stroke_width "1px"
-        color "#1e293b"
-        font_weight "500"
-        icon "layout-grid"
-    }
-
     style component {
         shape "rounded_rectangle"
         fill "#f8fafc"
@@ -185,16 +135,6 @@ theme light "material-grayscale" {
     }
 
     style data_object {
-        shape "cylinder"
-        fill "#ffffff"
-        stroke "#cbd5e1"
-        stroke_width "1px"
-        color "#1e293b"
-        font_weight "500"
-        icon "database"
-    }
-
-    style database {
         shape "cylinder"
         fill "#ffffff"
         stroke "#cbd5e1"
@@ -218,16 +158,6 @@ theme light "material-grayscale" {
     // 5. Technology Architecture
     // ==============================================================================
     style infrastructure {
-        shape "rounded_rectangle"
-        fill "#f8fafc"
-        stroke "#cbd5e1"
-        stroke_width "1px"
-        color "#334155"
-        font_weight "500"
-        icon "hard-drive"
-    }
-
-    style node {
         shape "rounded_rectangle"
         fill "#f8fafc"
         stroke "#cbd5e1"
